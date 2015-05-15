@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/lay_drem_activity_container"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@drawable/grayborder"
+    android:orientation="vertical"
+    android:paddingBottom="10dp" >
+
+    <LinearLayout
+        android:id="@+id/layCommentAuthor"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal" >
+
+        <com.drem.dremboard.view.HyIconView
+            android:id="@+id/imgCommentAuthor"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:layout_marginRight="15dip"
+            android:contentDescription="Author" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical" >
+
+            <TextView
+                android:id="@+id/txtCommentAuthor"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:linksClickable="true"
+                android:minHeight="30dp"
+                android:paddingLeft="5dp"
+                android:textColor="#783302"
+                android:textSize="14sp"
+                android:textStyle="bold" />"
+
+            <TextView
+                android:id="@+id/txtComment"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/darkgray"
+                android:textSize="14sp"
+                android:paddingLeft="5dp"/>
+        </LinearLayout>
+    </LinearLayout>
+
+    <com.drem.dremboard.view.HyIconView
+        android:id="@+id/imgCommentPic"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/layCommentAuthor"
+        android:padding="2dip"
+        android:layout_centerHorizontal="true"
+        android:gravity="center"
+        android:visibility="visible" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="3dip"
+        android:orientation="horizontal"
+        android:paddingLeft="10dp" >
+
+        <Button
+            android:id="@+id/btnCommentLike"
+            android:layout_width="40dip"
+            android:layout_height="18dip"
+            android:layout_marginRight="3dip"
+            android:background="@drawable/btn_action"
+            android:gravity="center"
+            android:text="@string/text_like"
+            android:textColor="@color/white"
+            android:textSize="12sp" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10dip"
+            android:minHeight="20dp"
+            android:text="replied "
+            android:textColor="@color/darkgray"
+            android:textIsSelectable="true"
+            android:textSize="13sp" />
+
+        <TextView
+            android:id="@+id/txtCommentDate"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:minHeight="20dp"
+            android:paddingLeft="10dp"
+            android:textColor="#AEADAE"
+            android:textIsSelectable="true"
+            android:textSize="12sp" />
+    </LinearLayout>
+
+</LinearLayout>

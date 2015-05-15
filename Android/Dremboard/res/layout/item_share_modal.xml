@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="64dip"
+    android:background="@color/transparent" >
+
+    <LinearLayout
+        android:id="@+id/layActions02"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_centerVertical="true"
+        android:orientation="horizontal" >
+
+        <Button
+            android:id="@+id/btnShareDremboard"
+            android:layout_width="48dip"
+            android:layout_height="48dip"
+            android:layout_marginRight="6dip"
+            android:background="@drawable/dremboard"
+            android:gravity="center"
+            android:textColor="@color/white"
+            android:textSize="12sp" />
+
+        <Button
+            android:id="@+id/btnShareFacebook"
+            android:layout_width="48dip"
+            android:layout_height="48dip"
+            android:layout_marginRight="6dip"
+            android:background="@drawable/facebook"
+            android:gravity="center"
+            android:textColor="@color/white"
+            android:textSize="12sp" />
+
+        <Button
+            android:id="@+id/btnShareTwitter"
+            android:layout_width="48dip"
+            android:layout_height="48dip"
+            android:layout_marginRight="6dip"
+            android:background="@drawable/twitter"
+            android:gravity="center"
+            android:textColor="@color/white"
+            android:textSize="12sp" />
+
+        <Button
+            android:id="@+id/btnShareGoogle"
+            android:layout_width="48dip"
+            android:layout_height="48dip"
+            android:layout_marginRight="6dip"
+            android:background="@drawable/google"
+            android:gravity="center"
+            android:textColor="@color/white"
+            android:textSize="12sp" />
+
+        <Button
+            android:id="@+id/btnShareEmail"
+            android:layout_width="48dip"
+            android:layout_height="48dip"
+            android:layout_marginRight="6dip"
+            android:background="@drawable/email"
+            android:gravity="center"
+            android:textColor="@color/white"
+            android:textSize="12sp" />
+    </LinearLayout>
+
+</RelativeLayout>

@@ -1,0 +1,106 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/background_gray" >
+
+    <ScrollView
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:scrollbars="vertical"
+        android:visibility="visible" >
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingLeft="20dip"
+            android:paddingRight="20dip" >
+
+            <TextView
+                android:id="@+id/lblReceivers"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dip"
+                android:text="Send To (Username or Friends&apos;s Name)"
+                android:textColor="@color/black"
+                android:textSize="13sp"
+                android:textStyle="bold" />
+
+            <EditText
+                android:id="@+id/txtReceivers"
+                android:layout_width="250dip"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/lblReceivers"
+                android:layout_marginTop="7dip"
+                android:paddingLeft="7dip"
+                android:singleLine="true"
+                android:textColor="@color/black"
+                android:textSize="14sp" />
+
+            <TextView
+                android:id="@+id/lblSubject"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/txtReceivers"
+                android:layout_marginTop="7dip"
+                android:text="Subject"
+                android:textColor="@color/black"
+                android:textSize="13sp"
+                android:textStyle="bold" />
+
+            <EditText
+                android:id="@+id/txtSubject"
+                android:layout_width="250dip"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/lblSubject"
+                android:layout_marginTop="7dip"
+                android:paddingLeft="7dip"
+                android:singleLine="true"
+                android:textColor="@color/black"
+                android:textSize="14sp" />
+
+            <TextView
+                android:id="@+id/lblMessage"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/txtSubject"
+                android:layout_marginTop="10dip"
+                android:text="Message"
+                android:textColor="@color/black"
+                android:textSize="13sp"
+                android:textStyle="bold" />
+
+            <EditText
+                android:id="@+id/txtMessage"
+                android:layout_width="match_parent"
+                android:layout_height="170dip"
+                android:layout_below="@+id/lblMessage"
+                android:layout_marginTop="10dip"
+                android:gravity="top|left"
+                android:inputType="textMultiLine"
+                android:padding="7dip"
+                android:scrollbars="vertical"
+                android:singleLine="false"
+                android:textColor="@color/black"
+                android:textSize="14sp" />
+
+            <Button
+                android:id="@+id/btnCompose"
+                android:layout_width="120dip"
+                android:layout_height="30dip"
+                android:layout_below="@+id/txtMessage"
+                android:layout_marginLeft="10dip"
+                android:layout_marginTop="15dip"
+                android:background="@drawable/btn_login"
+                android:gravity="center"
+                android:text="Send Message"
+                android:textColor="@color/white"
+                android:textSize="15sp" />
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="20dip"
+                android:layout_below="@+id/btnCompose" />
+        </RelativeLayout>
+    </ScrollView>
+
+</RelativeLayout>

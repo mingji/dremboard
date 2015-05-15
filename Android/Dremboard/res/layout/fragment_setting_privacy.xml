@@ -1,0 +1,78 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/background_gray" >
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingLeft="20dip"
+        android:paddingRight="20dip" >
+
+        <TextView
+            android:id="@+id/lblPrivacy"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dip"
+            android:text="Default Privacy"
+            android:textColor="@color/black"
+            android:textSize="25sp"
+            android:textStyle="bold" />
+
+        <RadioGroup
+            android:id="@+id/radioPrivacy"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/lblPrivacy"
+            android:layout_marginLeft="10dip" >
+
+            <RadioButton
+                android:id="@+id/radioPrivate"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Private - Visible only to the user"
+                android:textSize="15sp" />
+
+            <RadioButton
+                android:id="@+id/radioFamily"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Family - Visible to user&apos;s friends"
+                android:textSize="15sp" />
+
+            <RadioButton
+                android:id="@+id/radioFriend"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Friends - visible to user&apos;s friends"
+                android:textSize="15sp" />
+
+            <RadioButton
+                android:id="@+id/radioPublic"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Public - Visible to the world"
+                android:textSize="15sp" />
+        </RadioGroup>
+
+        <Button
+            android:id="@+id/btnSave"
+            android:layout_width="120dip"
+            android:layout_height="40dip"
+            android:layout_alignParentRight="true"
+            android:layout_below="@+id/radioPrivacy"
+            android:layout_marginRight="10dip"
+            android:layout_marginTop="15dip"
+            android:background="@drawable/btn_login"
+            android:gravity="center"
+            android:text="Save Changes"
+            android:textColor="@color/white"
+            android:textSize="16sp" />
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="20dip"
+            android:layout_below="@+id/btnSave" />
+    </RelativeLayout>
+
+</RelativeLayout>

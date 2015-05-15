@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content" >
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="7dip"
+        android:layout_marginLeft="12dip"
+        android:layout_marginRight="10dip"
+        android:layout_marginTop="7dip"
+        android:background="@drawable/grayborder_grayback"
+        android:padding="7dip" >
+
+        <RelativeLayout
+            android:id="@+id/layUser"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" >
+
+            <com.drem.dremboard.view.HyIconView
+                android:id="@+id/imgSender"
+                android:layout_width="50dip"
+                android:layout_height="50dip"
+                android:gravity="center"
+                android:visibility="visible" />
+
+            <TextView
+                android:id="@+id/txtFromTo"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="8dip"
+                android:layout_toRightOf="@+id/imgSender"
+                android:singleLine="true"
+                android:text="From: "
+                android:textColor="@color/darkgray"
+                android:textSize="16sp" />
+
+            <TextView
+                android:id="@+id/txtPartner"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="8dip"
+                android:layout_toRightOf="@+id/txtFromTo"
+                android:singleLine="false"
+                android:text="admin"
+                android:textColor="@drawable/selector_red_color"
+                android:textSize="15sp" />
+
+            <TextView
+                android:id="@+id/txtDate"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/txtFromTo"
+                android:layout_marginLeft="12dip"
+                android:layout_marginTop="10dip"
+                android:layout_toRightOf="@+id/imgSender"
+                android:text="active 41 minutes ago"
+                android:textColor="@color/darkgray"
+                android:textSize="12sp" />
+        </RelativeLayout>
+
+        <TextView
+            android:id="@+id/txtSubject"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/layUser"
+            android:layout_marginLeft="12dip"
+            android:layout_marginTop="12dip"            
+            android:singleLine="false"
+            android:text="Subject ..."
+            android:textColor="@drawable/selector_red_color"
+            android:textSize="15sp" />
+        
+        <TextView
+            android:id="@+id/txtExcerpt"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/txtSubject"
+            android:layout_marginLeft="8dip"            
+            android:singleLine="false"
+            android:text="Message body ..."
+            android:textColor="@color/darkgray"
+            android:textSize="14sp" />
+    </RelativeLayout>
+
+</RelativeLayout>

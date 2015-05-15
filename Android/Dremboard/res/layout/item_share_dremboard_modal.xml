@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white"
+    android:padding="20dip">
+
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:orientation="vertical" >
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" >
+
+            <Spinner
+                android:id="@+id/spin_share_option"
+                android:layout_width="200dip"
+                android:layout_height="30dip"
+                android:background="@drawable/bg_spinner"
+                android:gravity="center_vertical"
+                android:paddingLeft="3dip"
+                android:textColor="@color/lightgray2" />
+        </LinearLayout>
+
+		<LinearLayout
+		    android:id="@+id/lay_share_target"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:orientation="vertical" >
+
+            <EditText
+                android:id="@+id/txt_share_target"
+                android:layout_width="fill_parent"
+                android:background="@android:drawable/edit_text"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:layout_marginTop="5dip"
+                android:visibility="gone"
+                android:singleLine="true" >
+            </EditText>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:orientation="vertical" >
+
+            <TextView
+                android:id="@+id/lbl_desc"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Description:" />
+
+            <EditText
+                android:id="@+id/txt_desc"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:background="@android:drawable/edit_text"
+                android:layout_marginBottom="10dip"
+                android:gravity="top|left"
+                android:inputType="textMultiLine"
+                android:lines="4"
+                android:scrollbars="vertical" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1" >
+
+            <Button
+                android:id="@+id/btn_share"
+                android:layout_width="100dip"
+                android:layout_height="32dip"
+                android:background="@drawable/btn_register"
+                android:text="Share"
+                android:textColor="@color/white"
+                android:textSize="16sp" />
+
+            <Button
+                android:id="@+id/btn_cancel"
+                android:layout_width="100dip"
+                android:layout_height="32dip"
+                android:layout_marginLeft="10dip"
+                android:background="@drawable/btn_cancel"
+                android:text="Cancel"
+                android:textColor="@color/white"
+                android:textSize="16sp" />
+        </LinearLayout>
+    </LinearLayout>
+</RelativeLayout>

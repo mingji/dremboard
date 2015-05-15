@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+    <resources>
+        <string-array name="ShareOption">
+            <item >On your own Timeline</item>
+            <item >Share with friend</item>
+            <item >In a group</item>
+            <item >In a private message</item>
+        </string-array>
+    </resources>

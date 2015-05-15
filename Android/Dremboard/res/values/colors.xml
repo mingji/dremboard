@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    
+    <color name="transparent">#00000000</color>
+    <color name="blue">#FF0000EE</color>
+    <color name="green">#17291C</color>
+    <color name="green_stroke">#53933f</color>
+    <color name="darkgreen">#FF7DC691</color>
+    <color name="darkgray">#FF222222</color>
+    <color name="darkgray2">#FF333333</color>
+    <color name="gray">#FF555555</color>
+    <color name="lightgray">#FFD9D9D9</color>
+    <color name="lightgray2">#FFBBBBBB</color>
+    <color name="menucolor_gray">#FF6B6B6B</color>
+    <color name="black">#000</color>
+    <color name="white">#FFFFFFFF</color>
+    <color name="backgroundcolor">#FF3986C5</color>
+    <color name="lightbackgroundcolor">#FF5E9CD0</color>
+    <color name="background_gray">#FFF4F4F4</color>
+    <color name="background_lightyellow">#FFFBF48A</color>
+    <color name="background_signup_bottom">#FFC4E5F9</color>
+    <color name="text_signup_bottom">#FF484D72</color>
+    
+    <color name="repo_unselect">#FFDADADA</color>
+    <color name="repo_select">#FF94BA38</color>
+    <color name="repo_content_background">#FFECECEC</color>
+    
+    <color name="title_name">#FFF6FF00</color>
+    
+    <color name="yellowbackground">#ffF8C015</color>
+    <color name="darekgreen">#ff6BC04B</color>
+    
+    <color name="bg_gray">#FFF4F4F4</color>
+    <color name="bg_blue">#FF135F8E</color>
+    <color name="bg_lightblue">#FFF0F8FF</color>
+    
+    <color name="fg_darkred">#FFA42F1E</color>
+    
+    <color name="bg_lost_pwd_des">#FFFFFFE0</color>
+    <color name="fg_lost_pwd_des">#FFE6DB55</color>
+    
+    <color name="login_normal">#FF1195F9</color>
+    <color name="login_down">#FF135C7A</color>
+    
+    <color name="reg_normal">#FF68BA26</color>
+    <color name="reg_down">#FF58AA16</color>
+    
+    <color name="darkred1">#FFA42F1E</color>
+    <color name="darkred2">#783302</color>    
+    
+</resources>

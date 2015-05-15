@@ -1,0 +1,143 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/background_gray" >
+
+    <ScrollView
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:scrollbars="vertical"
+        android:visibility="visible" >
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingLeft="20dip"
+            android:paddingRight="20dip" >
+
+            <TextView
+                android:id="@+id/lblCurPwd"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dip"
+                android:text="Current Password (required to update email or change current password)"
+                android:textColor="@color/black"
+                android:textSize="15sp"
+                android:textStyle="bold" />
+
+            <EditText
+                android:id="@+id/txtCurPwd"
+                android:layout_width="200dip"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/lblCurPwd"
+                android:layout_marginTop="7dip"
+                android:inputType="textPassword"
+                android:paddingLeft="7dip"
+                android:singleLine="true"
+                android:textColor="@color/black"
+                android:textSize="14sp" />
+
+            <TextView
+                android:id="@+id/lblEmail"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/txtCurPwd"
+                android:layout_marginTop="20dip"
+                android:text="Account Email"
+                android:textColor="@color/black"
+                android:textSize="15sp"
+                android:textStyle="bold" />
+
+            <EditText
+                android:id="@+id/txtEmail"
+                android:layout_width="200dip"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/lblEmail"
+                android:layout_marginTop="7dip"
+                android:inputType="textEmailAddress"
+                android:paddingLeft="7dip"
+                android:singleLine="true"
+                android:textColor="@color/black"
+                android:textSize="14sp" />
+
+            <TextView
+                android:id="@+id/lblPassword"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/txtEmail"
+                android:layout_marginTop="30dip"
+                android:text="Change Password(leave blank for no change)"
+                android:textColor="@color/black"
+                android:textSize="15sp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/lblNewPassword"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/lblPassword"
+                android:layout_marginTop="10dip"
+                android:text="New Password"
+                android:textColor="@color/darkgray"
+                android:textSize="14sp" />
+
+            <EditText
+                android:id="@+id/txtNewPass"
+                android:layout_width="200dip"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/lblNewPassword"
+                android:layout_marginTop="5dip"
+                android:gravity="top|left"
+                android:inputType="textPassword"
+                android:padding="7dip"
+                android:scrollbars="vertical"
+                android:singleLine="false"
+                android:textColor="@color/black"
+                android:textSize="14sp" />
+
+            <TextView
+                android:id="@+id/lblConfirmPassword"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/txtNewPass"
+                android:layout_marginTop="10dip"
+                android:text="Repeat New Password"
+                android:textColor="@color/darkgray"
+                android:textSize="14sp" />
+
+            <EditText
+                android:id="@+id/txtConfirmPass"
+                android:layout_width="200dip"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/lblConfirmPassword"
+                android:layout_marginTop="5dip"
+                android:gravity="top|left"
+                android:inputType="textPassword"
+                android:padding="7dip"
+                android:scrollbars="vertical"
+                android:singleLine="false"
+                android:textColor="@color/black"
+                android:textSize="14sp" />
+
+            <Button
+                android:id="@+id/btnSave"
+                android:layout_width="120dip"
+                android:layout_height="40dip"
+                android:layout_alignParentRight="true"
+                android:layout_below="@+id/txtConfirmPass"
+                android:layout_marginRight="10dip"
+                android:layout_marginTop="15dip"
+                android:background="@drawable/btn_login"
+                android:gravity="center"
+                android:text="Save Changes"
+                android:textColor="@color/white"
+                android:textSize="16sp" />
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="20dip"
+                android:layout_below="@+id/btnSave" />
+        </RelativeLayout>
+    </ScrollView>
+
+</RelativeLayout>

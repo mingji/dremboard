@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@color/transparent" >
+
+    <TextView
+        android:id="@+id/txtCategory"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:text="Category"
+        android:textColor="@color/black"
+        android:textSize="14sp" />
+
+    <com.drem.dremboard.view.HyIconView
+        android:id="@+id/imgPic"
+        android:layout_width="match_parent"
+        android:layout_height="120dip"
+        android:layout_below="@+id/txtCategory"
+        android:layout_centerHorizontal="true"
+        android:background="@color/bg_lightblue"
+        android:gravity="center"
+        android:visibility="visible" />
+
+    <LinearLayout
+        android:id="@+id/layActions"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/imgPic"
+        android:layout_marginTop="3dip"
+        android:orientation="horizontal" >
+
+        <Button
+            android:id="@+id/btnFavorite"
+            android:layout_width="60dip"
+            android:layout_height="18dip"
+            android:layout_marginRight="3dip"
+            android:background="@drawable/btn_action"
+            android:gravity="center"
+            android:text="@string/text_fav"
+            android:textColor="@color/white"
+            android:textSize="12sp" />
+
+        <Button
+            android:id="@+id/btnLike"
+            android:layout_width="40dip"
+            android:layout_height="18dip"
+            android:layout_marginRight="3dip"
+            android:background="@drawable/btn_action"
+            android:gravity="center"
+            android:text="@string/text_like"
+            android:textColor="@color/white"
+            android:textSize="12sp" />
+
+        <Button
+            android:id="@+id/btnFlag"
+            android:layout_width="40dip"
+            android:layout_height="18dip"
+            android:layout_marginRight="3dip"
+            android:background="@drawable/btn_action"
+            android:gravity="center"
+            android:text="@string/text_flag"
+            android:textColor="@color/white"
+            android:textSize="12sp" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/layActions02"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_below="@+id/layActions"
+        android:layout_marginTop="3dip"
+        android:orientation="horizontal" >
+        
+        <Button
+            android:id="@+id/btnShare"
+            android:layout_width="40dip"
+            android:layout_height="18dip"
+            android:layout_marginRight="3dip"
+            android:background="@drawable/btn_action"
+            android:gravity="center"
+            android:text="@string/text_share"
+            android:textColor="@color/white"
+            android:textSize="12sp" />
+
+    </LinearLayout>
+
+</RelativeLayout>

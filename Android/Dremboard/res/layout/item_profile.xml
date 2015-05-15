@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content" >
+
+    <LinearLayout
+        android:id="@+id/layProfile"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="3dip"
+        android:layout_marginRight="2dip"
+        android:orientation="horizontal"
+        android:background="@drawable/grayborder_grayback" >
+
+        <TextView
+            android:id="@+id/txtFieldName"
+            android:layout_width="120dip"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"            
+            android:gravity="center_horizontal"
+            android:layout_margin="5dip"
+            android:text="User Name"
+            android:textColor="@color/darkgray"
+            android:textSize="15sp" />
+        <View
+            android:layout_width="1dip"
+            android:layout_height="match_parent"
+            android:background="@color/darkgray" />
+        
+        <TextView
+            android:id="@+id/txtFieldValue"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:gravity="center_horizontal"
+            android:layout_margin="5dip"
+            android:text="user name"
+            android:textColor="@color/darkgray"
+            android:textSize="15sp" />
+    </LinearLayout>
+
+</RelativeLayout>

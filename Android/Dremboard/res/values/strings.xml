@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">Dremboard</string>
+
+    <!-- Login and Register Page -->
+    <string name="text_welcome">Welcome to Dremboard</string>
+    <string name="text_username">User name</string>
+    <string name="text_passwd">Password</string>
+    <string name="text_remember">Remember Me</string>
+    <string name="text_login">LOG IN</string>
+    <string name="text_with_other">Connect with:</string>
+    <string name="text_copyright">\u00A9 <a href="http://dremboard.com/">DREMBOARD</a> . ALL RIGHTS RESERVED.</string>
+    <string name="text_register">REGISTER</string>
+    <string name="text_lost_pwd">LOST PASSWORD</string>
+    <string name="text_get_pwd">Get New Password</string>
+    <string name="text_get_pwd_des">Please enter your username or email address. You will receive a link to create a new password via email.</string>
+    <string name="text_username_email">Username or E-mail:</string>
+
+    <!-- Actions -->
+    <string name="text_comment">Comment</string>
+    <string name="text_edit">Edit</string>
+    <string name="text_del">Delete</string>
+    <string name="text_fav">Favorite</string>
+    <string name="text_like">Like</string>
+    <string name="text_flag">Flag</string>
+    <string name="text_share">Share</string>
+
+    <!-- Actions -->
+    <string name="text_about">Our mission is to create dremers who excel in life.\n\n
+        Dremboard is a social media site founded in January 2014 by Raymond Freeman III and Reco L. Dixon. The site allows dremers to express their drems and inspirations through drems, memories, dremboards, and beautiful slideshows.\n\n
+        Our users are our “dremers” and they can post pictures called “drems” or videos called “memories.” Drems can then be organized into “dremboards.”\n\n
+        Dremers can connect with family and friends and post any drem that they find on the web. No matter what no matter what the interest, if you are a dremer then you have discovered a place to share, create, and gather inspiration.\n\n
+        <b><i>Drem it, Believe it, Achieve it.</i></b>\n \n
+        We welcome your feedback.\nEmail us anytime at <b>CustomerService@dremboard.com</b>\n</string>
+    
+    <!-- Dialog -->
+    <string name="text_report_drem">Report Drem</string>
+    <string name="text_complaint">Is this your <a href="http://dremboard.com/copyright-complaint/">Intellectual Property</a>?</string>
+
+    <!-- Error String -->
+    <string name="error_player">There was an error initializing the YouTubePlayer (%1$s)</string>
+    <string name="error_config">Please set the %1$s constant and recompile the app.</string>
+    <string name="error_enter_username"><b>ERROR</b>: Enter a username or e-mail address.</string>
+
+</resources>

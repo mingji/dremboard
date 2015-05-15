@@ -1,0 +1,179 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/lay_drem_activity_container"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@drawable/grayborder"
+    android:orientation="vertical"
+    android:paddingBottom="10dp" >
+
+    <LinearLayout
+        android:id="@+id/lay_drem_activity"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical" >
+
+        <LinearLayout
+            android:id="@+id/layAction"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="fill_horizontal"
+            android:background="@drawable/activity_action"
+            android:orientation="horizontal" >
+
+            <com.drem.dremboard.view.HyIconView
+                android:id="@+id/img_author"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:contentDescription="Author" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical" >
+
+                <TextView
+                    android:id="@+id/txtAction"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:linksClickable="true"
+                    android:minHeight="30dp"
+                    android:paddingLeft="10dp"
+                    android:textColor="#000000"
+                    android:textColorLink="#783302"
+                    android:textIsSelectable="true"
+                    android:textSize="16sp"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/txtDate"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:linksClickable="true"
+                    android:minHeight="20dp"
+                    android:paddingLeft="10dp"
+                    android:textColor="#AEADAE"
+                    android:textIsSelectable="true"
+                    android:textSize="12sp"
+                    android:textStyle="italic" />
+            </LinearLayout>
+        </LinearLayout>
+
+        <TextView
+            android:id="@+id/txtDescription"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:padding="10dp" />
+
+        <LinearLayout
+            android:id="@+id/layMediaList"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical" >
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="3dip"
+            android:orientation="horizontal"
+            android:paddingLeft="10dp" >
+
+            <Button
+                android:id="@+id/btnComment"
+                android:layout_width="60dip"
+                android:layout_height="18dip"
+                android:layout_marginRight="3dip"
+                android:background="@drawable/btn_action"
+                android:gravity="center"
+                android:text="@string/text_comment"
+                android:textColor="@color/white"
+                android:textSize="12sp" />
+
+            <Button
+                android:id="@+id/btnFavorite"
+                android:layout_width="60dip"
+                android:layout_height="18dip"
+                android:layout_marginRight="3dip"
+                android:background="@drawable/btn_action"
+                android:gravity="center"
+                android:text="@string/text_fav"
+                android:textColor="@color/white"
+                android:textSize="12sp" />
+
+            <Button
+                android:id="@+id/btnEdit"
+                android:layout_width="40dip"
+                android:layout_height="18dip"
+                android:layout_marginRight="3dip"
+                android:background="@drawable/btn_action"
+                android:gravity="center"
+                android:text="@string/text_edit"
+                android:textColor="@color/white"
+                android:textSize="12sp" />
+
+            <Button
+                android:id="@+id/btnLike"
+                android:layout_width="40dip"
+                android:layout_height="18dip"
+                android:layout_marginRight="3dip"
+                android:background="@drawable/btn_action"
+                android:gravity="center"
+                android:text="@string/text_like"
+                android:textColor="@color/white"
+                android:textSize="12sp" />
+
+            <Button
+                android:id="@+id/btnDelete"
+                android:layout_width="40dip"
+                android:layout_height="18dip"
+                android:layout_marginRight="3dip"
+                android:background="@drawable/btn_action"
+                android:gravity="center"
+                android:text="@string/text_del"
+                android:textColor="@color/white"
+                android:textSize="12sp" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dip"
+            android:orientation="horizontal"
+            android:paddingLeft="10dp" >
+
+            <Button
+                android:id="@+id/btnShare"
+                android:layout_width="40dip"
+                android:layout_height="18dip"
+                android:layout_marginRight="3dip"
+                android:background="@drawable/btn_action"
+                android:gravity="center"
+                android:text="@string/text_share"
+                android:textColor="@color/white"
+                android:textSize="12sp" />
+
+            <Button
+                android:id="@+id/btnFlag"
+                android:layout_width="40dip"
+                android:layout_height="18dip"
+                android:layout_marginRight="3dip"
+                android:background="@drawable/btn_action"
+                android:gravity="center"
+                android:text="@string/text_flag"
+                android:textColor="@color/white"
+                android:textSize="12sp" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/layCommentList"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dip"
+            android:layout_marginLeft="15dip"
+            android:layout_marginRight="10dip"
+            android:orientation="vertical" >
+        </LinearLayout>
+    </LinearLayout>
+
+</LinearLayout>

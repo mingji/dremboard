@@ -1,0 +1,134 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="290dip"
+    android:layout_height="wrap_content"
+    android:background="@color/white"
+    android:orientation="vertical" >
+
+    <RelativeLayout
+        android:id="@+id/RelativeLayout1"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/lightgray"
+        android:padding="5dip" >
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentTop="true"
+            android:layout_centerHorizontal="true"
+            android:text="@string/text_report_drem"
+            android:textAppearance="?android:attr/textAppearanceLarge" />
+    </RelativeLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="5dip"
+        android:paddingLeft="10dip" >
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" >
+
+            <TextView
+                android:id="@+id/textView1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Why are you reporting this drem?"
+                android:textAppearance="?android:attr/textAppearanceMedium" />
+        </LinearLayout>
+
+        <RadioGroup
+            android:id="@+id/radio_report_group"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" >
+
+            <RadioButton
+                android:id="@+id/radio_report_annoy"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:checked="true"
+                android:text="It&apos;s annoying or not interesting" />
+
+            <RadioButton
+                android:id="@+id/radio_report_nudity"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Nudity or Pornography" />
+
+            <RadioButton
+                android:id="@+id/radio_report_graphic"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Graphic Violence" />
+
+            <RadioButton
+                android:id="@+id/radio_report_attack"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Attacks a group or individual" />
+
+            <RadioButton
+                android:id="@+id/radio_report_improper"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="I think it shouldn&apos;t be on Dremboard" />
+
+            <RadioButton
+                android:id="@+id/radio_spam"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="It&apos;s spam" />
+        </RadioGroup>
+    </LinearLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/lightgray"
+        android:padding="5dip" >
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical" >
+
+            <TextView
+                android:id="@+id/text_complaint"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="16sp"
+                android:layout_marginBottom="10dip"
+                android:text="@string/text_complaint" />
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" >
+                
+				<Button
+                    android:id="@+id/btn_flag_register"
+                    android:layout_width="wrap_content"
+                    android:background="@drawable/btn_register"
+                    android:textColor="@color/white"
+					android:layout_height="32dip"
+					android:textSize="16sp"
+                    android:text="Report Drem" />
+
+                <Button
+                    android:id="@+id/btn_cancel"
+                    android:layout_width="wrap_content"
+                    android:background="@drawable/btn_cancel"
+                    android:textColor="@color/white"
+					android:layout_height="32dip"
+					android:textSize="16sp"
+					android:layout_marginLeft="10dip"
+                    android:text="Cancel" />
+            </LinearLayout>
+            
+        </LinearLayout>
+
+    </RelativeLayout>
+
+</LinearLayout>

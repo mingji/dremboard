@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content" >
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="7dip"
+        android:layout_marginLeft="12dip"
+        android:layout_marginRight="10dip"
+        android:layout_marginTop="7dip"
+        android:background="@drawable/grayborder_grayback"
+        android:padding="7dip" >
+
+        <RelativeLayout
+            android:id="@+id/layBody"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" >
+
+            <TextView
+                android:id="@+id/txtDesc"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="8dip"
+                android:singleLine="false"
+                android:text="Notification description"
+                android:textColor="@color/fg_darkred"
+                android:textSize="16sp" />
+
+            <TextView
+                android:id="@+id/txtSince"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/txtDesc"
+                android:layout_marginLeft="12dip"
+                android:layout_toRightOf="@+id/imgUser"
+                android:text="active 41 minutes ago"
+                android:textColor="@color/darkgray"
+                android:textSize="14sp" />
+        </RelativeLayout>
+
+        <LinearLayout
+            android:id="@+id/layActions"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_below="@+id/layBody"
+            android:layout_marginTop="12dip"
+            android:gravity="center"
+            android:orientation="horizontal" >
+
+            <Button
+                android:id="@+id/btnRead"
+                android:layout_width="50dip"
+                android:layout_height="25dip"
+                android:layout_marginLeft="10dip"
+                android:background="@drawable/btn_action"
+                android:gravity="center"
+                android:text="Read"
+                android:textColor="@drawable/selector_btn_color"
+                android:textSize="12sp" />
+
+            <Button
+                android:id="@+id/btnDelete"
+                android:layout_width="50dip"
+                android:layout_height="25dip"
+                android:layout_marginLeft="7dip"
+                android:background="@drawable/btn_register"
+                android:gravity="center"
+                android:text="Delete"
+                android:textColor="@drawable/selector_btn_color"
+                android:textSize="12sp" />
+        </LinearLayout>
+    </RelativeLayout>
+
+</RelativeLayout>

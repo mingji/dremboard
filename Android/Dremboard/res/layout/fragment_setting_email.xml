@@ -1,0 +1,439 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/background_gray" >
+
+    <ScrollView
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:scrollbars="vertical"
+        android:visibility="visible" >
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingLeft="20dip"
+            android:paddingRight="20dip" >
+
+            <TextView
+                android:id="@+id/lblCaption"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dip"
+                android:text="Send an email notice when:"
+                android:textColor="@color/black"
+                android:textSize="17sp" />
+
+            <TextView
+                android:id="@+id/lblActivity"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/lblCaption"
+                android:layout_marginTop="15dip"
+                android:text="Activity"
+                android:textColor="@color/black"
+                android:textSize="20sp"
+                android:textStyle="bold" />
+
+            <LinearLayout
+                android:id="@+id/layActivity1"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/lblActivity"
+                android:layout_marginTop="10dip"
+                android:orientation="horizontal" >
+
+                <TextView
+                    android:layout_width="230dip"
+                    android:layout_height="wrap_content"
+                    android:text="A member mentions you in an update"
+                    android:textColor="@color/black"
+                    android:textSize="15sp" />
+
+                <CheckBox
+                    android:id="@+id/chkActivityMention"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="20dip"
+                    android:background="@color/transparent"
+                    android:button="@null"
+                    android:checked="false"
+                    android:drawableLeft="@drawable/checkbox"
+                    android:textSize="14sp" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/layActivity2"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/layActivity1"
+                android:layout_marginTop="10dip"
+                android:orientation="horizontal" >
+
+                <TextView
+                    android:layout_width="230dip"
+                    android:layout_height="wrap_content"
+                    android:text="A member replies to an update or comment you&apos;ve posted"
+                    android:textColor="@color/black"
+                    android:textSize="15sp" />
+
+                <CheckBox
+                    android:id="@+id/chkActivityReply"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:layout_marginLeft="20dip"
+                    android:background="@color/transparent"
+                    android:button="@null"
+                    android:checked="false"
+                    android:drawableLeft="@drawable/checkbox"
+                    android:textSize="14sp" />
+            </LinearLayout>
+
+            <TextView
+                android:id="@+id/lblMessages"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/layActivity2"
+                android:layout_marginTop="15dip"
+                android:text="Messages"
+                android:textColor="@color/black"
+                android:textSize="20sp"
+                android:textStyle="bold" />
+
+            <LinearLayout
+                android:id="@+id/layMessage1"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/lblMessages"
+                android:layout_marginTop="10dip"
+                android:orientation="horizontal" >
+
+                <TextView
+                    android:layout_width="230dip"
+                    android:layout_height="wrap_content"
+                    android:text="A member sends you a new message"
+                    android:textColor="@color/black"
+                    android:textSize="15sp" />
+
+                <CheckBox
+                    android:id="@+id/chkMessageSend"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="20dip"
+                    android:background="@color/transparent"
+                    android:button="@null"
+                    android:checked="false"
+                    android:drawableLeft="@drawable/checkbox"
+                    android:textSize="14sp" />
+            </LinearLayout>
+
+            <TextView
+                android:id="@+id/lblFriends"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/layMessage1"
+                android:layout_marginTop="15dip"
+                android:text="Friends"
+                android:textColor="@color/black"
+                android:textSize="20sp"
+                android:textStyle="bold" />
+
+            <LinearLayout
+                android:id="@+id/layFriend1"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/lblFriends"
+                android:layout_marginTop="10dip"
+                android:orientation="horizontal" >
+
+                <TextView
+                    android:layout_width="230dip"
+                    android:layout_height="wrap_content"
+                    android:text="A member sends you a friendship request"
+                    android:textColor="@color/black"
+                    android:textSize="15sp" />
+
+                <CheckBox
+                    android:id="@+id/chkFriendRequest"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="20dip"
+                    android:background="@color/transparent"
+                    android:button="@null"
+                    android:checked="false"
+                    android:drawableLeft="@drawable/checkbox"
+                    android:textSize="14sp" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/layFriend2"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/layFriend1"
+                android:layout_marginTop="10dip"
+                android:orientation="horizontal" >
+
+                <TextView
+                    android:layout_width="230dip"
+                    android:layout_height="wrap_content"
+                    android:text="A member accepts your friendship request"
+                    android:textColor="@color/black"
+                    android:textSize="15sp" />
+
+                <CheckBox
+                    android:id="@+id/chkFriendAccept"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="20dip"
+                    android:background="@color/transparent"
+                    android:button="@null"
+                    android:checked="false"
+                    android:drawableLeft="@drawable/checkbox"
+                    android:textSize="14sp" />
+            </LinearLayout>
+
+            <TextView
+                android:id="@+id/lblGroups"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/layFriend2"
+                android:layout_marginTop="15dip"
+                android:text="Groups"
+                android:textColor="@color/black"
+                android:textSize="20sp"
+                android:textStyle="bold" />
+
+            <LinearLayout
+                android:id="@+id/layGroup1"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/lblGroups"
+                android:layout_marginTop="10dip"
+                android:orientation="horizontal" >
+
+                <TextView
+                    android:layout_width="230dip"
+                    android:layout_height="wrap_content"
+                    android:text="A member invites you to join a group"
+                    android:textColor="@color/black"
+                    android:textSize="15sp" />
+
+                <CheckBox
+                    android:id="@+id/chkGroupInvite"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="20dip"
+                    android:background="@color/transparent"
+                    android:button="@null"
+                    android:checked="false"
+                    android:drawableLeft="@drawable/checkbox"
+                    android:textSize="14sp" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/layGroup2"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/layGroup1"
+                android:layout_marginTop="10dip"
+                android:orientation="horizontal" >
+
+                <TextView
+                    android:layout_width="230dip"
+                    android:layout_height="wrap_content"
+                    android:text="Group information is updated"
+                    android:textColor="@color/black"
+                    android:textSize="15sp" />
+
+                <CheckBox
+                    android:id="@+id/chkGroupUpdate"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="20dip"
+                    android:background="@color/transparent"
+                    android:button="@null"
+                    android:checked="false"
+                    android:drawableLeft="@drawable/checkbox"
+                    android:textSize="14sp" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/layGroup3"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/layGroup2"
+                android:layout_marginTop="10dip"
+                android:orientation="horizontal" >
+
+                <TextView
+                    android:layout_width="230dip"
+                    android:layout_height="wrap_content"
+                    android:text="You are promoted to a group administrator or moderator"
+                    android:textColor="@color/black"
+                    android:textSize="15sp" />
+
+                <CheckBox
+                    android:id="@+id/chkGroupPromote"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="20dip"
+                    android:background="@color/transparent"
+                    android:button="@null"
+                    android:checked="false"
+                    android:drawableLeft="@drawable/checkbox"
+                    android:textSize="14sp" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/layGroup4"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/layGroup3"
+                android:layout_marginTop="10dip"
+                android:orientation="horizontal" >
+
+                <TextView
+                    android:layout_width="230dip"
+                    android:layout_height="wrap_content"
+                    android:text="A member requests to join a private group for which you are an admin"
+                    android:textColor="@color/black"
+                    android:textSize="15sp" />
+
+                <CheckBox
+                    android:id="@+id/chkGroupRequest"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="20dip"
+                    android:background="@color/transparent"
+                    android:button="@null"
+                    android:checked="false"
+                    android:drawableLeft="@drawable/checkbox"
+                    android:textSize="14sp" />
+            </LinearLayout>
+
+            <TextView
+                android:id="@+id/lblFamily"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/layGroup4"
+                android:layout_marginTop="15dip"
+                android:text="Familys"
+                android:textColor="@color/black"
+                android:textSize="20sp"
+                android:textStyle="bold" />
+
+            <LinearLayout
+                android:id="@+id/layFamily1"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/lblFamily"
+                android:layout_marginTop="10dip"
+                android:orientation="horizontal" >
+
+                <TextView
+                    android:layout_width="230dip"
+                    android:layout_height="wrap_content"
+                    android:text="A member sends you a familyship request"
+                    android:textColor="@color/black"
+                    android:textSize="15sp" />
+
+                <CheckBox
+                    android:id="@+id/chkFamilyRequest"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="20dip"
+                    android:background="@color/transparent"
+                    android:button="@null"
+                    android:checked="false"
+                    android:drawableLeft="@drawable/checkbox"
+                    android:textSize="14sp" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/layFamily2"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/layFamily1"
+                android:layout_marginTop="10dip"
+                android:orientation="horizontal" >
+
+                <TextView
+                    android:layout_width="230dip"
+                    android:layout_height="wrap_content"
+                    android:text="A member accepts your familyship request"
+                    android:textColor="@color/black"
+                    android:textSize="15sp" />
+
+                <CheckBox
+                    android:id="@+id/chkFamilyAccept"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="20dip"
+                    android:background="@color/transparent"
+                    android:button="@null"
+                    android:checked="false"
+                    android:drawableLeft="@drawable/checkbox"
+                    android:textSize="14sp" />
+            </LinearLayout>
+
+            <TextView
+                android:id="@+id/lblFollow"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/layFamily2"
+                android:layout_marginTop="15dip"
+                android:text="Follow"
+                android:textColor="@color/black"
+                android:textSize="20sp"
+                android:textStyle="bold" />
+
+            <LinearLayout
+                android:id="@+id/layFallow"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/lblFollow"
+                android:layout_marginTop="10dip"
+                android:orientation="horizontal" >
+
+                <TextView
+                    android:layout_width="230dip"
+                    android:layout_height="wrap_content"
+                    android:text="A member starts following your activity"
+                    android:textColor="@color/black"
+                    android:textSize="15sp" />
+
+                <CheckBox
+                    android:id="@+id/chkFollow"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="20dip"
+                    android:background="@color/transparent"
+                    android:button="@null"
+                    android:checked="false"
+                    android:drawableLeft="@drawable/checkbox"
+                    android:textSize="14sp" />
+            </LinearLayout>
+
+            <Button
+                android:id="@+id/btnSave"
+                android:layout_width="120dip"
+                android:layout_height="40dip"
+                android:layout_alignParentRight="true"
+                android:layout_below="@+id/layFallow"
+                android:layout_marginRight="10dip"
+                android:layout_marginTop="15dip"
+                android:background="@drawable/btn_login"
+                android:gravity="center"
+                android:text="Save Changes"
+                android:textColor="@color/white"
+                android:textSize="16sp" />
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="20dip"
+                android:layout_below="@+id/btnSave" />
+        </RelativeLayout>
+    </ScrollView>
+
+</RelativeLayout>

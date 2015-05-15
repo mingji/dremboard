@@ -1,0 +1,129 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/background_gray" >
+    
+    <RelativeLayout
+        android:id="@+id/layTop"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true" >
+        
+        <include
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            layout="@layout/view_title_bar" />
+
+    </RelativeLayout>
+
+    <ScrollView
+        android:id="@+id/viewScroll"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/layTop"
+        android:scrollbars="vertical"
+        android:visibility="visible" >
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingLeft="20dip"
+            android:paddingRight="10dip" >
+
+            <LinearLayout
+                android:id="@+id/layDelete"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="15dip"
+                android:orientation="horizontal" >
+
+                <Button
+                    android:id="@+id/btnDelete"
+                    android:layout_width="70dip"
+                    android:layout_height="30dip"
+                    android:layout_below="@+id/txtMessage"
+                    android:layout_marginRight="7dip"
+                    android:background="@drawable/btn_register"
+                    android:gravity="center"
+                    android:text="Delete"
+                    android:textColor="@color/white"
+                    android:textSize="15sp" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text=""
+                    android:textColor="@color/black"
+                    android:textSize="12sp" />
+
+                <TextView
+                    android:id="@+id/txtPartner"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text=""
+                    android:textColor="@color/darkred1"
+                    android:textSize="13sp" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text=""
+                    android:textColor="@color/black"
+                    android:textSize="12sp" />
+            </LinearLayout>
+
+            <ListView
+                android:id="@+id/lstThread"
+                android:layout_width="match_parent"
+                android:layout_height="200dip"
+                android:layout_below="@+id/layDelete"
+                android:layout_marginBottom="8dip"
+                android:layout_marginTop="15dip"
+                android:divider="@null"
+                android:dividerHeight="0dp" />
+            
+            <TextView
+                android:id="@+id/lblReply"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/lstThread"
+                android:layout_marginTop="10dip"
+                android:text="Send a Reply"
+                android:textColor="@color/black"
+                android:textSize="13sp"
+                android:textStyle="bold" />
+
+            <EditText
+                android:id="@+id/txtReply"
+                android:layout_width="match_parent"
+                android:layout_height="120dip"
+                android:layout_below="@+id/lblReply"
+                android:layout_marginTop="10dip"
+                android:gravity="top|left"
+                android:inputType="textMultiLine"
+                android:padding="7dip"
+                android:scrollbars="vertical"
+                android:singleLine="false"
+                android:textColor="@color/black"
+                android:textSize="14sp" />
+
+            <Button
+                android:id="@+id/btnReply"
+                android:layout_width="100dip"
+                android:layout_height="30dip"
+                android:layout_below="@+id/txtReply"
+                android:layout_marginTop="15dip"
+                android:background="@drawable/btn_login"
+                android:gravity="center"
+                android:text="Send Reply"
+                android:textColor="@color/white"
+                android:textSize="15sp" />
+            
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="20dip"
+                android:layout_below="@+id/btnReply" />
+        </RelativeLayout>
+    </ScrollView>
+
+</RelativeLayout>
