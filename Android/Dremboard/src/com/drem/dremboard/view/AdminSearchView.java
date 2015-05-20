@@ -82,10 +82,15 @@ public class AdminSearchView extends LinearLayout implements OnClickListener {
 			public void onItemSelected(AdapterView<?> parent, View view,
 					int position, long id) {
 				// TODO Auto-generated method stub
+				
+				// same logic when click search button <<
 				String cate_val = spin_cate.getSelectedItem().toString();
-				String cate_key = mMapCategory.get(cate_val);
+				String category = mMapCategory.get(cate_val);
+				String search_str = "";
 
+				mSearchListener.onSearchBtnClicked(category, search_str);
 			}
+				// >>
 
 			@Override
 			public void onNothingSelected(AdapterView<?> parent) {

@@ -25,7 +25,7 @@ import android.graphics.Bitmap.CompressFormat;
 import android.util.Log;
 
 public class HttpApi {
-	private static final String LOG = "ScienceIsFun.HttpApi";
+	private static final String LOG = "Dremboard.HttpApi";
 	private static CookieStore cookieStore = null;
 
 	public static DefaultHttpClient defaultHttpClient() {

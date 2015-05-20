@@ -1,6 +1,8 @@
 package com.drem.dremboard.ui;
 
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.HashMap;
 
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -9,8 +11,12 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AbsListView;
 import android.widget.AbsListView.OnScrollListener;
+import android.widget.AdapterView.OnItemSelectedListener;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.GridView;
 import android.widget.ProgressBar;
+import android.widget.Spinner;
 
 import com.drem.dremboard.R;
 import com.drem.dremboard.adapter.DremActivityAdapter;
@@ -29,6 +35,7 @@ public class FragmentHome extends Fragment implements WebApiCallback
 {
 	private AppPreferences mPrefs;
 
+	Spinner spin_ActivityScope;
 	GridView mGridDremActivities;
 	DremActivityAdapter mAdapterDremActivity;
 	ArrayList<DremActivityInfo> mArrayDremActivities;
@@ -40,6 +47,11 @@ public class FragmentHome extends Fragment implements WebApiCallback
 	int mLastDremActivityId = 0;
 	int mPerPage = 5;
 	String mDremActivityScope = "all";
+	
+	//Init activity scope array string & hashMap
+	ArrayList<String> mArrayScopeStr = new ArrayList(Arrays.asList("ALL MEMBERS","FOLLOWING","MY FRIENDS","MENTIONS","NOTIFICATINOS"));
+	ArrayList<String> mArrayScopeVal = new ArrayList(Arrays.asList("all","following","friends","mentions","notifications"));
+	HashMap<String, String> mMapScope;
 	
 	WaitDialog waitDialog;
 	
@@ -68,6 +80,45 @@ public class FragmentHome extends Fragment implements WebApiCallback
 			mProgMore.setVisibility(View.VISIBLE);
 		else
 			mProgMore.setVisibility(View.GONE);
+		
+		//Init spin_activityscope control <<
+		spin_ActivityScope = (Spinner) view.findViewById(R.id.spinDremActivityOption);
+		spin_ActivityScope.setPrompt("Select activity scope");
+		ArrayAdapter<String> adapterActivityScope = new ArrayAdapter<String>(
+				getActivity(), android.R.layout.simple_spinner_item,
+				mArrayScopeStr);
+		adapterActivityScope
+				.setDropDownViewResource(R.layout.custom_spinner_dropdown_item);
+		spin_ActivityScope.setAdapter(adapterActivityScope);
+
+		mMapScope = new HashMap<String, String>();
+		for (int i = 0; i < 5; i++) {
+			mMapScope.put(mArrayScopeStr.get(i), mArrayScopeVal.get(i));
+		}		
+		//>>
+
+		//Set spin_activityscope item select listener <<
+		spin_ActivityScope.setOnItemSelectedListener(new OnItemSelectedListener() {
+
+			@Override
+			public void onItemSelected(AdapterView<?> parent, View view,
+					int position, long id) {
+				// TODO Auto-generated method stub
+				String scope_str = spin_ActivityScope.getSelectedItem().toString();
+				String scope_val = mMapScope.get(scope_str);
+
+				resetOptions();
+				mDremActivityScope = scope_val;
+				getDremActivityList(mLastDremActivityId, mPerPage);				
+			}
+
+			@Override
+			public void onNothingSelected(AdapterView<?> parent) {
+				// TODO Auto-generated method stub
+
+			}
+		});
+		//>>
 		
 		mArrayDremActivities = new ArrayList<DremActivityInfo>();
 		mAdapterDremActivity = new DremActivityAdapter(getActivity(), R.layout.item_drem_activity,
@@ -109,6 +160,7 @@ public class FragmentHome extends Fragment implements WebApiCallback
 		mDremActivityScope = "all";
 		mLastDremActivityId = 0;
 		mPerPage = 5;
+		mArrayDremActivities.clear();
 	}
 
 	private void loadMoreDremActivities()
