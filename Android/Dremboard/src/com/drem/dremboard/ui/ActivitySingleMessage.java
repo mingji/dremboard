@@ -12,7 +12,7 @@ import com.drem.dremboard.entity.SingleViewMessageInfo.MsgThread;
 import com.drem.dremboard.utils.AppPreferences;
 import com.drem.dremboard.utils.ImageLoader;
 import com.drem.dremboard.view.CustomToast;
-import com.drem.dremboard.view.HyIconView;
+import com.drem.dremboard.view.WebCircularImgView;
 import com.drem.dremboard.view.WaitDialog;
 import com.drem.dremboard.webservice.Constants;
 import com.drem.dremboard.webservice.WebApiCallback;
@@ -272,7 +272,7 @@ public class ActivitySingleMessage extends Activity implements OnClickListener, 
 				convertView = inflater.inflate(R.layout.item_msg_thread, null);
 				holder = new MsgThreadHolder();				
 				
-				holder.imgSender = (HyIconView) convertView.findViewById(R.id.imgSender);
+				holder.imgSender = (WebCircularImgView) convertView.findViewById(R.id.imgSender);
 				
 				holder.txtSender = (TextView) convertView.findViewById(R.id.txtSender);
 				holder.txtTime = (TextView) convertView.findViewById(R.id.txtTimeSince);
@@ -297,7 +297,7 @@ public class ActivitySingleMessage extends Activity implements OnClickListener, 
 		}
 
 		public class MsgThreadHolder {
-			HyIconView imgSender;
+			WebCircularImgView imgSender;
 			TextView txtSender;
 			TextView txtTime;
 			

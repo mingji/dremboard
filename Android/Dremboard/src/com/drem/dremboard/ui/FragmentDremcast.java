@@ -5,7 +5,8 @@ import java.util.ArrayList;
 import com.drem.dremboard.R;
 import com.drem.dremboard.entity.VideoInfo;
 import com.drem.dremboard.utils.ImageLoader;
-import com.drem.dremboard.view.HyIconView;
+import com.drem.dremboard.view.WebCircularImgView;
+import com.drem.dremboard.view.WebImgView;
 
 import android.app.Activity;
 import android.content.Intent;
@@ -92,6 +93,15 @@ public class FragmentDremcast extends Fragment implements OnClickListener
 		mAdapterMemory.notifyDataSetChanged();
 	}
 
+	private void startActivityDremer (int dremerId)
+	{
+		Intent intent = new Intent();
+		intent.setClass(getActivity(), ActivityDremer.class);
+		intent.putExtra("dremer_id", dremerId);
+		startActivity(intent);
+		getActivity().overridePendingTransition(R.anim.in_right_left, R.anim.out_right_left);
+	}
+	
 	@Override
 	public void onClick(View v) {
 		// TODO Auto-generated method stub
@@ -133,7 +143,8 @@ public class FragmentDremcast extends Fragment implements OnClickListener
 				holder = new VideoHolder();
 				holder.txtVideoName = (TextView) convertView.findViewById(R.id.txtVideoName);				
 				holder.txtUserName = (TextView) convertView.findViewById(R.id.txtUserName);
-				holder.imgVideoPic = (HyIconView) convertView.findViewById(R.id.imgPic);
+				holder.imgVideoPic = (WebImgView) convertView.findViewById(R.id.imgPic);
+				holder.videoUser = (WebCircularImgView) convertView.findViewById(R.id.videoUser);
 				holder.imgVideoPic.setOnClickListener(new View.OnClickListener() {
 					public void onClick(View v) {
 
@@ -154,13 +165,20 @@ public class FragmentDremcast extends Fragment implements OnClickListener
 			holder.txtVideoName.setText(video.mVideoName);			
 			holder.txtUserName.setText(video.mUserName);
 
+			if (video.media_author_avatar != null && !video.media_author_avatar.isEmpty())
+				ImageLoader.getInstance().displayImage(video.media_author_avatar, holder.videoUser, 0, 0);
+			else
+				holder.videoUser.imageView.setImageResource(R.drawable.empty_man);
+			holder.videoUser.setTag(position);
+
 			return convertView;
 		}
 
 		public class VideoHolder {
-			HyIconView imgVideoPic;
+			WebImgView imgVideoPic;
 			TextView txtVideoName;
 			TextView txtUserName;
+			WebCircularImgView videoUser;
 		}
 	}
 }

@@ -38,7 +38,7 @@ public class WebApiInstance {
 		GET_DREM_ACTIVITY, GET_DREM, GET_DREMER, GET_DREMBOARD, GET_VIDEOS, GET_SINGLE_DREMER,
 		
 		/* Contents Actions */
-		SET_COMMENT, SET_FAVORITE, SET_LIKE,
+		SET_COMMENT, SET_FAVORITE, SET_LIKE, SET_FLAG,
 		
 		/* Dremer Actions */
 		SET_FRIENDSHIP, SET_FAMILYSHIP, SET_BLOCK, SET_FOLLOW,
@@ -176,6 +176,10 @@ public class WebApiInstance {
 			
 		case SET_LIKE:
 			result = setLike(param);
+			break;
+			
+		case SET_FLAG:
+			result = setFlag(param);
 			break;
 			
 		case SET_FRIENDSHIP:
@@ -330,6 +334,18 @@ public class WebApiInstance {
 			return null;		
 		
 		result = Server.SetLike(param);
+		return result;
+	}
+	
+	Object setFlag(Object obj)
+	{
+		Object result = null;
+		SetFlagParam param = (SetFlagParam)obj;
+		
+		if (param == null)
+			return null;		
+		
+		result = Server.SetFlag(param);
 		return result;
 	}
 	

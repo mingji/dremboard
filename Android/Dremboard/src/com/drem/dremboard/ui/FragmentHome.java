@@ -49,7 +49,7 @@ public class FragmentHome extends Fragment implements WebApiCallback
 	String mDremActivityScope = "all";
 	
 	//Init activity scope array string & hashMap
-	ArrayList<String> mArrayScopeStr = new ArrayList(Arrays.asList("ALL MEMBERS","FOLLOWING","MY FRIENDS","MENTIONS","NOTIFICATINOS"));
+	ArrayList<String> mArrayScopeStr = new ArrayList(Arrays.asList("ALL MEMBERS","FOLLOWING","MY FRIENDS","MENTIONS","NOTIFICATIONS"));
 	ArrayList<String> mArrayScopeVal = new ArrayList(Arrays.asList("all","following","friends","mentions","notifications"));
 	HashMap<String, String> mMapScope;
 	
@@ -67,7 +67,7 @@ public class FragmentHome extends Fragment implements WebApiCallback
 		
 		resetOptions();
 
-		getDremActivityList(mLastDremActivityId, mPerPage);
+//		getDremActivityList(mLastDremActivityId, mPerPage);
 
 		return view;
 	}

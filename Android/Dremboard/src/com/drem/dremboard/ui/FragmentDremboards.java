@@ -13,7 +13,8 @@ import com.drem.dremboard.utils.ImageLoader;
 import com.drem.dremboard.utils.Utility;
 import com.drem.dremboard.view.AdminSearchView;
 import com.drem.dremboard.view.CustomToast;
-import com.drem.dremboard.view.HyIconView;
+import com.drem.dremboard.view.WebCircularImgView;
+import com.drem.dremboard.view.WebImgView;
 import com.drem.dremboard.view.WaitDialog;
 import com.drem.dremboard.webservice.Constants;
 import com.drem.dremboard.webservice.WebApiCallback;
@@ -237,9 +238,9 @@ public class FragmentDremboards extends Fragment implements AdminSearchView.OnSe
 				LayoutInflater inflater = ((Activity) activity).getLayoutInflater();
 				convertView = inflater.inflate(R.layout.item_dremboard, null);
 				holder = new DremboardHolder();
-				holder.imgAuthor = (HyIconView) convertView.findViewById(R.id.imgAuthor);
+				holder.imgAuthor = (WebCircularImgView) convertView.findViewById(R.id.imgAuthor);
 				holder.txtAuthor = (TextView) convertView.findViewById(R.id.txtAuthor);	
-				holder.imgBoardPic = (HyIconView) convertView.findViewById(R.id.imgPic);
+				holder.imgBoardPic = (WebImgView) convertView.findViewById(R.id.imgPic);
 				holder.txtBoardName = (TextView) convertView.findViewById(R.id.txtName);				
 				holder.txtDremCount = (TextView) convertView.findViewById(R.id.txtDremCount);
 				
@@ -279,9 +280,9 @@ public class FragmentDremboards extends Fragment implements AdminSearchView.OnSe
 		}
 
 		public class DremboardHolder {
-			HyIconView imgAuthor;
+			WebCircularImgView imgAuthor;
 			TextView txtAuthor;
-			HyIconView imgBoardPic;
+			WebImgView imgBoardPic;
 			TextView txtBoardName;
 			TextView txtDremCount;
 		}

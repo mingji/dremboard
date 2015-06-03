@@ -13,7 +13,7 @@
         android:background="@drawable/activity_action"
         android:orientation="horizontal" >
 
-        <com.drem.dremboard.view.HyIconView
+        <com.drem.dremboard.view.WebCircularImgView
             android:id="@+id/imgAuthor"
             android:layout_width="50dp"
             android:layout_height="50dp"
@@ -33,7 +33,7 @@
             android:textSize="16sp" />
     </LinearLayout>
 
-    <com.drem.dremboard.view.HyIconView
+    <com.drem.dremboard.view.WebImgView
         android:id="@+id/imgPic"
         android:layout_width="match_parent"
         android:layout_height="match_parent"

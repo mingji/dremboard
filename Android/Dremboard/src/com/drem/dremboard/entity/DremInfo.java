@@ -1,5 +1,7 @@
 package com.drem.dremboard.entity;
 
+import java.util.ArrayList;
+
 public class DremInfo {
 	
 	public int id;
@@ -10,9 +12,12 @@ public class DremInfo {
 	public String guid;
 	public String favorite;
 	public String like;
-
+	public boolean isMore = true;
+	public ArrayList<CommentInfo> comment_list;
+	
 	public DremInfo() {
 		super();
 	}
 
+	
 }

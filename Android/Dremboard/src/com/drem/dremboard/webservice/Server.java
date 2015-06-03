@@ -213,6 +213,30 @@ public class Server {
 			return null;
 	}
 	
+	public static SetFlagResult SetFlag(SetFlagParam param)
+	{
+
+		HttpParams httpParam = new HttpParams();
+		httpParam.addParam(Constants.PARAM_USER_ID, param.user_id);
+		httpParam.addParam(Constants.PARAM_ACTIVITY_ID, Integer.toString(param.activity_id));
+		httpParam.addParam(Constants.PARAM_FLAG_SLUG, param.flag_slug);
+
+		String response = HttpApi.sendRequest(Constants.SERVER_REST_API_BASE + Constants.ACT_FLAG_DREM,
+				httpParam, null);
+
+		SetFlagResult result = null;
+		if (response != null) {
+			try {
+				Gson gson = new Gson();
+				result = gson.fromJson(response, SetFlagResult.class);
+			} catch (JsonSyntaxException e) {
+				Log.e("SetFlag", e.toString());
+			}
+			return result;
+		} else
+			return null;
+	}
+	
 	public static SetCommentResult SetActivityComment(SetCommentParam param)
 	{
 

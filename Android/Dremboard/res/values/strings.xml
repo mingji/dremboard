@@ -25,7 +25,10 @@
     <string name="text_like">Like</string>
     <string name="text_flag">Flag</string>
     <string name="text_share">Share</string>
-
+    <string name="text_addtodremboard">Add To Dremboard</string>
+    <string name="text_more">+ More</string>
+    <string name="text_less">- Less</string>
+    
     <!-- Actions -->
     <string name="text_about">Our mission is to create dremers who excel in life.\n\n
         Dremboard is a social media site founded in January 2014 by Raymond Freeman III and Reco L. Dixon. The site allows dremers to express their drems and inspirations through drems, memories, dremboards, and beautiful slideshows.\n\n

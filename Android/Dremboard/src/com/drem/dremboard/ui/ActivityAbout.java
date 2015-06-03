@@ -4,7 +4,8 @@ import com.drem.dremboard.R;
 import com.drem.dremboard.entity.DremerInfo;
 import com.drem.dremboard.entity.GlobalValue;
 import com.drem.dremboard.utils.ImageLoader;
-import com.drem.dremboard.view.HyIconView;
+import com.drem.dremboard.view.WebCircularImgView;
+import com.drem.dremboard.view.WebImgView;
 
 import android.app.Activity;
 import android.os.Bundle;
@@ -19,7 +20,7 @@ public class ActivityAbout extends Activity implements OnClickListener{
 
 	TextView mTxtTitle;
 	Button mBtnBack;
-	HyIconView mImgUserIcon;
+	WebCircularImgView mImgUserIcon;
     
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -50,7 +51,7 @@ public class ActivityAbout extends Activity implements OnClickListener{
 		mTxtTitle = (TextView) findViewById(R.id.txtTitle);
 		mTxtTitle.setText("About Us");
 		
-		mImgUserIcon = (HyIconView) findViewById(R.id.imgUserIcon);
+		mImgUserIcon = (WebCircularImgView) findViewById(R.id.imgUserIcon);
 		mImgUserIcon.imageView.setImageResource(R.drawable.empty_man);
 		DremerInfo dremer = GlobalValue.getInstance().getCurrentDremer();
 		if (dremer.user_avatar != null && !dremer.user_avatar.isEmpty())

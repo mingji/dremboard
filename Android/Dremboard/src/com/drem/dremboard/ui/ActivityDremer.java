@@ -38,7 +38,7 @@ import com.drem.dremboard.utils.AppPreferences;
 import com.drem.dremboard.utils.ImageLoader;
 import com.drem.dremboard.utils.Utility;
 import com.drem.dremboard.view.CustomToast;
-import com.drem.dremboard.view.HyIconView;
+import com.drem.dremboard.view.WebImgView;
 import com.drem.dremboard.view.WaitDialog;
 import com.drem.dremboard.webservice.Constants;
 import com.drem.dremboard.webservice.WebApiCallback;
@@ -50,8 +50,8 @@ public class ActivityDremer extends Activity
 
 	private AppPreferences mPrefs;
 	
-	HyIconView mImgDremer;
-	HyIconView mImgUserIcon;
+	WebImgView mImgDremer;
+	WebImgView mImgUserIcon;
 	TextView mTxtTitle;	
 	TextView mTxtName, mTxtBio, mTxtUptime;
 	LinearLayout mLayLastContent;
@@ -153,13 +153,13 @@ public class ActivityDremer extends Activity
 
 	private void initView() {
 		
-		mImgUserIcon = (HyIconView) findViewById(R.id.imgUserIcon);
+		mImgUserIcon = (WebImgView) findViewById(R.id.imgUserIcon);
 		mImgUserIcon.imageView.setImageResource(R.drawable.empty_man);
 		DremerInfo dremer = GlobalValue.getInstance().getCurrentDremer();
 		if (dremer.user_avatar != null && !dremer.user_avatar.isEmpty())
 			ImageLoader.getInstance().displayImage(dremer.user_avatar, mImgUserIcon, 0, 0);
 		
-		mImgDremer = (HyIconView) findViewById(R.id.imgDremer);
+		mImgDremer = (WebImgView) findViewById(R.id.imgDremer);
 		mImgDremer.imageView.setImageResource(R.drawable.empty_man);
 		
 		mTxtTitle = (TextView) findViewById(R.id.txtTitle);

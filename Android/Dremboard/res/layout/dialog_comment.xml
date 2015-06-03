@@ -2,65 +2,81 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
+    android:layout_height="wrap_content"
     android:background="@color/white"
-    android:padding="20dip">
+    android:padding="5dip" >
+
+    <Button
+        android:id="@+id/btnClose"
+        android:layout_width="30dip"
+        android:layout_height="30dip"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginBottom="5dip"
+        android:background="@drawable/btn_close" >
+    </Button>
+
+    <ListView
+        android:id="@+id/lstComment"
+        android:layout_width="match_parent"
+        android:layout_height="300dip"
+        android:layout_below="@+id/btnClose"
+        android:divider="@null"
+        android:dividerHeight="1dp" />
 
     <LinearLayout
+        android:id="@+id/lytText"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:layout_alignParentTop="true"
-        android:orientation="vertical" >        
+        android:layout_below="@+id/lstComment"
+        android:orientation="vertical" >
 
-        <LinearLayout
+        <TextView
+            android:id="@+id/lblComment"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="15dip"
+            android:text="Comment:"
+            android:textSize="15sp" />
+
+        <EditText
+            android:id="@+id/txtComment"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:orientation="vertical" >
-
-            <TextView
-                android:id="@+id/lblComment"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="15dip"
-                android:text="Comment:"
-                android:textSize="15sp" />
-
-            <EditText
-                android:id="@+id/txtComment"
-                android:layout_width="fill_parent"
-                android:layout_height="wrap_content"
-                android:background="@android:drawable/edit_text"
-                android:layout_marginBottom="10dip"
-                android:gravity="top|left"
-                android:inputType="textMultiLine"
-                android:lines="4"
-                android:scrollbars="vertical" />
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_weight="1" >
-
-            <Button
-                android:id="@+id/btnPost"
-                android:layout_width="100dip"
-                android:layout_height="32dip"
-                android:background="@drawable/btn_register"
-                android:text="Post"
-                android:textColor="@color/white"
-                android:textSize="16sp" />
-
-            <Button
-                android:id="@+id/btnCancel"
-                android:layout_width="100dip"
-                android:layout_height="32dip"
-                android:layout_marginLeft="10dip"
-                android:background="@drawable/btn_cancel"
-                android:text="Cancel"
-                android:textColor="@color/white"
-                android:textSize="16sp" />
-        </LinearLayout>
+            android:layout_marginBottom="10dip"
+            android:background="@android:drawable/edit_text"
+            android:gravity="top|left"
+            android:inputType="textMultiLine"
+            android:lines="2"
+            android:scrollbars="vertical" />
     </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/lytButtons"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/lytText"
+        android:gravity="right"
+        android:orientation="horizontal" >
+
+        <Button
+            android:id="@+id/btnPost"
+            android:layout_width="100dip"
+            android:layout_height="32dip"
+            android:background="@drawable/btn_register"
+            android:text="Post"
+            android:textColor="@color/white"
+            android:textSize="16sp" />
+
+        <Button
+            android:id="@+id/btnCancel"
+            android:layout_width="100dip"
+            android:layout_height="32dip"
+            android:layout_marginLeft="10dip"
+            android:background="@drawable/btn_cancel"
+            android:text="Cancel"
+            android:textColor="@color/white"
+            android:textSize="16sp" />
+    </LinearLayout>
+
 </RelativeLayout>

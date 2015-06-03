@@ -4,6 +4,7 @@ import java.util.ArrayList;
 
 import android.app.Activity;
 import android.app.Dialog;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
@@ -26,11 +27,13 @@ import com.drem.dremboard.entity.Beans.SetFavoriteResult;
 import com.drem.dremboard.entity.Beans.SetLikeParam;
 import com.drem.dremboard.entity.Beans.SetLikeResult;
 import com.drem.dremboard.entity.DremInfo;
+import com.drem.dremboard.entity.GlobalValue;
+import com.drem.dremboard.ui.DialogFlagDrem.OnFlagResultCallback;
 import com.drem.dremboard.utils.AppPreferences;
 import com.drem.dremboard.utils.ImageLoader;
 import com.drem.dremboard.view.AdminSearchView;
 import com.drem.dremboard.view.CustomToast;
-import com.drem.dremboard.view.HyIconView;
+import com.drem.dremboard.view.WebImgView;
 import com.drem.dremboard.view.WaitDialog;
 import com.drem.dremboard.webservice.Constants;
 import com.drem.dremboard.webservice.WebApiCallback;
@@ -38,7 +41,7 @@ import com.drem.dremboard.webservice.WebApiInstance;
 import com.drem.dremboard.webservice.WebApiInstance.Type;
 
 public class FragmentDrems extends Fragment implements
-		AdminSearchView.OnSearchListener, WebApiCallback {
+		AdminSearchView.OnSearchListener, WebApiCallback, OnFlagResultCallback{
 
 	private AppPreferences mPrefs;
 
@@ -329,6 +332,12 @@ public class FragmentDrems extends Fragment implements
 		Dialog dialog = new DialogShare(getActivity(), getActivity(), activity_id);
 		dialog.show();
 	}
+	
+	private void showFlagDialog(int activity_id, int index)
+	{
+		Dialog dialog = new DialogFlagDrem(getActivity(), activity_id, index, this);
+		dialog.show();
+	}
 
 	@Override
 	public void onSearchBtnClicked(String category, String search_str) {
@@ -368,6 +377,24 @@ public class FragmentDrems extends Fragment implements
 		}
 	}
 
+	@Override
+	public void onFinishSetFlag(String strAlert, int index) {
+		// TODO Auto-generated method stub
+		mArrayDrems.remove(index);
+		mAdapterDrem.notifyDataSetChanged();
+		
+		CustomToast.makeCustomToastLong(getActivity(), strAlert);
+	}
+
+	public void ViewDrem(DremInfo dremItem) {
+		Intent intent = new Intent();
+		intent.setClass(getActivity(), ActivityDremView.class);
+		intent.putExtra("drem_img", dremItem.guid);
+		GlobalValue.getInstance().setCurrentDrem(dremItem);
+		startActivity(intent);
+		getActivity().overridePendingTransition(R.anim.in_right_left, R.anim.out_right_left);		
+	}
+	
 	public class DremAdapter extends ArrayAdapter<DremInfo> implements OnClickListener{
 		Activity activity;
 		int layoutResourceId;
@@ -396,18 +423,22 @@ public class FragmentDrems extends Fragment implements
 				holder = new DremHolder();
 				
 				holder.txtCategory = (TextView) convertView.findViewById(R.id.txtCategory);
-				holder.imgPic = (HyIconView) convertView.findViewById(R.id.imgPic);
+				holder.imgPic = (WebImgView) convertView.findViewById(R.id.imgPic);
 				
 				holder.btnFavorite = (Button) convertView.findViewById(R.id.btnFavorite);
 				holder.btnLike = (Button) convertView.findViewById(R.id.btnLike);
 				holder.btnFlag = (Button) convertView.findViewById(R.id.btnFlag);
 				holder.btnShare = (Button) convertView.findViewById(R.id.btnShare);
+				holder.btnMore = (Button) convertView.findViewById(R.id.btnMore);
+				holder.btnLess = (Button) convertView.findViewById(R.id.btnLess);
 
 				holder.imgPic.setOnClickListener(this);
 				holder.btnFavorite.setOnClickListener(this);
 				holder.btnLike.setOnClickListener(this);
-//				holder.btnFlag.setOnClickListener(this);
+				holder.btnFlag.setOnClickListener(this);
 				holder.btnShare.setOnClickListener(this);
+				holder.btnMore.setOnClickListener(this);
+				holder.btnLess.setOnClickListener(this);
 				
 				convertView.setTag(holder);
 			} else
@@ -428,31 +459,35 @@ public class FragmentDrems extends Fragment implements
 			holder.btnLike.setTag(position);
 			
 			holder.btnFlag.setTag(position);
-			holder.btnShare.setTag(position);
+			holder.btnShare.setTag(position);			
 
-			holder.btnFlag.setOnClickListener(new OnClickListener() {
-				public void onClick(View v) {
-					DialogFlagDrem flag_drem_diag = new DialogFlagDrem(activity, dremItem.activity_id) {
-						public void drem_flaged(int activity_id, String flag_slug) {
-							item.remove(dremItem);
-							notifyDataSetChanged();
-						}
-					};
-					flag_drem_diag.show();
-				}
-			});
-
+			holder.btnMore.setTag(position);
+			holder.btnLess.setTag(position);
+			
+			if(dremItem.isMore == true){
+				holder.btnFavorite.setVisibility(View.GONE);
+				holder.btnFlag.setVisibility(View.INVISIBLE);
+				holder.btnMore.setVisibility(View.VISIBLE);
+				holder.btnLess.setVisibility(View.INVISIBLE);
+			} else {
+				holder.btnFavorite.setVisibility(View.VISIBLE);
+				holder.btnFlag.setVisibility(View.VISIBLE);
+				holder.btnMore.setVisibility(View.INVISIBLE);
+				holder.btnLess.setVisibility(View.VISIBLE);
+			}
+			
 			return convertView;
-
 		}
 
 		public class DremHolder {
-			HyIconView imgPic;
+			WebImgView imgPic;
 			TextView txtCategory;
 			Button btnFavorite;
 			Button btnLike;
 			Button btnFlag;
 			Button btnShare;
+			Button btnMore;
+			Button btnLess;
 		}
 
 		@Override
@@ -467,7 +502,8 @@ public class FragmentDrems extends Fragment implements
 				return;
 			
 			switch (viewId) {
-			case R.id.imgPic:				
+			case R.id.imgPic:
+				ViewDrem(dremItem);
 				break;
 			case R.id.btnFavorite:
 				setFavorite(dremItem, v, position);
@@ -478,10 +514,22 @@ public class FragmentDrems extends Fragment implements
 			case R.id.btnShare:
 				showShareDialog(dremItem.activity_id);
 				break;
+			case R.id.btnFlag:
+				showFlagDialog(dremItem.activity_id, position);
+				break;
+			case R.id.btnMore:
+				dremItem.isMore = false;
+				notifyDataSetChanged();				
+				break;
+			case R.id.btnLess:
+				dremItem.isMore = true;
+				notifyDataSetChanged();				
+				break;
 			default:
 				break;
 			}
 		}
 	}
+
 }
 

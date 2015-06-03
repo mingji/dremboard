@@ -18,7 +18,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content" >
 
-            <com.drem.dremboard.view.HyIconView
+            <com.drem.dremboard.view.WebCircularImgView
                 android:id="@+id/imgSender"
                 android:layout_width="50dip"
                 android:layout_height="50dip"

@@ -12,7 +12,7 @@ import com.drem.dremboard.utils.AppPreferences;
 import com.drem.dremboard.utils.ImageLoader;
 import com.drem.dremboard.utils.Utility;
 import com.drem.dremboard.view.CustomToast;
-import com.drem.dremboard.view.HyIconView;
+import com.drem.dremboard.view.WebCircularImgView;
 import com.drem.dremboard.view.WaitDialog;
 import com.drem.dremboard.webservice.Constants;
 import com.drem.dremboard.webservice.WebApiCallback;
@@ -407,7 +407,7 @@ public class FragmentDremers extends Fragment
 				holder.txtLastContent = (TextView) convertView.findViewById(R.id.txtLastContent);
 				holder.txtViewContent = (TextView) convertView.findViewById(R.id.txtViewContent);
 				
-				holder.imgUser = (HyIconView) convertView.findViewById(R.id.imgUser);
+				holder.imgUser = (WebCircularImgView) convertView.findViewById(R.id.imgUser);
 				
 				holder.btnFriendship.setOnClickListener(this);
 				holder.txtName.setOnClickListener(this);
@@ -476,7 +476,7 @@ public class FragmentDremers extends Fragment
 		public class DremerHolder {
 			TextView txtName;
 			TextView txtUptime;
-			HyIconView imgUser;
+			WebCircularImgView imgUser;
 			
 			LinearLayout layLastContent;
 			TextView txtLastContent;

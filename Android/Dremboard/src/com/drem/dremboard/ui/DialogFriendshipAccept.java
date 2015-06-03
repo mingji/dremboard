@@ -17,7 +17,7 @@ import com.drem.dremboard.utils.AppPreferences;
 import com.drem.dremboard.utils.ImageLoader;
 import com.drem.dremboard.utils.Utility;
 import com.drem.dremboard.view.CustomToast;
-import com.drem.dremboard.view.HyIconView;
+import com.drem.dremboard.view.WebImgView;
 import com.drem.dremboard.view.WaitDialog;
 import com.drem.dremboard.webservice.Constants;
 import com.drem.dremboard.webservice.WebApiCallback;
@@ -28,7 +28,7 @@ public class DialogFriendshipAccept extends Dialog implements WebApiCallback {
 	Activity activity;
 	DremerInfo mDremer;
 	Button btnAccept, btnReject;
-	HyIconView mImgDremer;
+	WebImgView mImgDremer;
 	TextView mTxtName, mTxtUptime;	
 
 	AppPreferences mPrefs;
@@ -57,7 +57,7 @@ public class DialogFriendshipAccept extends Dialog implements WebApiCallback {
 		mPrefs = new AppPreferences(this.activity);
 		waitDialog = new WaitDialog(this.activity);
 
-		mImgDremer = (HyIconView) findViewById(R.id.imgUser);
+		mImgDremer = (WebImgView) findViewById(R.id.imgUser);
 		mTxtName = (TextView) findViewById(R.id.txtUserName);
 		mTxtUptime = (TextView) findViewById(R.id.txtUptime);
 		

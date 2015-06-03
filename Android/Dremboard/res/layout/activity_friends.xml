@@ -32,7 +32,7 @@
             android:textColor="@color/white"
             android:textSize="24sp" />
 
-        <com.drem.dremboard.view.HyIconView
+        <com.drem.dremboard.view.WebImgView
             android:id="@+id/imgUserIcon"
             android:layout_width="38dip"
             android:layout_height="38dip"

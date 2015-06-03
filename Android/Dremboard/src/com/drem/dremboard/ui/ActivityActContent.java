@@ -6,7 +6,8 @@ import com.drem.dremboard.adapter.TabsAdapter;
 import com.drem.dremboard.entity.DremerInfo;
 import com.drem.dremboard.entity.GlobalValue;
 import com.drem.dremboard.utils.ImageLoader;
-import com.drem.dremboard.view.HyIconView;
+import com.drem.dremboard.view.WebCircularImgView;
+import com.drem.dremboard.view.WebImgView;
 
 import android.os.Bundle;
 import android.support.v4.view.ViewPager;
@@ -27,7 +28,7 @@ public class ActivityActContent extends SherlockFragmentActivity implements OnCl
     int mDremerId;
     
     Button mBtnBack;
-    HyIconView mImgUserIcon;
+    WebCircularImgView mImgUserIcon;
     
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -79,7 +80,7 @@ public class ActivityActContent extends SherlockFragmentActivity implements OnCl
 		
 		mScrollTabs = (HorizontalScrollView) findViewById(R.id.scrollTabs);
 		
-		mImgUserIcon = (HyIconView) findViewById(R.id.imgUserIcon);
+		mImgUserIcon = (WebCircularImgView) findViewById(R.id.imgUserIcon);
 		mImgUserIcon.imageView.setImageResource(R.drawable.empty_man);
 		DremerInfo dremer = GlobalValue.getInstance().getCurrentDremer();
 		if (dremer.user_avatar != null && !dremer.user_avatar.isEmpty())

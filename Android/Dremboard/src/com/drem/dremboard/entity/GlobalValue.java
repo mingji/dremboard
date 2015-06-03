@@ -10,6 +10,7 @@ public class GlobalValue {
 	private DremboardInfo mDremboard;
 	private ArrayList<ProfileItem> mProfiles;
 	private String mPwd;
+	private DremInfo mDrem;
 
 	public static synchronized GlobalValue getInstance(){
 
@@ -91,4 +92,20 @@ public class GlobalValue {
 		return mPwd;
 	}
 
+	public void setCurrentDrem(DremInfo drem)
+	{
+		if (drem == null)
+			return;
+		
+		this.mDrem = drem;
+	}
+	
+	public DremInfo getCurrentDrem()
+	{
+		if (mDrem == null)
+			this.mDrem = new DremInfo();
+		
+		return mDrem;
+	}
+	
 }

@@ -201,6 +201,26 @@ public class Beans {
 		public SetLikeData data;
 	}
 	
+	/* Set Flag */
+	public static class SetFlagParam {
+		public String user_id;		
+		public int activity_id;
+		public String flag_slug;
+		
+		public Object exParam;
+		public int index;
+	}
+
+	public static class SetFlagData {
+		public String flag_slug;
+	}
+	
+	public static class SetFlagResult {
+		public String status;
+		public String msg;
+		public SetFlagData data;
+	}
+	
 	/* Set Comment */
 	public static class SetCommentParam {
 		public String user_id;		
@@ -209,18 +229,8 @@ public class Beans {
 		public String photo;		
 	}
 
-	public static class CommentData {
-		public int activity_id;
-		public int author_id;
-		public String author_name;
-		public String author_avatar;
-		public String description;
-		public String media_id;
-		public String last_modified;
-	}
-	
 	public static class SetCommentData {
-		public CommentData comment;
+		public CommentInfo comment;
 	}
 	
 	public static class SetCommentResult {

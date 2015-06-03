@@ -9,7 +9,7 @@
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true" />
-    
+
     <ListView
         android:id="@+id/lstDremer"
         android:layout_width="match_parent"
@@ -17,5 +17,30 @@
         android:layout_above="@+id/progMore"
         android:divider="@null"
         android:dividerHeight="0dp" />
+
+    <GridView
+        android:id="@+id/GrdDremer"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_above="@+id/progMore"
+        android:divider="@null"
+        android:dividerHeight="0dp"
+        android:visibility="gone" />
+
+    <ToggleButton
+        android:id="@+id/btnViewMode"
+        android:layout_width="120dip"
+        android:layout_height="30dip"
+        android:layout_alignParentRight="true"
+        android:layout_marginTop="8dip"
+        android:layout_marginRight="10dip"
+        android:background="@drawable/btn_action"        
+        android:textOn="Traditional View"
+        android:textOff="Grid View"
+        android:gravity="center"
+        android:visibility="gone"
+        android:text="Traditional View"
+        android:textColor="@drawable/selector_btn_color"
+        android:textSize="12sp" />
 
 </RelativeLayout>

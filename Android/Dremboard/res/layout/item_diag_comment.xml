@@ -11,6 +11,7 @@
         android:id="@+id/layCommentAuthor"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginTop="5dip"
         android:orientation="horizontal" >
 
         <com.drem.dremboard.view.WebCircularImgView
@@ -30,7 +31,6 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:linksClickable="true"
-                android:minHeight="30dp"
                 android:paddingLeft="5dp"
                 android:textColor="#783302"
                 android:textSize="14sp"
@@ -43,6 +43,15 @@
                 android:textColor="@color/darkgray"
                 android:textSize="14sp"
                 android:paddingLeft="5dp"/>
+
+            <TextView
+                android:id="@+id/txtTime"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/lightgray"
+                android:textSize="14sp"
+                android:paddingLeft="5dp"/>
+            
         </LinearLayout>
     </LinearLayout>
 
@@ -55,44 +64,5 @@
         android:layout_centerHorizontal="true"
         android:gravity="center"
         android:visibility="visible" />
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="3dip"
-        android:orientation="horizontal"
-        android:paddingLeft="10dp" >
-
-        <Button
-            android:id="@+id/btnCommentLike"
-            android:layout_width="40dip"
-            android:layout_height="18dip"
-            android:layout_marginRight="3dip"
-            android:background="@drawable/btn_action"
-            android:gravity="center"
-            android:text="@string/text_like"
-            android:textColor="@color/white"
-            android:textSize="12sp" />
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="10dip"
-            android:minHeight="20dp"
-            android:text="replied "
-            android:textColor="@color/darkgray"
-            android:textIsSelectable="true"
-            android:textSize="13sp" />
-
-        <TextView
-            android:id="@+id/txtCommentDate"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:minHeight="20dp"
-            android:paddingLeft="10dp"
-            android:textColor="#AEADAE"
-            android:textIsSelectable="true"
-            android:textSize="12sp" />
-    </LinearLayout>
 
 </LinearLayout>

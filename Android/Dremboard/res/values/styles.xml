@@ -18,5 +18,8 @@
     </style>
     <style name="ActivityTheme" parent="@style/Sherlock.__Theme.Light">
 	</style>
+	<style name="DialogTheme" parent="@style/Sherlock.__Theme.Dialog">
+	</style>
+	<style name="DialogHoloLightTheme" parent="android:Theme.Holo.Light.Dialog"></style>
 
 </resources>

@@ -13,7 +13,7 @@
         android:background="@drawable/grayborder_grayback"
         android:padding="7dip" >
 
-        <com.drem.dremboard.view.HyIconView
+        <com.drem.dremboard.view.WebCircularImgView
             android:id="@+id/imgSender"
             android:layout_width="40dip"
             android:layout_height="40dip"

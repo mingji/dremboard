@@ -34,7 +34,6 @@ public abstract class RestApi {
 	public static final String ACT_SET_FAVORITE 	= "set_favorite";
 	public static final String ACT_SET_LIKE 		= "set_like"; 
 	public static final String ACT_SHARE_DREM 		= "share_drem"; 
-	public static final String ACT_SET_FLAG 		= "set_flag";
 	public static final String ACT_USER_REGISTER	= "user_register";
 	public static final String ACT_RETRIEVE_PASSWORD= "retrieve_password";
 	public static final String ACT_FLAG_DREM		= "flag_drem";

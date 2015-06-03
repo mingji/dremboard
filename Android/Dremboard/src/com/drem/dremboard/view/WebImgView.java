@@ -11,7 +11,7 @@ import android.view.View;
 import android.widget.ProgressBar;
 import android.widget.RelativeLayout;
 
-public class HyIconView extends RelativeLayout implements ImageProcessingCallback {
+public class WebImgView extends RelativeLayout implements ImageProcessingCallback {
 
 //	public ImageView imageView;
 	private ProgressBar viewProgress;
@@ -19,12 +19,12 @@ public class HyIconView extends RelativeLayout implements ImageProcessingCallbac
 	public boolean flagShowProg = true;
 	public Bitmap failedBp = null;
 
-	public HyIconView(Context context) {
+	public WebImgView(Context context) {
 		super(context);
 		init();
 	}
 
-	public HyIconView(Context context, AttributeSet attrs) {
+	public WebImgView(Context context, AttributeSet attrs) {
 		super(context, attrs);
 		init();
 	}

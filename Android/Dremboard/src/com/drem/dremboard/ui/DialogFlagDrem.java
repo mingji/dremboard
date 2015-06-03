@@ -18,28 +18,56 @@ import android.widget.RadioGroup;
 import android.widget.TextView;
 
 import com.drem.dremboard.R;
+import com.drem.dremboard.entity.Beans.SetFlagParam;
+import com.drem.dremboard.entity.Beans.SetFlagResult;
+import com.drem.dremboard.entity.DremInfo;
+import com.drem.dremboard.entity.Beans.SetFavoriteParam;
+import com.drem.dremboard.entity.Beans.SetFavoriteResult;
+import com.drem.dremboard.utils.AppPreferences;
 import com.drem.dremboard.utils.RestApi;
+import com.drem.dremboard.view.CustomToast;
+import com.drem.dremboard.view.WaitDialog;
+import com.drem.dremboard.webservice.Constants;
+import com.drem.dremboard.webservice.WebApiCallback;
+import com.drem.dremboard.webservice.WebApiInstance;
+import com.drem.dremboard.webservice.WebApiInstance.Type;
 
-public abstract class DialogFlagDrem extends Dialog {
+public class DialogFlagDrem extends Dialog implements WebApiCallback {
 	Activity activity;
 	int activity_id;
 	Button btnCancel, btnFlag;
 	RadioGroup radio_flag_group;
 	TextView text_complaint;
 	ArrayList<String> flag_value;
+	
+	int itemIndex;
+	
+	OnFlagResultCallback callback;
+	
+	AppPreferences mPrefs;
+	WaitDialog waitDialog;
 
-	public DialogFlagDrem(Context context, int activity_id) {
+	public interface OnFlagResultCallback {
+		void onFinishSetFlag(String strAlert, int index);
+	}
+	
+	public DialogFlagDrem(Context context, int activity_id, int itemIndex, OnFlagResultCallback callback) {
 		super(context);
 		this.activity = (Activity) context;
 		this.activity_id = activity_id;
+		this.itemIndex = itemIndex;
+		this.callback = callback;
 	}
 	
-	public abstract void drem_flaged(int activity_id, String flag_slug);
+//	public abstract void drem_flaged(int activity_id, String flag_slug);
 
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		requestWindowFeature(Window.FEATURE_NO_TITLE);
 		setContentView(R.layout.item_flag_drem_modal);
+		
+		mPrefs = new AppPreferences(this.activity);		
+		waitDialog = new WaitDialog(this.activity);
 
 		setCancelable(true);
 		btnCancel = (Button) findViewById(R.id.btn_cancel);
@@ -68,22 +96,61 @@ public abstract class DialogFlagDrem extends Dialog {
 				View radioButton = radio_flag_group.findViewById(radioButtonId);
 				int idx = radio_flag_group.indexOfChild(radioButton);
 				String flag_slug = flag_value.get(idx);
-				flag_drem_task(activity_id, flag_slug);
-				dismiss();
+				setFlag (activity_id, flag_slug);				
 			}
 		});
 	}
+	
+	private void setFlag(int activityId, String flag_slug)	{
+		waitDialog.show();
+		
+		SetFlagParam param = new SetFlagParam();
+		
+		param.user_id = mPrefs.getUserId();
+		param.activity_id = activityId;	
+		param.flag_slug = flag_slug;
+		
+		WebApiInstance.getInstance().executeAPI(Type.SET_FLAG, param, this);
+	}
 
-	public void flag_drem_task(final int activity_id, final String flag_slug) {
-		String action = RestApi.ACT_FLAG_DREM;
-		HashMap<String, String> params = new HashMap<String, String>();
-		params.put(RestApi.PARAM_ACTIVITY_ID, String.valueOf(activity_id));
-		params.put(RestApi.PARAM_FLAG_SLUG, flag_slug);
+	private void setFlagResult(Object param, Object obj) {
 
-		new RestApi(activity, action, params) {
-			public void process_result(JSONObject data) throws JSONException {
-				drem_flaged(activity_id, flag_slug);
+		waitDialog.dismiss();
+		
+		if (obj == null) {
+			CustomToast.makeCustomToastShort(this.activity, Constants.NETWORK_ERR);
+		}
+
+		if (obj != null){
+			SetFlagResult resultBean = (SetFlagResult)obj;
+
+			if (resultBean.status.equals("ok")) {				
+				if (this.callback != null)
+						callback.onFinishSetFlag(resultBean.msg, itemIndex);
+			} else {
+				CustomToast.makeCustomToastShort(this.activity, resultBean.msg);
 			}
-		}.execute();
+		}
+		
+		dismiss();
+	}
+
+	@Override
+	public void onPreProcessing(Type type, Object parameter) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void onResultProcessing(Type type, Object parameter, Object result) {
+		// TODO Auto-generated method stub
+		switch (type)
+		{
+		case SET_FLAG:
+			setFlagResult(parameter, result);			
+			break;
+		default:
+			break;
+		}		
 	}
 }

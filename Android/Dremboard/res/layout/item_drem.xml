@@ -14,7 +14,7 @@
         android:textColor="@color/black"
         android:textSize="14sp" />
 
-    <com.drem.dremboard.view.HyIconView
+    <com.drem.dremboard.view.WebImgView
         android:id="@+id/imgPic"
         android:layout_width="match_parent"
         android:layout_height="120dip"
@@ -33,17 +33,6 @@
         android:orientation="horizontal" >
 
         <Button
-            android:id="@+id/btnFavorite"
-            android:layout_width="60dip"
-            android:layout_height="18dip"
-            android:layout_marginRight="3dip"
-            android:background="@drawable/btn_action"
-            android:gravity="center"
-            android:text="@string/text_fav"
-            android:textColor="@color/white"
-            android:textSize="12sp" />
-
-        <Button
             android:id="@+id/btnLike"
             android:layout_width="40dip"
             android:layout_height="18dip"
@@ -55,16 +44,37 @@
             android:textSize="12sp" />
 
         <Button
-            android:id="@+id/btnFlag"
+            android:id="@+id/btnShare"
             android:layout_width="40dip"
             android:layout_height="18dip"
             android:layout_marginRight="3dip"
             android:background="@drawable/btn_action"
             android:gravity="center"
-            android:text="@string/text_flag"
+            android:text="@string/text_share"
+            android:textColor="@color/white"
+            android:textSize="12sp" />
+        
+        <Button
+            android:id="@+id/btnFavorite"
+            android:layout_width="60dip"
+            android:layout_height="18dip"
+            android:layout_marginRight="3dip"
+            android:background="@drawable/btn_action"
+            android:gravity="center"
+            android:text="@string/text_fav"
             android:textColor="@color/white"
             android:textSize="12sp" />
 
+        <Button
+            android:id="@+id/btnMore"
+            android:layout_width="50dip"
+            android:layout_height="18dip"
+            android:layout_marginRight="3dip"
+            android:background="@drawable/btn_action"
+            android:gravity="center"
+            android:text="@string/text_more"
+            android:textColor="@color/white"
+            android:textSize="12sp" />
     </LinearLayout>
 
     <LinearLayout
@@ -77,16 +87,26 @@
         android:orientation="horizontal" >
         
         <Button
-            android:id="@+id/btnShare"
+            android:id="@+id/btnFlag"
             android:layout_width="40dip"
             android:layout_height="18dip"
             android:layout_marginRight="3dip"
             android:background="@drawable/btn_action"
             android:gravity="center"
-            android:text="@string/text_share"
+            android:text="@string/text_flag"
             android:textColor="@color/white"
             android:textSize="12sp" />
 
-    </LinearLayout>
+        <Button
+            android:id="@+id/btnLess"
+            android:layout_width="50dip"
+            android:layout_height="18dip"
+            android:layout_marginRight="3dip"
+            android:background="@drawable/btn_action"
+            android:gravity="center"
+            android:text="@string/text_less"
+            android:textColor="@color/white"
+            android:textSize="12sp" />
+        </LinearLayout>
 
 </RelativeLayout>

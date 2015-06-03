@@ -18,7 +18,8 @@ import com.drem.dremboard.entity.GlobalValue;
 import com.drem.dremboard.utils.AppPreferences;
 import com.drem.dremboard.utils.DownloadImageTask;
 import com.drem.dremboard.utils.ImageLoader;
-import com.drem.dremboard.view.HyIconView;
+import com.drem.dremboard.view.WebCircularImgView;
+import com.drem.dremboard.view.WebImgView;
 
 /**
  * Demonstrates combining a TabHost with a ViewPager to implement a tab UI
@@ -30,7 +31,7 @@ public class ActivityMain extends SherlockFragmentActivity {
     ViewPager  mViewPager;
     TabsAdapter mTabsAdapter;
     
-    HyIconView mImgUserIcon;
+    WebCircularImgView mImgUserIcon;
     
     private AppPreferences mPrefs;
     
@@ -92,7 +93,7 @@ public class ActivityMain extends SherlockFragmentActivity {
     
     private void initView()
     {
-    	mImgUserIcon = (HyIconView) findViewById(R.id.imgUserIcon);
+    	mImgUserIcon = (WebCircularImgView) findViewById(R.id.imgUserIcon);
 		mImgUserIcon.imageView.setImageResource(R.drawable.empty_man);
 		DremerInfo dremer = GlobalValue.getInstance().getCurrentDremer();
 		if (dremer.user_avatar != null && !dremer.user_avatar.isEmpty())

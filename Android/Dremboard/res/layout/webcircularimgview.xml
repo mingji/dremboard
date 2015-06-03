@@ -5,7 +5,7 @@
     android:orientation="vertical"
     android:padding="2dip" >
 
-    <com.drem.dremboard.view.ResizableImageView
+    <com.drem.dremboard.view.CircularImageView
         android:id="@+id/id_imageview_bitmap"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"

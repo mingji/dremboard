@@ -7,7 +7,7 @@ import com.drem.dremboard.entity.DremerInfo;
 import com.drem.dremboard.entity.GlobalValue;
 import com.drem.dremboard.utils.AppPreferences;
 import com.drem.dremboard.utils.ImageLoader;
-import com.drem.dremboard.view.HyIconView;
+import com.drem.dremboard.view.WebImgView;
 
 import android.os.Bundle;
 import android.support.v4.view.ViewPager;
@@ -28,7 +28,7 @@ public class ActivityFamily extends SherlockFragmentActivity implements OnClickL
 	AppPreferences mPrefs;    
 	int mDremerId;
 
-	HyIconView mImgUserIcon;
+	WebImgView mImgUserIcon;
 	Button mBtnBack;
 
 	@Override
@@ -72,7 +72,7 @@ public class ActivityFamily extends SherlockFragmentActivity implements OnClickL
 
 	private void initView()
 	{
-		mImgUserIcon = (HyIconView) findViewById(R.id.imgUserIcon);
+		mImgUserIcon = (WebImgView) findViewById(R.id.imgUserIcon);
 		mImgUserIcon.imageView.setImageResource(R.drawable.empty_man);
 		DremerInfo dremer = GlobalValue.getInstance().getCurrentDremer();
 		if (dremer.user_avatar != null && !dremer.user_avatar.isEmpty())

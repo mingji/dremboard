@@ -9,7 +9,7 @@ import com.drem.dremboard.entity.MessageInfo.FromToInfo;
 import com.drem.dremboard.utils.AppPreferences;
 import com.drem.dremboard.utils.ImageLoader;
 import com.drem.dremboard.view.CustomToast;
-import com.drem.dremboard.view.HyIconView;
+import com.drem.dremboard.view.WebImgView;
 import com.drem.dremboard.view.WaitDialog;
 import com.drem.dremboard.webservice.Constants;
 import com.drem.dremboard.webservice.WebApiCallback;
@@ -231,7 +231,7 @@ implements OnClickListener, WebApiCallback
 				convertView = inflater.inflate(R.layout.item_message, null);
 				holder = new MessageHolder();
 
-				holder.imgSender = (HyIconView) convertView.findViewById(R.id.imgSender);
+				holder.imgSender = (WebImgView) convertView.findViewById(R.id.imgSender);
 
 				holder.txtFromTo = (TextView) convertView.findViewById(R.id.txtFromTo);
 				holder.txtPartner = (TextView) convertView.findViewById(R.id.txtPartner);
@@ -286,7 +286,7 @@ implements OnClickListener, WebApiCallback
 		}
 
 		public class MessageHolder {
-			HyIconView imgSender;
+			WebImgView imgSender;
 
 			TextView txtFromTo;
 			TextView txtPartner;

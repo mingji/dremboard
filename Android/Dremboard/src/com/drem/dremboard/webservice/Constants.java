@@ -3,7 +3,7 @@ package com.drem.dremboard.webservice;
 public class Constants {
 
 	/* Published server */
-//	public static final String HTTP_HOME = "http://10.70.8.10/";
+//	public static final String HTTP_HOME = "http://10.70.126.4:8080/";
 	public static final String HTTP_HOME = "http://dremboard.com/";
 	
 	public static final String SERVER_REST_API_BASE = Constants.HTTP_HOME
@@ -16,7 +16,6 @@ public class Constants {
 	public static final String ACT_SET_FAVORITE 	= "set_favorite";
 	public static final String ACT_SET_LIKE 		= "set_like"; 
 	public static final String ACT_SHARE_DREM 		= "share_drem"; 
-	public static final String ACT_SET_FLAG 		= "set_flag";
 	public static final String ACT_USER_REGISTER	= "user_register";
 	public static final String ACT_RETRIEVE_PASSWORD= "retrieve_password";
 	public static final String ACT_FLAG_DREM		= "flag_drem";
