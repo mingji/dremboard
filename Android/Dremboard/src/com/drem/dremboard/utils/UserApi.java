@@ -86,10 +86,10 @@ public abstract class UserApi {
 						if (jsonData.has("msg"))
 							strMsg = jsonData.getString("msg");
 
-						if (strStatus.equals("ok") && (jsonData != null))
-							process_result(jsonData);
-	
-						if (!strMsg.equals(""))
+						if (strStatus.equals("ok")) {
+							if (jsonData != null)
+								process_result(jsonData);	
+						} else
 							CustomToast.makeCustomToastShort(mActivity, strMsg);
 					}
 					catch (Exception e) {
