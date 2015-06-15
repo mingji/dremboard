@@ -21,14 +21,21 @@ import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.TextView;
 
+import com.drem.dremboard.Const;
 import com.drem.dremboard.R;
 import com.drem.dremboard.entity.DremerInfo;
 import com.drem.dremboard.entity.GlobalValue;
 import com.drem.dremboard.entity.Beans.GetSingleDremerParam;
 import com.drem.dremboard.entity.Beans.GetSingleDremerResult;
 import com.drem.dremboard.entity.ProfileItem;
+import com.drem.dremboard.facebook.FacebookLoginUtil;
+import com.drem.dremboard.facebook.FacebookLoginUtil.FacebookLoginFinishedListener;
+import com.drem.dremboard.google.ActivityLoginGoogle;
+import com.drem.dremboard.twitter.TwitterLoginUtil;
+import com.drem.dremboard.twitter.TwitterLoginUtil.TwitterLoginFinishedListener;
 import com.drem.dremboard.utils.AppPreferences;
 import com.drem.dremboard.utils.RestApi;
+import com.drem.dremboard.utils.UserApi;
 import com.drem.dremboard.view.CustomToast;
 import com.drem.dremboard.webservice.Constants;
 import com.drem.dremboard.webservice.WebApiCallback;
@@ -46,6 +53,16 @@ public class ActivityLogin extends Activity implements OnClickListener, WebApiCa
 	EditText mTxtUserName, mTxtPassWord;
 	CheckBox mChkRemember;
 
+	// Facebook
+	FacebookLoginUtil mFacebookLoginUtil;
+	String mStrFacebookId;
+	String mStrFacebookName;
+	String mStrFacebookAvatar;
+
+	// Twitter
+	TwitterLoginUtil mTwitterLoginUtil;
+	String mStrTwitterName;
+	
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -110,10 +127,56 @@ public class ActivityLogin extends Activity implements OnClickListener, WebApiCa
 			break;
 
 		case R.id.btnFacebook:
+			if (mFacebookLoginUtil == null)
+				mFacebookLoginUtil = new FacebookLoginUtil(ActivityLogin.this);
+
+			mFacebookLoginUtil.SetLoginFinishedListener(
+				new FacebookLoginFinishedListener() {
+					@Override
+					public void OnFacebookLoginFinished(boolean result) {
+						if (result) {
+							mStrFacebookId = mFacebookLoginUtil.GetFacebookId();
+							mStrFacebookName = mFacebookLoginUtil.GetFacebookName();
+							ActivityLogin.this.onFacebookLoginResult();
+						}
+					}
+				}
+			);
+
+			try {
+				mFacebookLoginUtil.SetFacebookConnection();
+
+				if (mFacebookLoginUtil.IsFacebookSessionValid()) {
+					mStrFacebookId = mFacebookLoginUtil.GetFacebookId();
+					mStrFacebookName = mFacebookLoginUtil.GetFacebookName();
+
+					if (mStrFacebookName != null) {
+						onFacebookLoginResult();
+						break;
+					}
+				}
+				mFacebookLoginUtil.StartAuthorizeFacebook();
+			} catch (Exception e) { e.printStackTrace(); }
+			
 			break;
 		case R.id.btnGoogle:
+			Intent intentLogin2Google;
+			intentLogin2Google = new Intent(ActivityLogin.this, ActivityLoginGoogle.class);
+			startActivity(intentLogin2Google);
 			break;
 		case R.id.btnTwitter:
+			if (mTwitterLoginUtil == null)
+				mTwitterLoginUtil = new TwitterLoginUtil(ActivityLogin.this);
+			mTwitterLoginUtil.SetLoginFinishedListener(
+				new TwitterLoginFinishedListener() {
+					@Override
+					public void OnTwitterLoginFinished() {
+						mStrTwitterName	= mTwitterLoginUtil.GetUserName();
+						// Treat Result
+					}
+				}
+			);
+			mTwitterLoginUtil.LoginTwitter();
 			break;
 		case R.id.btnWindows:
 			break;
@@ -124,6 +187,46 @@ public class ActivityLogin extends Activity implements OnClickListener, WebApiCa
 		}
 	}
 
+	@Override
+	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+		switch (requestCode) {
+			case Const.REQUESTCODE_LOGIN_TWITTER :
+				break;
+			case Const.REQUESTCODE_LOGIN_FACEBOOK :
+				if (mFacebookLoginUtil != null) {
+					mFacebookLoginUtil.AuthorizeCallback(requestCode, resultCode, data);
+				}
+				break;
+			default:
+				break;
+		}
+		super.onActivityResult(requestCode, resultCode, data);
+	}
+
+	private void onFacebookLoginResult() {
+		HashMap<String, String> mapParams = new HashMap<String, String>();
+		
+		mapParams.put(UserApi.PARAM_ACCESS_TOKEN, mFacebookLoginUtil.GetFacebookToken());
+
+		new UserApi(ActivityLogin.this, UserApi.ACT_FB_CONNECT, mapParams) {
+			public void process_result(JSONObject aJsonData) throws JSONException {
+				String strUserId	= aJsonData.getString("wp_user_id");
+				String strUserLogin	= aJsonData.getString("user_login");
+				
+				mPrefs.setUserId(strUserId);
+				mPrefs.setUserLogin(strUserLogin);
+				mPrefs.setCategory("-1");
+				
+				String strCateList = mPrefs.getCategoryList();
+				if (strCateList.equals(""))
+					get_init_params_task();
+				else
+					getSingleDremer();
+
+			}
+		}.execute();
+	}
+	
 	@Override
 	public boolean onKeyDown(int keyCode, KeyEvent event) {
 		boolean bool;
