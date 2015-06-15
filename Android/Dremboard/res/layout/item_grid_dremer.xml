@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@color/transparent" >
+
+    <com.drem.dremboard.view.WebCircularImgView
+        android:id="@+id/imgDremer"
+        android:layout_width="70dp"
+        android:layout_height="70dp"
+        android:layout_centerHorizontal="true"
+        android:contentDescription="Dremer" />
+
+    <TextView
+        android:id="@+id/txtDremer"
+        android:layout_width="match_parent"
+        android:layout_height="35dp"
+        android:layout_below="@+id/imgDremer"
+        android:gravity="center"
+        android:singleLine="false"
+        android:lines="2"
+        android:ellipsize="end"
+        android:text="Dremer Name"
+        android:textColor="@color/darkgray"
+        android:textSize="14sp" />
+
+</RelativeLayout>

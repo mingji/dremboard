@@ -5,7 +5,6 @@ import java.util.ArrayList;
 import com.drem.dremboard.R;
 import com.drem.dremboard.entity.Beans.*;
 import com.drem.dremboard.entity.DremerInfo;
-import com.drem.dremboard.entity.GlobalValue;
 import com.drem.dremboard.ui.DialogDremerBlocking.OnSetBlockResultCallback;
 import com.drem.dremboard.ui.DialogFriendshipAccept.OnFriendshipResultCallback;
 import com.drem.dremboard.utils.AppPreferences;
@@ -30,6 +29,7 @@ import android.view.ViewGroup;
 import android.widget.AbsListView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.GridView;
 import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.ProgressBar;
@@ -49,10 +49,16 @@ public class FragmentDremers extends Fragment
 	int mLastCount = 1;
 
 	boolean mFlagLoading = false;
+	boolean mShowType = false; // false-Grid, true-List
+	
+	TextView mTxtGrid, mTxtList;
 
 	ArrayList<DremerInfo> mArrayDremer = null;
 	DremerAdapter mAdapterDremer;
 	ListView mListviewDremer;
+	
+	GridView mGridDremer;
+	DremerGridAdapter mAdapterGridDremer;
 	
 	int mDremerId;
 	String mType;
@@ -87,6 +93,12 @@ public class FragmentDremers extends Fragment
 
 	private void initView (View view)
 	{
+		mTxtGrid = (TextView) view.findViewById(R.id.lblGrid);
+		mTxtList = (TextView) view.findViewById(R.id.lblList);
+		
+		mTxtGrid.setOnClickListener(this);
+		mTxtList.setOnClickListener(this);
+		
 		mProgMore = (ProgressBar) view.findViewById(R.id.progMore);
 		if (mFlagLoading)
 			mProgMore.setVisibility(View.VISIBLE);
@@ -118,6 +130,33 @@ public class FragmentDremers extends Fragment
 				}				
 			}
 		});
+		
+		mAdapterGridDremer = new DremerGridAdapter(getActivity(), R.layout.item_grid_dremer, mArrayDremer);
+
+		mGridDremer = (GridView)view.findViewById(R.id.GrdDremer);
+		mGridDremer.setAdapter(mAdapterGridDremer);
+		mGridDremer.setOnScrollListener(new OnScrollListener() {
+
+			@Override
+			public void onScrollStateChanged(AbsListView view, int scrollState) {
+				// TODO Auto-generated method stub
+
+			}
+
+			@Override
+			public void onScroll(AbsListView view, int firstVisibleItem,
+					int visibleItemCount, int totalItemCount) {
+				// TODO Auto-generated method stub
+
+				int lastInScreen = firstVisibleItem + visibleItemCount;
+				if (totalItemCount != 0 && (lastInScreen == totalItemCount) &&
+						!mFlagLoading && mLastCount > 0) {					
+					loadMoreDremers();
+				}				
+			}
+		});
+		
+		onClickShowType (false);
 	}
 	
 	private void resetOptions()
@@ -136,10 +175,44 @@ public class FragmentDremers extends Fragment
 		startActivity(intent);
 		getActivity().overridePendingTransition(R.anim.in_right_left, R.anim.out_right_left);
 	}
+	
+	private void onClickShowType (boolean type)
+	{
+		if (mShowType == type)
+			return;
+		
+		mShowType = type;
+		
+		if (mShowType == true) {
+			// Show List Type
+			mListviewDremer.setVisibility(View.VISIBLE);
+			mGridDremer.setVisibility(View.GONE);
+			mTxtGrid.setTextColor(getResources().getColor(R.color.darkgray));
+			mTxtList.setTextColor(getResources().getColor(R.color.lightblue));
+		} else {
+			// Show Grid Type
+			mListviewDremer.setVisibility(View.GONE);
+			mGridDremer.setVisibility(View.VISIBLE);
+			mTxtGrid.setTextColor(getResources().getColor(R.color.lightblue));
+			mTxtList.setTextColor(getResources().getColor(R.color.darkgray));
+		}
+	}
 
 	@Override
 	public void onClick(View v) {
 		// TODO Auto-generated method stub
+		int id = v.getId();
+		
+		switch (id) {
+		case R.id.lblGrid:
+			onClickShowType (false);
+			break;
+		case R.id.lblList:
+			onClickShowType (true);
+			break;
+			default:
+				break;
+		}
 
 	}
 	
@@ -198,6 +271,7 @@ public class FragmentDremers extends Fragment
 		}
 
 		mAdapterDremer.notifyDataSetChanged();
+		mAdapterGridDremer.notifyDataSetChanged();
 	}
 
 	private void getDremerList(int pagenum, int count)	{
@@ -526,6 +600,80 @@ public class FragmentDremers extends Fragment
 				else
 					action = "stop";
 				setDremerFollowing(dremerItem.user_id, action, v, position); 
+				break;
+			default:
+				break;
+			}
+		}
+	}
+	
+	public class DremerGridAdapter extends ArrayAdapter<DremerInfo> implements OnClickListener {
+		Activity activity;
+		int layoutResourceId;
+		ArrayList<DremerInfo> item = new ArrayList<DremerInfo>();
+
+		public DremerGridAdapter(Activity activity, int layoutId, ArrayList<DremerInfo> items) {
+			super(activity, layoutId, items);
+			item = items;
+			this.activity = activity;
+			this.layoutResourceId = layoutId;
+		}
+
+		@Override
+		public View getView(final int position, View convertView, ViewGroup parent) {
+			DremerGidHolder holder = null;	
+
+			final DremerInfo dremer = getItem(position);			
+
+			// inflate the view
+			if (convertView == null) {
+				LayoutInflater inflater = ((Activity) activity).getLayoutInflater();
+				convertView = inflater.inflate(R.layout.item_grid_dremer, null);
+				holder = new DremerGidHolder();
+				holder.imgDremer = (WebCircularImgView) convertView.findViewById(R.id.imgDremer);
+				holder.txtDremer = (TextView) convertView.findViewById(R.id.txtDremer);	
+				
+				holder.imgDremer.setOnClickListener(this);
+				holder.txtDremer.setOnClickListener(this);
+				
+				convertView.setTag(holder);
+			} 
+			else
+				holder = (DremerGidHolder) convertView.getTag();
+			
+			holder.imgDremer.setTag(position);
+			holder.txtDremer.setTag(position);
+
+			if (dremer.user_avatar != null && !dremer.user_avatar.isEmpty())
+				ImageLoader.getInstance().displayImage(dremer.user_avatar, holder.imgDremer, 0, 0);
+			else
+				holder.imgDremer.imageView.setImageResource(R.drawable.empty_man);
+
+			holder.txtDremer.setText(dremer.display_name);
+
+			return convertView;
+		}
+
+		public class DremerGidHolder {
+			WebCircularImgView imgDremer;
+			TextView txtDremer;
+		}
+
+		@Override
+		public void onClick(View v) {
+			// TODO Auto-generated method stub
+			int viewId = v.getId();
+			int position = (Integer) v.getTag();
+			
+			DremerInfo dremer = getItem(position);
+			
+			if (dremer == null)
+				return;
+			
+			switch (viewId) {
+			case R.id.imgDremer:
+			case R.id.txtDremer:
+				startActivityDremer(dremer.user_id);
 				break;
 			default:
 				break;
