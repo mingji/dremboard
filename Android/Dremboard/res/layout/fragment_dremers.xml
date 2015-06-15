@@ -3,11 +3,42 @@
     android:layout_height="match_parent"
     android:background="@color/background_gray" >
 
+    <LinearLayout
+        android:id="@+id/layBtns"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:orientation="horizontal"
+        android:background="@color/lightgray" >
+
+        <TextView
+            android:id="@+id/lblGrid"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:padding="10dip" 
+            android:text="Grid"
+            android:textColor="@color/lightblue"
+            android:textSize="16sp" />
+
+        <TextView
+            android:id="@+id/lblList"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:padding="10dip"
+            android:text="List"
+            android:textColor="@color/darkgray"
+            android:textSize="16sp" />
+    </LinearLayout>
+
     <ProgressBar
         android:id="@+id/progMore"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
+        android:layout_above="@+id/layBtns"
         android:layout_centerHorizontal="true" />
 
     <ListView
@@ -16,31 +47,20 @@
         android:layout_height="match_parent"
         android:layout_above="@+id/progMore"
         android:divider="@null"
-        android:dividerHeight="0dp" />
+        android:dividerHeight="0dp"
+        android:visibility="gone" />
 
     <GridView
         android:id="@+id/GrdDremer"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_above="@+id/progMore"
-        android:divider="@null"
-        android:dividerHeight="0dp"
-        android:visibility="gone" />
-
-    <ToggleButton
-        android:id="@+id/btnViewMode"
-        android:layout_width="120dip"
-        android:layout_height="30dip"
-        android:layout_alignParentRight="true"
-        android:layout_marginTop="8dip"
-        android:layout_marginRight="10dip"
-        android:background="@drawable/btn_action"        
-        android:textOn="Traditional View"
-        android:textOff="Grid View"
-        android:gravity="center"
-        android:visibility="gone"
-        android:text="Traditional View"
-        android:textColor="@drawable/selector_btn_color"
-        android:textSize="12sp" />
+        android:background="@android:color/transparent"
+        android:columnWidth="90dip"
+        android:horizontalSpacing="5dip"
+        android:numColumns="auto_fit"
+        android:stretchMode="columnWidth"
+        android:verticalSpacing="15dp"
+        android:visibility="visible" />
 
 </RelativeLayout>
