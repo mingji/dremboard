@@ -8,8 +8,8 @@ public class Const {
 	public	static	final	int		REQUESTCODE_LOGIN_TWITTER	= 3;
 	
 	// Twitter
-	public	static	final	String	TWITTER_CONSUMER_KEY		=		"kDxijlc2lL4vdXq13EhsXHrEh";
-	public	static	final	String	TWITTER_CONSUMER_SECRET		=		"1Q167iKv1F6GF9ajwMXff4lZk08ByQAYSI7mFaW1EyOZYptVum";
+	public	static	final	String	TWITTER_CONSUMER_KEY		=		"IjCj8wIfK6gkqFiWelwRy8HV9";
+	public	static	final	String	TWITTER_CONSUMER_SECRET		=		"Xb8pJTx6td8sTi5uaufZzUVAoxAm7c5Mq0Fiz9FOwco5P6Crxz";
 	public	static	final	String	TWITTER_CALLBACK_URL		=		"oauth://twitter_callback";
 
 	public	static	final	String	KEY_TWITTER_CALLBACK_URL		= "URL_CALLBACK";
@@ -19,6 +19,7 @@ public class Const {
 	public	static	final	String	KEY_LOGINTYPE	= "TYPELOGIN";
 	public	static	final	String	KEY_USERID		= "USERID";
 	public	static	final	String	KEY_USERNAME	= "USERNAME";
+	public	static	final	String	KEY_TOKEN		= "TOKEN";
 	public	static	final	String	KEY_AVATAR		= "AVATAR";
 
 	// Login Type

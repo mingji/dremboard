@@ -1,5 +1,6 @@
 package com.drem.dremboard.google;
 
+import java.io.IOException;
 import java.io.InputStream;
 
 import android.app.Activity;
@@ -9,6 +10,7 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Menu;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -20,7 +22,11 @@ import android.widget.Toast;
 
 import com.drem.dremboard.Const;
 import com.drem.dremboard.R;
-import com.drem.dremboard.ui.ActivityMain;
+import com.drem.dremboard.ui.ActivityLogin;
+import com.drem.dremboard.view.WaitDialog;
+import com.google.android.gms.auth.GoogleAuthException;
+import com.google.android.gms.auth.GoogleAuthUtil;
+import com.google.android.gms.auth.UserRecoverableAuthException;
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.GooglePlayServicesUtil;
 import com.google.android.gms.common.SignInButton;
@@ -38,9 +44,10 @@ public class ActivityLoginGoogle extends Activity
 					ConnectionCallbacks,
 					OnConnectionFailedListener {
 
-	private static final int RC_SIGN_IN = 0;
-	// Profile pic image size in pixels
-	private static final int PROFILE_PIC_SIZE = 400;
+	private static final int	REQUEST_SIGN_IN		= 1;
+	private static final int	REQUEST_AUTHORIZE	= 2;
+	
+	private static final int PROFILE_PIC_SIZE = 400;			// Profile pic image size in pixels
 
 	// Google client to interact with Google API
 	private GoogleApiClient m_googleApiClient;
@@ -60,6 +67,12 @@ public class ActivityLoginGoogle extends Activity
 
 	private	String		m_strUserName;
 	private	String		m_strAvatarUrl;
+	private String		m_strToken;
+	
+	private WaitDialog	m_dlgWait;
+
+	private static final String		STR_SCOPES =	"https://www.googleapis.com/auth/userinfo.email";
+
 
 	//------------------------------------------------------------------------------
 	@Override
@@ -69,6 +82,8 @@ public class ActivityLoginGoogle extends Activity
 
 		m_strUserName	= null;
 		m_strAvatarUrl	= null;
+		m_strToken		= null;
+
 		m_btnSignIn				= (SignInButton)findViewById(R.id.btn_sign_in);
 		m_btnSignOut			= (Button)		findViewById(R.id.btn_sign_out);
 		m_btnRevokeAccess		= (Button)		findViewById(R.id.btn_revoke_access);
@@ -87,13 +102,17 @@ public class ActivityLoginGoogle extends Activity
 				.addConnectionCallbacks(this)
 				.addOnConnectionFailedListener(this)
 				.addApi(Plus.API)
-				.addScope(Plus.SCOPE_PLUS_LOGIN).build();
+				.addScope(Plus.SCOPE_PLUS_LOGIN)
+				.build();
+		
+		m_dlgWait = new WaitDialog(this);
 	}
 
 	//------------------------------------------------------------------------------
 	@Override
 	protected void onStart() {
 		super.onStart();
+		m_dlgWait.show();
 		m_googleApiClient.connect();
 	}
 
@@ -101,6 +120,7 @@ public class ActivityLoginGoogle extends Activity
 	@Override
 	protected void onStop() {
 		super.onStop();
+		m_dlgWait.dismiss();
 		if (m_googleApiClient.isConnected()) {
 			m_googleApiClient.disconnect();
 		}
@@ -108,10 +128,14 @@ public class ActivityLoginGoogle extends Activity
 
 	//------------------------------------------------------------------------------
 	private void ResolveSignInError() {
-		if (m_connectionResult.hasResolution()) {
+		if (m_connectionResult == null) {
+			m_bIntentInProgress = false;
+			m_googleApiClient.connect();
+		}
+		else if (m_connectionResult.hasResolution()) {
 			try {
 				m_bIntentInProgress = true;
-				m_connectionResult.startResolutionForResult(this, RC_SIGN_IN);
+				m_connectionResult.startResolutionForResult(this, REQUEST_SIGN_IN);
 			}
 			catch (SendIntentException e) {
 				m_bIntentInProgress = false;
@@ -123,6 +147,7 @@ public class ActivityLoginGoogle extends Activity
 	//------------------------------------------------------------------------------
 	@Override
 	public void onConnectionFailed(ConnectionResult result) {
+		m_dlgWait.dismiss();
 		if (!result.hasResolution()) {
 			GooglePlayServicesUtil.getErrorDialog(result.getErrorCode(), this, 0).show();
 			return;
@@ -144,7 +169,7 @@ public class ActivityLoginGoogle extends Activity
 	//------------------------------------------------------------------------------
 	@Override
 	protected void onActivityResult(int requestCode, int responseCode, Intent intent) {
-		if (requestCode == RC_SIGN_IN) {
+		if (requestCode == REQUEST_SIGN_IN) {
 			if (responseCode != RESULT_OK) {
 				m_bSignInClicked = false;
 			}
@@ -155,42 +180,99 @@ public class ActivityLoginGoogle extends Activity
 				m_googleApiClient.connect();
 			}
 		}
+		
+		if (requestCode == REQUEST_AUTHORIZE) {
+			if (responseCode == RESULT_OK) {
+				Bundle		bundle = intent.getExtras();
+
+				m_strToken = bundle.getString("authtoken");
+				Intent		intentGoogle2Main;
+				
+				intentGoogle2Main = new Intent(ActivityLoginGoogle.this, ActivityLogin.class);
+				bundle = new Bundle();
+				bundle.putInt(Const.KEY_LOGINTYPE, Const.TYPE_LOGIN_GOOGLE);
+				bundle.putString(Const.KEY_TOKEN, m_strToken);
+				intentGoogle2Main.putExtras(bundle);
+				setResult(Const.TYPE_LOGIN_GOOGLE, intentGoogle2Main);
+				finish();
+			}
+		}
+		m_dlgWait.dismiss();
 	}
 
 	//------------------------------------------------------------------------------
 	@Override
 	public void onConnected(Bundle arg0) {
 		m_bSignInClicked = false;
-		Toast.makeText(this, "User is connected!", Toast.LENGTH_LONG).show();
 
 		// Get user's information
-		GetProfileInformation();
+//		GetProfileInformation();
 
 		// Update the UI after signin
 		UpdateUi(true);
 
+		// Get Token
+		AsyncTask<Void, Void, String> task = new AsyncTask<Void, Void, String>() {
+			@Override
+			protected String doInBackground(Void... params) {
+				String strToken	= null;
+				String strName	= null;
+				try {
+					strName = Plus.AccountApi.getAccountName(m_googleApiClient);
+					strToken = GoogleAuthUtil.getToken(
+							ActivityLoginGoogle.this,
+							strName,
+							"oauth2:" + STR_SCOPES);
+				}
+				catch (IOException eIO) {
+					Log.e("Google Error", eIO.toString());		// Network or server error, try later
+				}
+				catch (UserRecoverableAuthException eUser)	{
+					Log.e("Google Error", eUser.toString());
+					m_dlgWait.dismiss();
+					startActivityForResult(eUser.getIntent(), REQUEST_AUTHORIZE);
+				}
+				catch (GoogleAuthException eAuth) {
+					Log.e("Google Error", eAuth.toString());
+				}
+
+				m_strUserName = strName;
+				return strToken;
+			}
+
+			@Override
+			protected void onPostExecute(String a_strToken) {
+				m_dlgWait.dismiss();
+
+				if (a_strToken == null) {
+					UpdateUi(false);
+					return;
+				}
+
+				m_strToken = a_strToken;
+				
+				Intent		intentGoogle2Main;
+				Bundle		bundle;
+				intentGoogle2Main = new Intent(ActivityLoginGoogle.this, ActivityLogin.class);
+				bundle = new Bundle();
+				bundle.putInt(Const.KEY_LOGINTYPE, Const.TYPE_LOGIN_GOOGLE);
+				bundle.putString(Const.KEY_TOKEN, m_strToken);
+				intentGoogle2Main.putExtras(bundle);
+				setResult(Const.TYPE_LOGIN_GOOGLE, intentGoogle2Main);
+				finish();
+			}
+
+		};
+		task.execute();
 	}
 
 	//------------------------------------------------------------------------------
-	private void UpdateUi(boolean isSignedIn) {
-		if (isSignedIn) {
+	private void UpdateUi(boolean a_bSignedIn) {
+		if (a_bSignedIn) {
 //			btnSignIn.setVisibility(View.GONE);
 //			btnSignOut.setVisibility(View.VISIBLE);
 //			btnRevokeAccess.setVisibility(View.VISIBLE);
 //			llProfileLayout.setVisibility(View.VISIBLE);
-			/*
-			Intent		intentGoogle2Main;
-			Bundle		bundle;
-			intentGoogle2Main = new Intent(ActivityLoginGoogle.this, ActivityMain.class);
-			bundle = new Bundle();
-			bundle.putInt(Const.KEY_LOGINTYPE, Const.TYPE_LOGIN_GOOGLE);
-			bundle.putString(Const.KEY_USERID,		m_strUserName);
-			bundle.putString(Const.KEY_USERNAME,	m_strUserName);
-			bundle.putString(Const.KEY_AVATAR,		m_strAvatarUrl);
-			intentGoogle2Main.putExtras(bundle);
-			startActivity(intentGoogle2Main);
-			finish();
-			*/
 		}
 		else {
 			m_btnSignIn.setVisibility(View.VISIBLE);
@@ -213,9 +295,8 @@ public class ActivityLoginGoogle extends Activity
 				m_txtViewName.setText(m_strUserName);
 				m_txtViewEmail.setText(strEmail);
 
-				// by default the profile url gives 50x50 px image only
-				// we can replace the value with whatever dimension we want by
-				// replacing sz=X
+				// By default the profile url gives 50x50 px image only
+				// We can replace the value with whatever dimension we want by replacing sz=X
 				m_strAvatarUrl = m_strAvatarUrl.substring(0, m_strAvatarUrl.length() - 2) + PROFILE_PIC_SIZE;
 
 				new LoadProfileImage(m_imgViewProfilePic).execute(m_strAvatarUrl);
@@ -239,8 +320,6 @@ public class ActivityLoginGoogle extends Activity
 	//------------------------------------------------------------------------------
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
-		// Inflate the menu; this adds items to the action bar if it is present.
-//		getMenuInflater().inflate(R.menu.main, menu);
 		return true;
 	}
 
@@ -273,6 +352,7 @@ public class ActivityLoginGoogle extends Activity
 
 	//------------------------------------------------------------------------------
 	private void SignOutFromGplus() {
+		m_dlgWait.dismiss();
 		if (m_googleApiClient.isConnected()) {
 			Plus.AccountApi.clearDefaultAccount(m_googleApiClient);
 			m_googleApiClient.disconnect();

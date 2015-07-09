@@ -63,6 +63,9 @@ public class ActivityLogin extends Activity implements OnClickListener, WebApiCa
 	TwitterLoginUtil mTwitterLoginUtil;
 	String mStrTwitterName;
 	
+	// Google
+	String mStrGoogleToken;
+	
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -162,7 +165,7 @@ public class ActivityLogin extends Activity implements OnClickListener, WebApiCa
 		case R.id.btnGoogle:
 			Intent intentLogin2Google;
 			intentLogin2Google = new Intent(ActivityLogin.this, ActivityLoginGoogle.class);
-			startActivity(intentLogin2Google);
+			startActivityForResult(intentLogin2Google, Const.REQUESTCODE_LOGIN_GOOGLE);
 			break;
 		case R.id.btnTwitter:
 			if (mTwitterLoginUtil == null)
@@ -173,6 +176,10 @@ public class ActivityLogin extends Activity implements OnClickListener, WebApiCa
 					public void OnTwitterLoginFinished() {
 						mStrTwitterName	= mTwitterLoginUtil.GetUserName();
 						// Treat Result
+						if (mStrTwitterName == null)	return;
+						if (mStrTwitterName.isEmpty())	return;
+
+						onTwitterLoginResult();
 					}
 				}
 			);
@@ -190,12 +197,19 @@ public class ActivityLogin extends Activity implements OnClickListener, WebApiCa
 	@Override
 	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
 		switch (requestCode) {
+			case Const.REQUESTCODE_LOGIN_GOOGLE :
+				try {
+					mStrGoogleToken = data.getStringExtra(Const.KEY_TOKEN);
+					onGoogleLoginResult();
+				} catch (Exception e) {}
+				break;
 			case Const.REQUESTCODE_LOGIN_TWITTER :
+				if (mTwitterLoginUtil != null)
+					mTwitterLoginUtil.StartGetAccessToken(data.getStringExtra(Const.KEY_TWITTER_CALLBACK_URL));
 				break;
 			case Const.REQUESTCODE_LOGIN_FACEBOOK :
-				if (mFacebookLoginUtil != null) {
+				if (mFacebookLoginUtil != null)
 					mFacebookLoginUtil.AuthorizeCallback(requestCode, resultCode, data);
-				}
 				break;
 			default:
 				break;
@@ -223,6 +237,55 @@ public class ActivityLogin extends Activity implements OnClickListener, WebApiCa
 				else
 					getSingleDremer();
 
+			}
+		}.execute();
+	}
+
+	private void onGoogleLoginResult() {
+		HashMap<String, String> mapParams = new HashMap<String, String>();
+		
+		mapParams.put(UserApi.PARAM_ACCESS_TOKEN, mStrGoogleToken);
+
+		new UserApi(ActivityLogin.this, UserApi.ACT_GG_CONNECT, mapParams) {
+			public void process_result(JSONObject aJsonData) throws JSONException {
+				String strUserId	= aJsonData.getString("wp_user_id");
+				String strUserLogin	= aJsonData.getString("user_login");
+				
+				mPrefs.setUserId(strUserId);
+				mPrefs.setUserLogin(strUserLogin);
+				mPrefs.setCategory("-1");
+				
+				String strCateList = mPrefs.getCategoryList();
+				if (strCateList.equals(""))
+					get_init_params_task();
+				else
+					getSingleDremer();
+			}
+		}.execute();
+	}
+	
+	private void onTwitterLoginResult() {
+		HashMap<String, String> mapParams = new HashMap<String, String>();
+		
+		mapParams.put(UserApi.PARAM_ACCESS_TOKEN,			mTwitterLoginUtil.GetAccessToken());
+		mapParams.put(UserApi.PARAM_ACCESS_TOKEN_SECRET,	mTwitterLoginUtil.GetAccessTokenSecret());
+		mapParams.put(UserApi.PARAM_CONSUMER_KEY,			Const.TWITTER_CONSUMER_KEY);
+		mapParams.put(UserApi.PARAM_CONSUMER_SECRET,		Const.TWITTER_CONSUMER_SECRET);
+
+		new UserApi(ActivityLogin.this, UserApi.ACT_TW_CONNECT, mapParams) {
+			public void process_result(JSONObject aJsonData) throws JSONException {
+				String strUserId	= aJsonData.getString("wp_user_id");
+				String strUserLogin	= aJsonData.getString("user_login");
+				
+				mPrefs.setUserId(strUserId);
+				mPrefs.setUserLogin(strUserLogin);
+				mPrefs.setCategory("-1");
+				
+				String strCateList = mPrefs.getCategoryList();
+				if (strCateList.equals(""))
+					get_init_params_task();
+				else
+					getSingleDremer();
 			}
 		}.execute();
 	}

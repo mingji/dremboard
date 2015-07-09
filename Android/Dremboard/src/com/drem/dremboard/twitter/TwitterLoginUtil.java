@@ -27,6 +27,9 @@ public class TwitterLoginUtil {
 	
 	private	String		m_strUserName;
 	private	String		m_strAvatarUrl;
+	
+	private String		m_strAccessToken;
+	private String		m_strAccessTokenSecret;
 
 	private	ProgressDialog	m_dlgProgress;
 
@@ -93,7 +96,7 @@ public class TwitterLoginUtil {
 	}
 
 	//------------------------------------------------------------------------------
-	public void GetAccessToken(String a_strCallbackUrl) {
+	public void StartGetAccessToken(String a_strCallbackUrl) {
 		Uri		uri = Uri.parse(a_strCallbackUrl);
 		String	strVerifier = null;
 		if (strVerifier == null)	strVerifier = uri.getQueryParameter("oauth_verifier");
@@ -102,6 +105,16 @@ public class TwitterLoginUtil {
 
 		TaskGetAccessToken taskGetAccessToken = new TaskGetAccessToken();
 		taskGetAccessToken.execute(strVerifier);
+	}
+
+	//------------------------------------------------------------------------------
+	public String GetAccessToken() {
+		return m_strAccessToken;
+	}
+	
+	//------------------------------------------------------------------------------
+	public String GetAccessTokenSecret() {
+		return m_strAccessTokenSecret;
 	}
 
 	//==============================================================================
@@ -141,6 +154,9 @@ public class TwitterLoginUtil {
 				User		user			= m_twitter.showUser(m_twitter.getId());
 				m_strUserName	= accessToken.getScreenName();
 				m_strAvatarUrl	= user.getProfileImageURL();
+
+				m_strAccessToken = accessToken.getToken();
+				m_strAccessTokenSecret = accessToken.getTokenSecret();
 			} catch (Exception e) { Log.e("TOKEN", e.getMessage()); return false; }
 			return true;
 		}

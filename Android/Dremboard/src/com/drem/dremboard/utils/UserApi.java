@@ -29,9 +29,15 @@ public abstract class UserApi {
 	public static final String SERVER_USER_API_BASE		= Constants.HTTP_HOME + "api/user/";
 
 	public static final String ACT_FB_CONNECT 	= "fb_connect";
+	public static final String ACT_GG_CONNECT	= "google_connect";
+	public static final String ACT_TW_CONNECT	= "twitter_connect";
 	public static final String ACT_GET_AVATAR	= "get_avatar";
 
-	public static final String PARAM_ACCESS_TOKEN	= "access_token";
+	public static final String	PARAM_ACCESS_TOKEN			= "access_token";
+	public static final String	PARAM_ACCESS_TOKEN_SECRET	= "access_token_secret";
+	public static final String	PARAM_CONSUMER_KEY			= "consumer_key";
+	public static final String	PARAM_CONSUMER_SECRET		= "consumer_secret"; 
+	
 	public static final String PARAM_USER_ID 		= "user_id";
 	public static final String PARAM_TYPE			= "type";
 
@@ -45,7 +51,6 @@ public abstract class UserApi {
 		this.mMapParams	= aMapParams;
 		this.mPrefs		= new AppPreferences(aActivity);
 		mStrUserId	= this.mPrefs.getUserId();
-		mWaitDialog	= new WaitDialog(this.mActivity);
 	}
 	
 	//------------------------------------------------------------------------------
@@ -65,6 +70,9 @@ public abstract class UserApi {
 	//------------------------------------------------------------------------------
 	// User Api
 	public void execute() {
+		
+		mWaitDialog	= new WaitDialog(this.mActivity);
+
 		BaseTask.run(
 			new TaskListener() {
 				@Override
@@ -88,8 +96,9 @@ public abstract class UserApi {
 
 						if (strStatus.equals("ok")) {
 							if (jsonData != null)
-								process_result(jsonData);	
-						} else
+								process_result(jsonData);
+						}
+						else
 							CustomToast.makeCustomToastShort(mActivity, strMsg);
 					}
 					catch (Exception e) {
