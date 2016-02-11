@@ -6,8 +6,11 @@ import com.drem.dremboard.utils.ImageProcessingCallback;
 
 import android.content.Context;
 import android.graphics.Bitmap;
+import android.graphics.drawable.BitmapDrawable;
+import android.graphics.drawable.Drawable;
 import android.util.AttributeSet;
 import android.view.View;
+import android.widget.ImageView.ScaleType;
 import android.widget.ProgressBar;
 import android.widget.RelativeLayout;
 
@@ -51,6 +54,7 @@ public class WebImgView extends RelativeLayout implements ImageProcessingCallbac
 	public void onImageProcessing(Bitmap bitmap, int w, int h) {
 		this.viewProgress.setVisibility(View.GONE);
 		imageView.setImageBitmap(bitmap);
+//		imageView.setScaleType(ScaleType.FIT_XY);
 		this.invalidate();
 	}
 	

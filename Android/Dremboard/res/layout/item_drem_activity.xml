@@ -36,7 +36,6 @@
                     android:id="@+id/txtAction"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:linksClickable="true"
                     android:minHeight="30dp"
                     android:paddingLeft="10dp"
                     android:textColor="#000000"
@@ -63,6 +62,7 @@
             android:id="@+id/txtDescription"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:autoLink="web"
             android:padding="10dp" />
 
         <LinearLayout
@@ -80,6 +80,17 @@
             android:paddingLeft="10dp" >
 
             <Button
+                android:id="@+id/btnLike"
+                android:layout_width="40dip"
+                android:layout_height="18dip"
+                android:layout_marginRight="3dip"
+                android:background="@drawable/btn_action"
+                android:gravity="center"
+                android:text="@string/text_like"
+                android:textColor="@color/white"
+                android:textSize="12sp" />
+
+            <Button
                 android:id="@+id/btnComment"
                 android:layout_width="80dip"
                 android:layout_height="18dip"
@@ -91,13 +102,43 @@
                 android:textSize="12sp" />
 
             <Button
-                android:id="@+id/btnFavorite"
-                android:layout_width="60dip"
+                android:id="@+id/btnShare"
+                android:layout_width="40dip"
                 android:layout_height="18dip"
                 android:layout_marginRight="3dip"
                 android:background="@drawable/btn_action"
                 android:gravity="center"
-                android:text="@string/text_fav"
+                android:text="@string/text_share"
+                android:textColor="@color/white"
+                android:textSize="12sp" />
+
+            <Button
+                android:id="@+id/btnMore"
+                android:layout_width="50dip"
+                android:layout_height="18dip"
+                android:layout_marginRight="3dip"
+                android:background="@drawable/btn_action"
+                android:gravity="center"
+                android:text="@string/text_more"
+                android:textColor="@color/white"
+                android:textSize="12sp" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dip"
+            android:orientation="horizontal"
+            android:paddingLeft="10dp" >
+
+            <Button
+                android:id="@+id/btnDelete"
+                android:layout_width="40dip"
+                android:layout_height="18dip"
+                android:layout_marginRight="3dip"
+                android:background="@drawable/btn_action"
+                android:gravity="center"
+                android:text="@string/text_del"
                 android:textColor="@color/white"
                 android:textSize="12sp" />
 
@@ -113,43 +154,13 @@
                 android:textSize="12sp" />
 
             <Button
-                android:id="@+id/btnLike"
-                android:layout_width="40dip"
+                android:id="@+id/btnFavorite"
+                android:layout_width="60dip"
                 android:layout_height="18dip"
                 android:layout_marginRight="3dip"
                 android:background="@drawable/btn_action"
                 android:gravity="center"
-                android:text="@string/text_like"
-                android:textColor="@color/white"
-                android:textSize="12sp" />
-
-            <Button
-                android:id="@+id/btnDelete"
-                android:layout_width="40dip"
-                android:layout_height="18dip"
-                android:layout_marginRight="3dip"
-                android:background="@drawable/btn_action"
-                android:gravity="center"
-                android:text="@string/text_del"
-                android:textColor="@color/white"
-                android:textSize="12sp" />
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="5dip"
-            android:orientation="horizontal"
-            android:paddingLeft="10dp" >
-
-            <Button
-                android:id="@+id/btnShare"
-                android:layout_width="40dip"
-                android:layout_height="18dip"
-                android:layout_marginRight="3dip"
-                android:background="@drawable/btn_action"
-                android:gravity="center"
-                android:text="@string/text_share"
+                android:text="@string/text_fav"
                 android:textColor="@color/white"
                 android:textSize="12sp" />
 
@@ -163,15 +174,26 @@
                 android:text="@string/text_flag"
                 android:textColor="@color/white"
                 android:textSize="12sp" />
+
+            <Button
+                android:id="@+id/btnLess"
+                android:layout_width="50dip"
+                android:layout_height="18dip"
+                android:layout_marginRight="3dip"
+                android:background="@drawable/btn_action"
+                android:gravity="center"
+                android:text="@string/text_less"
+                android:textColor="@color/white"
+                android:textSize="12sp" />
         </LinearLayout>
 
         <LinearLayout
             android:id="@+id/layCommentList"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="8dip"
             android:layout_marginLeft="15dip"
             android:layout_marginRight="10dip"
+            android:layout_marginTop="8dip"
             android:orientation="vertical" >
         </LinearLayout>
     </LinearLayout>

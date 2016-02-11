@@ -1,16 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <string name="app_name">Dremboard</string>
+    <string name="app_name">Drēmboard</string>
 
     <!-- Login and Register Page -->
-    <string name="text_welcome">Welcome to Dremboard</string>
+    <string name="text_welcome">Welcome to Drēmboard</string>
     <string name="text_username">User name</string>
     <string name="text_passwd">Password</string>
     <string name="text_remember">Remember Me</string>
     <string name="text_login">LOG IN</string>
     <string name="text_with_other">Connect with:</string>
-    <string name="text_copyright">\u00A9 <a href="http://dremboard.com/">DREMBOARD</a> . ALL RIGHTS RESERVED.</string>
+    <string name="text_copyright">\u00A9 <a href="http://dremboard.com/">DRĒMBOARD</a> . ALL RIGHTS RESERVED.</string>
     <string name="text_register">REGISTER</string>
     <string name="text_lost_pwd">LOST PASSWORD</string>
     <string name="text_get_pwd">Get New Password</string>
@@ -25,18 +25,20 @@
     <string name="text_like">Like</string>
     <string name="text_flag">Flag</string>
     <string name="text_share">Share</string>
-    <string name="text_addtodremboard">Add To Dremboard</string>
+    <string name="text_addtodremboard"><b>Add to Drēmboard</b></string>
+    <string name="text_deletedremboard"><b>Delete Drēmboard</b></string>
     <string name="text_more">+ More</string>
     <string name="text_less">- Less</string>
-    
+    <string name="text_manufactor"><b>Drēmed by drēmer</b></string>
+    <string name="text_title_logout"><b>Log out</b></string>
+    <string name="text_deleteManageMedia"><b>Delete Media</b></string>
+
     <!-- Actions -->
-    <string name="text_about">Our mission is to create dremers who excel in life.\n\n
-        Dremboard is a social media site founded in January 2014 by Raymond Freeman III and Reco L. Dixon. The site allows dremers to express their drems and inspirations through drems, memories, dremboards, and beautiful slideshows.\n\n
-        Our users are our “dremers” and they can post pictures called “drems” or videos called “memories.” Drems can then be organized into “dremboards.”\n\n
-        Dremers can connect with family and friends and post any drem that they find on the web. No matter what no matter what the interest, if you are a dremer then you have discovered a place to share, create, and gather inspiration.\n\n
-        <b><i>Drem it, Believe it, Achieve it.</i></b>\n \n
-        We welcome your feedback.\nEmail us anytime at <b>CustomerService@dremboard.com</b>\n</string>
-    
+    <string name="text_about"><b>About US</b>\n\n \n\n \n\n Drēmboard is the ultimate photo and video management service that allows users to express their ideas and inspirations. It was founded on January 28, 2014 by Raymond Freeman III and Reco L. Dixon with the hope to encourage users to follow their drēm.\n\n
+		Our users are called “drēmers,” and they can post up pictures called “drēms,” or broadcast videos in our video section called “drēmcast.” Drēms can be organized into drēmboards where hopefully you’ll find your true passion and purpose.\n\n
+		No matter what the interest, if you’re a drēmer then you have discovered a place to share, create, and gather inspiration.\n\n <b><i>Drem it, Believe it, Achieve it.</i></b>\n \n
+        We welcome your feedback. Email us anytime at <b>CustomerService@dremboard.com</b>\n</string>
+
     <!-- Dialog -->
     <string name="text_report_drem">Report Drem</string>
     <string name="text_complaint">Is this your <a href="http://dremboard.com/copyright-complaint/">Intellectual Property</a>?</string>
@@ -47,9 +49,56 @@
     <string name="error_enter_username"><b>ERROR</b>: Enter a username or e-mail address.</string>
 
     <!-- Facebook -->
-	<string name="FACEBOOK_APP_ID">1001098959910544</string>
+    <string name="FACEBOOK_APP_ID">1001098959910544</string>
 
-	<!-- Google -->
-	<string name="text_logout">Logout</string>
-	<string name="text_revoke_access">Revoke Access</string>
+    <!-- Google -->
+    <string name="text_logout">Logout</string>
+    <string name="text_revoke_access">Revoke Access</string>
+
+    <!-- Add to Dremboard -->
+    <string name="text_choose_dremboard">Please choose a drēmboard to add this drem in:</string>
+    <string name="text_new_dremboard">Or you can create a new drēmboard first at here:</string>
+    <string name="text_dremboard_options">Drēmboard Options</string>
+    <string name="btn_new_dremboard">New Drēmboard</string>
+    <string name="btn_add_dremboard">Add It</string>
+    <string name="text_new_dremboard_title"><b>Create New Drēmboard</b></string>
+    <string name="text_edit_dremboard_title"><b>Edit Drēmboard</b></string>
+    <string name="text_merge_dremboard_title"><b>Merge Item</b></string>
+    <string name="text_move_drems_to_dremboard_title"><b>Move Media</b></string>
+    <string name="text_edit_act_title"><b>EDIT ACTIVITY</b></string>
+    <string name="text_edit_act_action">Action:</string>
+    <string name="text_edit_act_status">Status:</string>
+    <string name="text_dremboard_title">Title:</string>
+    <string name="text_dremboard_merge_title">Select Item to merge with:</string>
+    <string name="text_dremboard_move_drems_title">Move selected media to album:</string>
+    <string name="text_dremboard_description">Description:</string>
+    <string name="text_dremboard_category">Category:</string>
+    <string name="btn_merge_dremboard">Merge</string>
+    <string name="btn_move_drems_to_dremboard">Move</string>
+    <string name="text_dremboard_privacy">Drēmboard Privacy:</string>
+    <string name="radio_dremboard_1">Make it public drēmboard</string>
+    <string name="radio_dremboard_2">Make it your personal drēmboard</string>
+    <string name="radio_dremboard_3">Make it your family drēmboard</string>
+    <string name="radio_dremboard_4">Make it your friends drēmboard</string>
+    <string name="btn_create_dremboard">Create Drēmboard</string>
+    <string name="btn_save_changes_dremboard">Save Changes</string>
+    <string name="txt_user_profile_name_description"><i>This field can be seen by:</i><b>Everyone</b></string>
+    <string name="What_post">What would you like to post?</string>
+    <string name="Write_post">Write a post</string>
+    <string name="Err_no_post_message">No post message</string>
+
+     <string-array name="avatar_kinds">
+        <item>Image from Camera</item>
+        <item>Image from Gallery</item>
+    </string-array>
+    
+    <string-array name="media_kinds">
+        <item>Image from Camera</item>
+        <item>Image from Gallery</item>
+        <item>Video from Camera</item>
+        <item>Video from Gallery</item>
+    </string-array>
+
+    <string name="label_delete">Do you want to delete?</string>
+
 </resources>

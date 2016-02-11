@@ -35,14 +35,14 @@ public class FragmentSettingEmail extends Fragment implements OnClickListener, W
 
 	Button mBtnSave;
 	
-	CheckBox mChkActMention, mChkActReply, mChkMsgSend, mChkFriendReq, mChkFriendAccept;
+	CheckBox mChkActMail, mChkActMention, mChkActReply, mChkMsgSend, mChkFriendReq, mChkFriendAccept;
 	CheckBox mChkGroupInvite, mChkGroupUpdate, mChkGroupPromote, mChkGroupReq;
 	CheckBox mChkFamilyReq, mChkFamilyAccept, mChkFollow;
 	
 	HashMap<String, CheckBox> mapIdChk;
 	String[] arrayId = {
 			
-			"notification_activity_new_mention", "notification_activity_new_reply",
+			"notification_turn_on_off_email", "notification_activity_new_mention", "notification_activity_new_reply",
 			
 			"notification_messages_new_message", 
 			
@@ -79,35 +79,37 @@ public class FragmentSettingEmail extends Fragment implements OnClickListener, W
 		mBtnSave = (Button) view.findViewById(R.id.btnSave);
 		mBtnSave.setOnClickListener(this);
 		
+		mChkActMail = (CheckBox) view.findViewById(R.id.chkEmail);
 		mChkActMention = (CheckBox) view.findViewById(R.id.chkActivityMention);
 		mChkActReply = (CheckBox) view.findViewById(R.id.chkActivityReply);		
-		mapIdChk.put(arrayId[0], mChkActMention);
-		mapIdChk.put(arrayId[1], mChkActReply);
+		mapIdChk.put(arrayId[0], mChkActMail);
+		mapIdChk.put(arrayId[1], mChkActMention);
+		mapIdChk.put(arrayId[2], mChkActReply);
 		
 		mChkMsgSend = (CheckBox) view.findViewById(R.id.chkMessageSend);		
-		mapIdChk.put(arrayId[2], mChkMsgSend);
+		mapIdChk.put(arrayId[3], mChkMsgSend);
 		
 		mChkFriendReq = (CheckBox) view.findViewById(R.id.chkFriendRequest);
 		mChkFriendAccept = (CheckBox) view.findViewById(R.id.chkFriendAccept);
-		mapIdChk.put(arrayId[3], mChkFriendReq);
-		mapIdChk.put(arrayId[4], mChkFriendAccept);
+		mapIdChk.put(arrayId[4], mChkFriendReq);
+		mapIdChk.put(arrayId[5], mChkFriendAccept);
 		
 		mChkGroupInvite = (CheckBox) view.findViewById(R.id.chkGroupInvite);
 		mChkGroupUpdate = (CheckBox) view.findViewById(R.id.chkGroupUpdate);
 		mChkGroupPromote = (CheckBox) view.findViewById(R.id.chkGroupPromote);
 		mChkGroupReq = (CheckBox) view.findViewById(R.id.chkGroupRequest);
-		mapIdChk.put(arrayId[5], mChkGroupInvite);
-		mapIdChk.put(arrayId[6], mChkGroupUpdate);
-		mapIdChk.put(arrayId[7], mChkGroupPromote);
-		mapIdChk.put(arrayId[8], mChkGroupReq);
+		mapIdChk.put(arrayId[6], mChkGroupInvite);
+		mapIdChk.put(arrayId[7], mChkGroupUpdate);
+		mapIdChk.put(arrayId[8], mChkGroupPromote);
+		mapIdChk.put(arrayId[9], mChkGroupReq);
 		
 		mChkFamilyReq = (CheckBox) view.findViewById(R.id.chkFamilyRequest);
 		mChkFamilyAccept = (CheckBox) view.findViewById(R.id.chkFamilyAccept);
-		mapIdChk.put(arrayId[9], mChkFamilyReq);
-		mapIdChk.put(arrayId[10], mChkFamilyAccept);
+		mapIdChk.put(arrayId[10], mChkFamilyReq);
+		mapIdChk.put(arrayId[11], mChkFamilyAccept);
 		
 		mChkFollow = (CheckBox) view.findViewById(R.id.chkFollow);
-		mapIdChk.put(arrayId[11], mChkFollow);		
+		mapIdChk.put(arrayId[12], mChkFollow);		
 	}
 
 	@Override

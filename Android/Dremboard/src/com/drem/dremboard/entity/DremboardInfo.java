@@ -6,6 +6,7 @@ public class DremboardInfo {
 	public int id;
 	public String media_type;
 	public String media_title;
+	public String media_description;
 	public int media_author_id;
 	public String media_author_avatar;
 	public String media_author_name;

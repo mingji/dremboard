@@ -11,6 +11,7 @@ public class GlobalValue {
 	private ArrayList<ProfileItem> mProfiles;
 	private String mPwd;
 	private DremInfo mDrem;
+	private DremcastInfo mDremcast;
 
 	public static synchronized GlobalValue getInstance(){
 
@@ -107,5 +108,21 @@ public class GlobalValue {
 		
 		return mDrem;
 	}
+
+	public void setCurrentDremcast(DremcastInfo dremcast)
+	{
+		if (dremcast == null)
+			return;
+		
+		this.mDremcast = dremcast;
+	}
 	
+	public DremcastInfo getCurrentDremcast()
+	{
+		if (mDremcast == null)
+			this.mDremcast = new DremcastInfo();
+		
+		return mDremcast;
+	}
+
 }

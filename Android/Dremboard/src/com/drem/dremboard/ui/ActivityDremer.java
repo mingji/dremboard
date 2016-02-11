@@ -73,6 +73,8 @@ public class ActivityDremer extends Activity
 	
 	WaitDialog waitDialog;
 
+	public static ActivityDremer instance;
+	
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -80,6 +82,8 @@ public class ActivityDremer extends Activity
 		setContentView(R.layout.activity_dremer);
 		mPrefs = new AppPreferences(this);
 		waitDialog = new WaitDialog(this);
+		
+		instance = this;
 		
 		mDremerId = getIntent().getIntExtra("dremer_id", -1);
 		if (mDremerId == -1) { // check valid dremer
@@ -159,8 +163,11 @@ public class ActivityDremer extends Activity
 		if (dremer.user_avatar != null && !dremer.user_avatar.isEmpty())
 			ImageLoader.getInstance().displayImage(dremer.user_avatar, mImgUserIcon, 0, 0);
 		
+		mImgUserIcon.setOnClickListener(this);
+		
 		mImgDremer = (WebImgView) findViewById(R.id.imgDremer);
 		mImgDremer.imageView.setImageResource(R.drawable.empty_man);
+		mImgDremer.setOnClickListener(this);
 		
 		mTxtTitle = (TextView) findViewById(R.id.txtTitle);
 		
@@ -291,12 +298,36 @@ public class ActivityDremer extends Activity
 		}
 	}
 
+	private void onPostAvatar()
+    {
+		Intent intent = new Intent();
+    	intent.setClass(this, ActivityAvatarPost.class);
+		startActivity(intent);
+		this.overridePendingTransition(R.anim.in_right_left, R.anim.out_right_left);
+    }
+	
+	public void onChangeAvatar()
+	{
+		DremerInfo dremer = GlobalValue.getInstance().getCurrentDremer();
+		if (dremer.user_avatar != null && !dremer.user_avatar.isEmpty())
+		{
+			ImageLoader.getInstance().displayImage(dremer.user_avatar, mImgDremer, 0, 0);
+			ImageLoader.getInstance().displayImage(dremer.user_avatar, mImgUserIcon, 0, 0);
+		}
+	}
+	
 	@Override
 	public void onClick(View v) {
 		// TODO Auto-generated method stub
 		int id = v.getId();
 
 		switch (id) {
+		case R.id.imgUserIcon:
+		case R.id.imgDremer:
+			if (mDremer.user_id == Integer.parseInt(mPrefs.getUserId()))
+				onPostAvatar();
+			break;
+
 		case R.id.btnBack:
 			onBackButton();
 			break;

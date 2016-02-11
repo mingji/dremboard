@@ -53,6 +53,8 @@ public class FragmentDremboards extends Fragment implements AdminSearchView.OnSe
 	int mLastMediaId = 0;
 	int mPerPage = 10;
 	int mLastCount = 1;
+	
+	int mDremerId;
 
 	boolean mFlagLoading = false;
 
@@ -68,6 +70,13 @@ public class FragmentDremboards extends Fragment implements AdminSearchView.OnSe
 
 		initView (view);
 		
+		Bundle bundle = getArguments();
+		if (bundle != null) {
+			mDremerId = getArguments().getInt("dremer_id", -1);
+		} else {
+			mDremerId = -1;
+		}
+
 		resetOptions();
 
 		getDremboardList(mLastMediaId, mPerPage);
@@ -132,7 +141,7 @@ public class FragmentDremboards extends Fragment implements AdminSearchView.OnSe
 	{
 		Intent intent = new Intent();
 		intent.setClass(getActivity(), ActivityBoardDrems.class);
-		startActivity(intent);
+		startActivityForResult(intent, 1);
 		getActivity().overridePendingTransition(R.anim.in_right_left, R.anim.out_right_left);
 	}
 	
@@ -161,7 +170,12 @@ public class FragmentDremboards extends Fragment implements AdminSearchView.OnSe
 		if (arrayBoards == null)
 			return;
 		for (DremboardInfo board : arrayBoards) {
-			mArrayDremboards.add(board);
+			
+			if (mDremerId == -1)
+				mArrayDremboards.add(board);
+			else if (mDremerId == board.media_author_id)
+				mArrayDremboards.add(board);
+
 			mLastMediaId = board.id;
 		}
 
@@ -274,7 +288,7 @@ public class FragmentDremboards extends Fragment implements AdminSearchView.OnSe
 				holder.imgBoardPic.imageView.setImageResource(R.drawable.sample_dremboard);
 
 			holder.txtBoardName.setText(dremboardItem.media_title);			
-			holder.txtDremCount.setText(dremboardItem.album_count + " Drems");
+			holder.txtDremCount.setText(dremboardItem.album_count + " Drēms");
 
 			return convertView;
 		}
@@ -347,4 +361,19 @@ public class FragmentDremboards extends Fragment implements AdminSearchView.OnSe
 		removeAllDremboards();
 		getDremboardList(mLastMediaId, mPerPage);
 	}
+	
+	@Override
+	public void onActivityResult(int requestCode, int resultCode, Intent data) {
+	    if (requestCode == 1) {
+	        if(resultCode == Activity.RESULT_OK){
+	    		resetOptions();
+	    		removeAllDremboards();
+	    		loadMoreDrembodrds();
+	    		this.getView();
+	        }
+	        if (resultCode == Activity.RESULT_CANCELED) {
+	            //Write your code if there's no result
+	        }
+	    }
+	}//onActivityResult
 }

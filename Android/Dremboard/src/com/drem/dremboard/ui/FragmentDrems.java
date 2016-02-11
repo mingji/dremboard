@@ -26,8 +26,13 @@ import com.drem.dremboard.entity.Beans.SetFavoriteParam;
 import com.drem.dremboard.entity.Beans.SetFavoriteResult;
 import com.drem.dremboard.entity.Beans.SetLikeParam;
 import com.drem.dremboard.entity.Beans.SetLikeResult;
+import com.drem.dremboard.entity.CommentInfo;
+import com.drem.dremboard.entity.DremActivityInfo;
 import com.drem.dremboard.entity.DremInfo;
 import com.drem.dremboard.entity.GlobalValue;
+import com.drem.dremboard.ui.DialogComment.OnCommentResultCallback;
+import com.drem.dremboard.ui.DialogComment.OnDelCommentResultCallback;
+import com.drem.dremboard.ui.DialogComment.OnEditCommentResultCallback;
 import com.drem.dremboard.ui.DialogFlagDrem.OnFlagResultCallback;
 import com.drem.dremboard.utils.AppPreferences;
 import com.drem.dremboard.utils.ImageLoader;
@@ -45,6 +50,8 @@ public class FragmentDrems extends Fragment implements
 
 	private AppPreferences mPrefs;
 
+	public static FragmentDrems instance;
+
 	GridView mGridDrems;
 	DremAdapter mAdapterDrem;
 	ArrayList<DremInfo> mArrayDrems;
@@ -58,7 +65,7 @@ public class FragmentDrems extends Fragment implements
 	String mSearchStr = "";
 	int mCategory = -1;
 	int mLastDremId = 0;
-	int mPerPage = 10;
+	int mPerPage = 5;
 	
 	int mDremerId;
 	
@@ -69,6 +76,7 @@ public class FragmentDrems extends Fragment implements
 			Bundle savedInstanceState) {
 		View view = inflater.inflate(R.layout.fragment_drems, null);
 		
+		instance = this;
 		mPrefs = new AppPreferences(getActivity());		
 		waitDialog = new WaitDialog(getActivity());
 		
@@ -130,7 +138,7 @@ public class FragmentDrems extends Fragment implements
 		mAdminSearchView.setOnSearchListener(this);
 	}
 	
-	private void resetOptions()
+	public void resetOptions()
 	{
 		mFlagLoading = false;
 		mAddMoreFlag = true;
@@ -155,14 +163,17 @@ public class FragmentDrems extends Fragment implements
 			dremItem.like = value;
 		else if (type.equalsIgnoreCase("favorite"))
 			dremItem.favorite = value;
+		
+		mAdapterDrem.notifyDataSetChanged();
+
 	}
 
-	private void loadMoreDrems()
+	public void loadMoreDrems()
 	{
 		getDremList(mLastDremId, mPerPage);
 	}
 
-	private void removeAllDrems() {
+	public void removeAllDrems() {
 		mArrayDrems.removeAll(mArrayDrems);
 	}
 	
@@ -327,9 +338,9 @@ public class FragmentDrems extends Fragment implements
 		}
 	}
 	
-	private void showShareDialog(int activity_id)
+	private void showShareDialog(int activity_id, String guid)
 	{
-		Dialog dialog = new DialogShare(getActivity(), getActivity(), activity_id);
+		Dialog dialog = new DialogShare(getActivity(), getActivity(), activity_id, guid);
 		dialog.show();
 	}
 	
@@ -395,7 +406,8 @@ public class FragmentDrems extends Fragment implements
 		getActivity().overridePendingTransition(R.anim.in_right_left, R.anim.out_right_left);		
 	}
 	
-	public class DremAdapter extends ArrayAdapter<DremInfo> implements OnClickListener{
+	public class DremAdapter extends ArrayAdapter<DremInfo> implements OnClickListener, 
+		OnCommentResultCallback, OnDelCommentResultCallback, OnEditCommentResultCallback {
 		Activity activity;
 		int layoutResourceId;
 		ArrayList<DremInfo> item = new ArrayList<DremInfo>();
@@ -425,6 +437,7 @@ public class FragmentDrems extends Fragment implements
 				holder.txtCategory = (TextView) convertView.findViewById(R.id.txtCategory);
 				holder.imgPic = (WebImgView) convertView.findViewById(R.id.imgPic);
 				
+				holder.btnComment = (Button) convertView.findViewById(R.id.btnComment);
 				holder.btnFavorite = (Button) convertView.findViewById(R.id.btnFavorite);
 				holder.btnLike = (Button) convertView.findViewById(R.id.btnLike);
 				holder.btnFlag = (Button) convertView.findViewById(R.id.btnFlag);
@@ -434,6 +447,7 @@ public class FragmentDrems extends Fragment implements
 
 				holder.imgPic.setOnClickListener(this);
 				holder.btnFavorite.setOnClickListener(this);
+				holder.btnComment.setOnClickListener(this);
 				holder.btnLike.setOnClickListener(this);
 				holder.btnFlag.setOnClickListener(this);
 				holder.btnShare.setOnClickListener(this);
@@ -447,9 +461,16 @@ public class FragmentDrems extends Fragment implements
 			holder.imgPic.setTag(position);
 			if (dremItem.guid != null && !dremItem.guid.isEmpty())
 				ImageLoader.getInstance().displayImage(dremItem.guid, holder.imgPic, 0, 0);
+//				ImageLoader.getInstance().displayImage("http://dremboard.com/wp-content/uploads/rtMedia/users/9/2015/08/Watermelon-Man.jpg", holder.imgPic, 0, 0);
 			else
 				holder.imgPic.imageView.setImageResource(R.drawable.sample_drem);
 
+			if(dremItem.comment_list != null && dremItem.comment_list.size() > 0) {
+				holder.btnComment.setText("Comment ("+String.valueOf(dremItem.comment_list.size())+")");
+			} else {
+				holder.btnComment.setText("Comment");
+			}
+			
 			holder.txtCategory.setText(dremItem.category);
 			
 			holder.btnFavorite.setText(dremItem.favorite);
@@ -458,6 +479,7 @@ public class FragmentDrems extends Fragment implements
 			holder.btnLike.setText(dremItem.like);
 			holder.btnLike.setTag(position);
 			
+			holder.btnComment.setTag(position);
 			holder.btnFlag.setTag(position);
 			holder.btnShare.setTag(position);			
 
@@ -465,13 +487,15 @@ public class FragmentDrems extends Fragment implements
 			holder.btnLess.setTag(position);
 			
 			if(dremItem.isMore == true){
+				holder.btnShare.setVisibility(View.GONE);
 				holder.btnFavorite.setVisibility(View.GONE);
-				holder.btnFlag.setVisibility(View.INVISIBLE);
+				holder.btnFlag.setVisibility(View.GONE);
 				holder.btnMore.setVisibility(View.VISIBLE);
 				holder.btnLess.setVisibility(View.INVISIBLE);
 			} else {
 				holder.btnFavorite.setVisibility(View.VISIBLE);
 				holder.btnFlag.setVisibility(View.VISIBLE);
+				holder.btnShare.setVisibility(View.VISIBLE);
 				holder.btnMore.setVisibility(View.INVISIBLE);
 				holder.btnLess.setVisibility(View.VISIBLE);
 			}
@@ -482,6 +506,7 @@ public class FragmentDrems extends Fragment implements
 		public class DremHolder {
 			WebImgView imgPic;
 			TextView txtCategory;
+			Button btnComment;
 			Button btnFavorite;
 			Button btnLike;
 			Button btnFlag;
@@ -505,6 +530,9 @@ public class FragmentDrems extends Fragment implements
 			case R.id.imgPic:
 				ViewDrem(dremItem);
 				break;
+			case R.id.btnComment:
+				setComment(dremItem, position);
+				break;
 			case R.id.btnFavorite:
 				setFavorite(dremItem, v, position);
 				break;
@@ -512,7 +540,7 @@ public class FragmentDrems extends Fragment implements
 				setLike(dremItem, v, position);
 				break;
 			case R.id.btnShare:
-				showShareDialog(dremItem.activity_id);
+				showShareDialog(dremItem.activity_id, dremItem.guid);
 				break;
 			case R.id.btnFlag:
 				showFlagDialog(dremItem.activity_id, position);
@@ -529,7 +557,81 @@ public class FragmentDrems extends Fragment implements
 				break;
 			}
 		}
-	}
 
+		
+		private void setComment(DremInfo dremItem, int index)
+		{
+			if (dremItem == null)
+				return;
+			
+			if (dremItem.comment_list == null)
+				dremItem.comment_list = new ArrayList<CommentInfo>();
+			
+			DialogComment commentDiag = new DialogComment(this.activity, this.activity, dremItem.activity_id, 
+					index, dremItem.comment_list, this, this, this);
+					commentDiag.show();
+		}
+		
+		private void setCommentResult (CommentInfo commentData, int index)
+		{
+			DremInfo dremItem = getItem(index);
+			
+			if (dremItem == null || commentData == null)
+				return;
+			
+			if (dremItem.comment_list == null)
+				dremItem.comment_list = new ArrayList<CommentInfo>();
+			
+			dremItem.comment_list.add(commentData);
+			notifyDataSetChanged();
+		}
+		
+		private void delCommentResult (int activity_index, int index)
+		{
+			DremInfo dremItem = getItem(activity_index);
+			
+			if (dremItem == null)
+				return;
+			
+			dremItem.comment_list.remove(index);
+			
+			notifyDataSetChanged();
+		}
+		
+		private void editCommentResult (int activity_index, CommentInfo commentData, int index)
+		{
+			DremInfo dremItem = getItem(activity_index);
+			
+			if (dremItem == null || commentData == null)
+				return;
+			
+			if (dremItem.comment_list == null)
+				dremItem.comment_list = new ArrayList<CommentInfo>();
+			
+			CommentInfo changeData = dremItem.comment_list.get(index);
+			changeData.description = commentData.description;
+			
+			notifyDataSetChanged();
+		}
+		
+		
+		@Override
+		public void OnCommentResult(CommentInfo commentData, int index) {
+			// TODO Auto-generated method stub
+			setCommentResult (commentData, index);
+		}
+		
+		@Override
+		public void OnDelCommentResult(int activity_index, int index) {
+			// TODO Auto-generated method stub
+			delCommentResult (activity_index, index);
+		}
+		
+		@Override
+		public void OnEditCommentResult(int activity_index, CommentInfo commentData, int index) {
+			// TODO Auto-generated method stub
+			editCommentResult (activity_index, commentData, index);
+		}
+	}
 }
 

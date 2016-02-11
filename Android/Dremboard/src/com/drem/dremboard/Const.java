@@ -27,4 +27,16 @@ public class Const {
 	public	static	final	int		TYPE_LOGIN_FACEBOOK		= 1;
 	public	static	final	int		TYPE_LOGIN_TWITTER		= 2;
 	public	static	final	int		TYPE_LOGIN_GOOGLE		= 3;
+	
+	/*
+	 * Request code
+	 */
+	public static final int REQ_IMAGE_FROM_CAMERA = 10001;
+	public static final int REQ_IMAGE_FROM_CAMERA_CROP = 10002;
+	public static final int REQ_IMAGE_FROM_GALLERY = 10003;
+	public static final int REQ_IMAGE_FROM_GALLERY_CROP = 10004;
+	public static final int REQ_VIDEO_FROM_CAMERA = 10005;
+	public static final int REQ_VIDEO_FROM_GALLERY = 10006;
+	public static final int REQ_MAP = 10007;
+
 }

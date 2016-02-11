@@ -22,7 +22,7 @@ import android.os.Handler;
 
 public class ImageLoader {
 
-	private static final int MAX_IMAGE_SIZE = 256;
+	private static final int MAX_IMAGE_SIZE = 1024;
 
 	private ImageLoaderMemoryCache memoryCache = new ImageLoaderMemoryCache();
 	private ImageLoaderFileCache fileCache;
@@ -156,9 +156,10 @@ public class ImageLoader {
 			
 //			 decode with inSampleSize
 			BitmapFactory.Options o2 = new BitmapFactory.Options();
-			//o2.inSampleSize = 1;
+//			o2.inSampleSize = 1;
 			o2.inSampleSize = scale; // 1 = 100% if you write 4 means 1/4 = 25%
 			o2.inJustDecodeBounds = false;
+			o2.inPreferredConfig = Bitmap.Config.ARGB_8888;
 			FileInputStream stream2 = new FileInputStream(f);
 			Bitmap bitmap = BitmapFactory.decodeStream(stream2, null, o2);
 			stream2.close();

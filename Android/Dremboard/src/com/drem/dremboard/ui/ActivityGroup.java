@@ -48,11 +48,11 @@ public class ActivityGroup extends SherlockFragmentActivity implements OnClickLi
         mTabsAdapter = new WorkingTabsAdapter(this, mTabHost, mViewPager);
 
         mTabsAdapter.addTab(mTabHost.newTabSpec("memberships").setIndicator("Memberships"),
-                FragmentBlank.class, null);        
+                FragmentProfileEdit.class, null);        
         mTabsAdapter.addTab(mTabHost.newTabSpec("pending").setIndicator("Pending Invites"),
-                FragmentBlank.class, null);
+                FragmentProfileEdit.class, null);
         mTabsAdapter.addTab(mTabHost.newTabSpec("create group").setIndicator("Create a Group"),
-                FragmentBlank.class, null);
+                FragmentProfileEdit.class, null);
         
         if (savedInstanceState != null) {
             mTabHost.setCurrentTabByTag(savedInstanceState.getString("tab"));

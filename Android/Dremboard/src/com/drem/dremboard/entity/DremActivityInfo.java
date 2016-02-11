@@ -6,12 +6,16 @@ public class DremActivityInfo {
 
 	public int activity_id;
 	public int author_id;
+	public String author_name;
 	public String author_avatar;
 	public String action;
 	public String last_modified;
 	public String description;
 	public String like;
 	public String favorite;
+	public String category;
+
+	public boolean isMore = true;
 
 	public ArrayList<MediaInfo> media_list;
 	public ArrayList<CommentInfo> comment_list;

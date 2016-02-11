@@ -99,9 +99,9 @@ public class ActivityProfile extends SherlockFragmentActivity implements OnClick
 		mTabsAdapter.addTab(mTabHost.newTabSpec("view").setIndicator("View"),
 				FragmentProfileView.class, bundle);
 		mTabsAdapter.addTab(mTabHost.newTabSpec("Edit").setIndicator("Edit"),
-				FragmentBlank.class, bundle);
-		mTabsAdapter.addTab(mTabHost.newTabSpec("picture").setIndicator("Picture"),
-				FragmentBlank.class, bundle);
+				FragmentProfileEdit.class, bundle);
+//		mTabsAdapter.addTab(mTabHost.newTabSpec("picture").setIndicator("Picture"),
+//				FragmentBlank.class, bundle);
 
 	}
 

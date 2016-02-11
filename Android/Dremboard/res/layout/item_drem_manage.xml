@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@color/transparent" >
+
+    <CheckBox
+        android:id="@+id/chkCategory"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:textColor="@color/black"
+        android:textSize="14sp" />
+
+    <com.drem.dremboard.view.WebImgView
+        android:id="@+id/imgPic"
+        android:layout_width="match_parent"
+        android:layout_height="120dip"
+        android:layout_below="@+id/chkCategory"
+        android:layout_centerHorizontal="true"
+        android:background="@color/bg_lightblue"
+        android:gravity="center"
+        android:visibility="visible" />
+
+</RelativeLayout>

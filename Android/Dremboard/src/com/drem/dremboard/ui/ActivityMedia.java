@@ -100,12 +100,12 @@ public class ActivityMedia extends SherlockFragmentActivity implements OnClickLi
 		Bundle dremcast = new Bundle();
 		dremcast.putInt("dremer_id", mDremerId);
 
-		mTabsAdapter.addTab(mTabHost.newTabSpec("drems").setIndicator("Drems"),
+		mTabsAdapter.addTab(mTabHost.newTabSpec("drems").setIndicator("Drēms"),
 				FragmentDrems.class, drems);
-		mTabsAdapter.addTab(mTabHost.newTabSpec("dremboard").setIndicator("Dremboard"),
+		mTabsAdapter.addTab(mTabHost.newTabSpec("dremboard").setIndicator("Drēmboard"),
 				FragmentDremboards.class, dremboard);
-		mTabsAdapter.addTab(mTabHost.newTabSpec("dremcast").setIndicator("Dremcast"),
-				FragmentBlank.class, dremcast);
+		mTabsAdapter.addTab(mTabHost.newTabSpec("dremcast").setIndicator("Drēmcast"),
+				FragmentDremcasts.class, dremcast);
 	}
 
 	@Override

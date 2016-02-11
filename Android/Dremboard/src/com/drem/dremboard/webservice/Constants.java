@@ -13,6 +13,7 @@ public class Constants {
 	public static final String ACT_GET_INIT_PARAMS 	= "get_init_params";
 	public static final String ACT_GET_DREMS 		= "get_drems";
 	public static final String ACT_SET_COMMENT 		= "set_activity_comment";
+	public static final String ACT_EDIT_COMMENT 		= "edit_activity_comment";
 	public static final String ACT_SET_FAVORITE 	= "set_favorite";
 	public static final String ACT_SET_LIKE 		= "set_like"; 
 	public static final String ACT_SHARE_DREM 		= "share_drem"; 
@@ -30,16 +31,28 @@ public class Constants {
 	public static final String ACT_SET_BLOCKING		= "change_dremer_blocking";
 	public static final String ACT_GET_NT			= "get_notifications";
 	public static final String ACT_SET_NT			= "set_notification_action";
+	public static final String ACT_GET_NT_CNT			= "get_notification_count";
 	public static final String ACT_GET_MESSAGES		= "get_messages";
 	public static final String ACT_GET_SINGLE_MESSAGE		= "get_message_single_view";
 	public static final String ACT_SEND_MESSAGE		= "message_compose";
 	public static final String ACT_REPLY_MESSAGE	= "message_reply";
+	public static final String ACT_SET_SINGLE_DREMER_IMAGE		= "set_single_dremer_image";
 	public static final String ACT_SET_GENERAL		= "set_single_dremer_general";
 	public static final String ACT_GET_MAIL_NOTE	= "get_single_dremer_email_note";
 	public static final String ACT_SET_MAIL_NOTE	= "set_single_dremer_email_note";
 	public static final String ACT_GET_DEF_PRIVACY	= "get_single_dremer_default_privacy";
 	public static final String ACT_SET_DEF_PRIVACY	= "set_single_dremer_default_privacy";
-	
+	public static final String ACT_ADD_DREM_TO_DREMBOARD = "add_drem_to_dremboard";
+	public static final String CREATE_DREMBOARD = 	"create_dremboard";
+	public static final String DELETE_DREMBOARD = 	"delete_dremboard";
+	public static final String EDIT_DREMBOARD = 	"edit_dremboard";
+	public static final String MERGE_DREMBOARD = 	"merge_dremboard";
+	public static final String REMOVE_DREMS_FROM_DREMBOARD = 	"remove_drems_from_dremboard";
+	public static final String MOVE_DREMS_TO_DREMBOARD = 	"move_drems_to_dremboard";
+	public static final String SET_ACTIVITY = 		"set_activity";
+	public static final String DELETE_ACTIVITY = 	"delete_activity";
+	public static final String GET_ACTIVITY = 	"get_activity";
+
 	public static final String PARAM_USERNAME 		= "username";
 	public static final String PARAM_PASSWORD 		= "password";
 	public static final String PARAM_USER_LOGIN 	= "user_login";
@@ -65,7 +78,7 @@ public class Constants {
 	public static final String PARAM_FLAG_SLUG		= "flag_slug";
 	public static final String PARAM_ACTIVITY_SCOPE	= "activity_scope";
 	public static final String PARAM_LAST_ACTIVITY_ID = "last_activity_id";
-	public static final String PARAM_PHOTO			= "photo";
+	public static final String PARAM_PHOTO			= "file";
 	public static final String PARAM_ACTION			= "action";
 	public static final String PARAM_BLOCK_TYPE		= "block_type";
 	public static final String PARAM_TYPE			= "type";
@@ -78,6 +91,21 @@ public class Constants {
 	public static final String PARAM_EMAIL			= "email";
 	public static final String PARAM_PRIVACY	 	= "privacy";
 	public static final String PARAM_NOTE_JSON	 	= "notifications_json";
+	public static final String PARAM_DREM_ID	 	= "drem_id";
+	public static final String PARAM_DREM_IDS	 	= "drem_ids";
+	public static final String PARAM_DREMBOARD_ID	= "dremboard_id";
+	public static final String PARAM_TITLE	 		= "title";
+	public static final String PARAM_CATEGORY_ID 	= "category_id";
+	public static final String PARAM_SOURCE_ID	 	= "source_id";
+	public static final String PARAM_TARGET_ID	 	= "target_id";
+	public static final String PARAM_FILE		 	= "file";
+	public static final String PARAM_CROP_X			= "crop_x";
+	public static final String PARAM_CROP_Y			= "crop_y";
+	public static final String PARAM_CROP_WIDTH		= "crop_w";
+	public static final String PARAM_CROP_HEIGHT	= "crop_h";
+
+
+
 
 	public static final String NETWORK_ERR = "Couldn't connect to Dremboard.com.";
 	

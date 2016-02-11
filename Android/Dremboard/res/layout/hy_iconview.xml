@@ -10,7 +10,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_centerInParent="true"
-        android:scaleType="fitCenter" />
+        android:scaleType="fitXY" />
     
     <ProgressBar
         android:id="@+id/id_imageview_progress"

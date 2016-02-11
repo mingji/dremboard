@@ -21,38 +21,63 @@
             android:layout_marginRight="15dip"
             android:contentDescription="Author" />
 
-        <LinearLayout
+        <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical" >
+            android:layout_height="wrap_content" >
 
-            <TextView
-                android:id="@+id/txtCommentAuthor"
-                android:layout_width="wrap_content"
+            <LinearLayout
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:linksClickable="true"
-                android:paddingLeft="5dp"
-                android:textColor="#783302"
-                android:textSize="14sp"
-                android:textStyle="bold" />"
+                android:orientation="vertical" >
 
-            <TextView
-                android:id="@+id/txtComment"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textColor="@color/darkgray"
-                android:textSize="14sp"
-                android:paddingLeft="5dp"/>
+                <TextView
+                    android:id="@+id/txtCommentAuthor"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:linksClickable="true"
+                    android:paddingLeft="5dp"
+                    android:textColor="#783302"
+                    android:textSize="14sp"
+                    android:textStyle="bold" />
 
-            <TextView
-                android:id="@+id/txtTime"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textColor="@color/lightgray"
-                android:textSize="14sp"
-                android:paddingLeft="5dp"/>
-            
-        </LinearLayout>
+                <TextView
+                    android:id="@+id/txtComment"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:autoLink="web"
+                    android:paddingLeft="5dp"
+                    android:textColor="@color/darkgray"
+                    android:textSize="14sp" />
+
+                <TextView
+                    android:id="@+id/txtTime"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:paddingLeft="5dp"
+                    android:textColor="@color/lightgray"
+                    android:textSize="14sp" />
+            </LinearLayout>
+
+            <ImageView
+                android:id="@+id/btn_edit"
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:layout_alignParentTop="true"
+                android:layout_marginRight="@dimen/margin_small"
+                android:layout_toLeftOf="@+id/btn_delete"
+                android:contentDescription="@string/app_name"
+                android:src="@drawable/ic_edit" />
+
+            <ImageView
+                android:id="@+id/btn_delete"
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:layout_alignParentRight="true"
+                android:layout_alignParentTop="true"
+                android:layout_marginRight="@dimen/margin_small"
+                android:contentDescription="@string/app_name"
+                android:src="@drawable/ic_delete" />
+        </RelativeLayout>
     </LinearLayout>
 
     <com.drem.dremboard.view.WebImgView
@@ -60,9 +85,9 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@+id/layCommentAuthor"
-        android:padding="2dip"
         android:layout_centerHorizontal="true"
         android:gravity="center"
+        android:padding="2dip"
         android:visibility="visible" />
 
 </LinearLayout>

@@ -1,0 +1,575 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:background="@color/bg_gray" >
+    <ScrollView
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/layTop"
+        android:layout_marginLeft="20dip"
+        android:layout_marginRight="5dip"
+        android:scrollbars="vertical"
+        android:visibility="visible" >
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical" >
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dip"
+                android:text="Name (required)"
+                android:textColor="@color/darkgray"
+                android:textSize="16sp"
+                android:textStyle="bold" />
+            
+            <EditText
+                android:id="@+id/txtName"
+                android:layout_width="200dip"
+                android:layout_height="36dip"
+                android:layout_marginTop="3dip"
+                android:paddingLeft="10.0dip"
+                android:singleLine="true"
+                android:gravity="center_vertical"
+                android:textSize="14sp" />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="0dip"
+                android:text="@string/txt_user_profile_name_description"
+                android:textColor="@color/darkgray"
+                android:textSize="14sp" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="15dip"
+                android:text="Gender"
+                android:textColor="@color/darkgray"
+                android:textStyle="bold" 
+                android:textSize="16sp" />
+
+            <Spinner
+                android:id="@+id/spinGender"
+                android:layout_width="160dip"
+                android:layout_height="30dip"
+                android:layout_marginTop="3dip"
+                android:background="@drawable/bg_spinner"
+                android:gravity="center_vertical"
+                android:paddingLeft="10dip"
+                android:textColor="@color/lightgray2" />
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="3dip"
+                android:gravity="center"
+                android:orientation="horizontal" >
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="This field can be seen by: "
+                    android:textColor="@color/darkgray"
+                    android:textSize="14sp"
+                    android:textStyle="italic" />
+
+                <Spinner
+                    android:id="@+id/spinGenderFieldPermission"
+                    android:layout_width="match_parent"
+                    android:layout_height="30dip"
+                    android:layout_marginLeft="3dip"
+                    android:layout_marginRight="10dip"
+                    android:gravity="center_vertical"
+ 	                android:background="@drawable/bg_spinner"
+                    android:paddingLeft="10dip"
+                    android:textColor="@color/lightgray2" />
+            </LinearLayout>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="15dip"
+                android:text="Birthday (required)"
+                android:textColor="@color/darkgray"
+                android:textStyle="bold" 
+                android:textSize="16sp" />
+            <EditText
+                android:id="@+id/txtBirthday"
+                android:layout_width="200dip"
+                android:layout_height="36dip"
+                android:layout_marginTop="3dip"
+                android:paddingLeft="10.0dip"
+                android:singleLine="true"
+                android:gravity="center_vertical"
+                android:textSize="14sp" />
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="3dip"
+                android:gravity="center"
+                android:orientation="horizontal" >
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="This field can be seen by: "
+                    android:textColor="@color/darkgray"
+                    android:textSize="14sp"
+                    android:textStyle="italic" />
+
+                <Spinner
+                    android:id="@+id/spinBirthdayFieldPermission"
+                    android:layout_width="match_parent"
+                    android:layout_height="30dip"
+                    android:layout_marginLeft="3dip"
+                    android:gravity="center_vertical"
+ 	                android:background="@drawable/bg_spinner"
+                    android:layout_marginRight="10dip"
+ 	                android:paddingLeft="10dip"
+                    android:textColor="@color/lightgray2" />
+            </LinearLayout>
+            
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="15dip"
+                android:text="Language"
+                android:textColor="@color/darkgray"
+                android:textStyle="bold" 
+                android:textSize="16sp" />
+            
+	        <Spinner
+                android:id="@+id/spinLang"
+                android:layout_width="match_parent"
+                android:layout_height="30dip"
+                android:layout_marginTop="3dip"
+                android:layout_marginRight="30dip"
+                android:background="@drawable/bg_spinner"
+                android:gravity="center_vertical"
+                android:paddingLeft="10dip"
+                android:textColor="@color/lightgray2" />
+		
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="3dip"
+                android:gravity="center"
+                android:orientation="horizontal" >
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="This field can be seen by: "
+                    android:textColor="@color/darkgray"
+                    android:textSize="14sp"
+                    android:textStyle="italic" />
+
+                <Spinner
+                    android:id="@+id/spinLangFieldPermission"
+                    android:layout_width="match_parent"
+                    android:layout_height="30dip"
+                    android:layout_marginLeft="3dip"
+                    android:layout_marginRight="10dip"
+                    android:gravity="center_vertical"
+ 	                android:background="@drawable/bg_spinner"      
+                    android:paddingLeft="10dip"
+                    android:textColor="@color/lightgray2" />
+            </LinearLayout>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="15dip"
+                android:text="Country"
+                android:textColor="@color/darkgray"
+                android:textStyle="bold" 
+                android:textSize="16sp" />
+            
+			<Spinner
+                android:id="@+id/spinCountry"
+                android:layout_width="match_parent"
+                android:layout_height="30dip"
+                android:layout_marginTop="3dip"
+                android:layout_marginRight="30dip"
+                android:background="@drawable/bg_spinner"
+                android:gravity="center_vertical"
+                android:paddingLeft="10dip"
+                android:textColor="@color/lightgray2" />
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="3dip"
+                android:gravity="center"
+                android:orientation="horizontal" >
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="This field can be seen by: "
+                    android:textColor="@color/darkgray"
+                    android:textSize="14sp"
+                    android:textStyle="italic" />
+
+                <Spinner
+                    android:id="@+id/spinCountryFieldPermission"
+                    android:layout_width="match_parent"
+                    android:layout_height="30dip"
+                    android:layout_marginLeft="3dip"
+                    android:layout_marginRight="10dip"
+                    android:gravity="center_vertical"
+                    android:background="@drawable/bg_spinner"
+                    android:paddingLeft="10dip"
+                    android:textColor="@color/lightgray2" />
+            </LinearLayout>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="15dip"
+                android:text="Address"
+                android:textColor="@color/darkgray"
+                android:textStyle="bold" 
+                android:textSize="16sp" />
+            <EditText
+                android:id="@+id/txtAddress"
+                android:layout_width="200dip"
+                android:layout_height="36dip"
+                android:layout_marginTop="3dip"
+                android:paddingLeft="10.0dip"
+                android:singleLine="true"
+                android:gravity="center_vertical"
+                android:textSize="14sp" />
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="3dip"
+                android:gravity="center"
+                android:orientation="horizontal" >
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="This field can be seen by: "
+                    android:textColor="@color/darkgray"
+                    android:textSize="14sp"
+                    android:textStyle="italic" />
+
+                <Spinner
+                    android:id="@+id/spinAddressFieldPermission"
+                    android:layout_width="match_parent"
+                    android:layout_height="30dip"
+                    android:layout_marginLeft="3dip"
+                    android:layout_marginRight="10dip"
+                    android:gravity="center_vertical"
+                    android:background="@drawable/bg_spinner"
+                    android:paddingLeft="10dip"
+                    android:textColor="@color/lightgray2" />
+            </LinearLayout>
+            
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="13dip"
+                android:text="Telephone Number"
+                android:textColor="@color/darkgray"
+                android:textStyle="bold" 
+                android:textSize="16sp" />
+			
+			<EditText
+                android:id="@+id/txtTelephoneNum"
+                android:layout_width="200dip"
+                android:layout_height="36dip"
+                android:layout_marginTop="3dip"
+                android:paddingLeft="10.0dip"
+                android:singleLine="true"
+                android:gravity="center_vertical"
+                android:textSize="14sp" />
+			
+           <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="3dip"
+                android:gravity="center"
+                android:orientation="horizontal" >
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="This field can be seen by: "
+                    android:textColor="@color/darkgray"
+                    android:textSize="14sp"
+                    android:textStyle="italic" />
+
+                <Spinner
+                    android:id="@+id/spinTelephoneNumFieldPermission"
+                    android:layout_width="match_parent"
+                    android:layout_height="30dip"
+                    android:layout_marginLeft="3dip"
+                    android:layout_marginRight="10dip"
+                    android:gravity="center_vertical"
+                    android:background="@drawable/bg_spinner"
+                    android:paddingLeft="10dip"
+                    android:textColor="@color/lightgray2" />
+            </LinearLayout>
+            
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="15dip"
+                android:text="facebobook (name)"
+                android:textColor="@color/darkgray"
+                android:textStyle="bold" 
+                android:textSize="16sp" />
+
+            
+            <EditText
+                android:id="@+id/txtFacebook"
+                android:layout_width="200dip"
+                android:layout_height="36dip"
+                android:layout_marginTop="3dip"
+                android:paddingLeft="10.0dip"
+                android:singleLine="true"
+                android:gravity="center_vertical"
+                android:textSize="14sp" />
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="3dip"
+                android:gravity="center"
+                android:orientation="horizontal" >
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="This field can be seen by: "
+                    android:textColor="@color/darkgray"
+                    android:textSize="14sp"
+                    android:textStyle="italic" />
+
+                <Spinner
+                    android:id="@+id/spinFacebookFieldPermission"
+                    android:layout_width="match_parent"
+                    android:layout_height="30dip"
+                    android:layout_marginLeft="3dip"
+                    android:layout_marginRight="10dip"
+                    android:gravity="center_vertical"
+                    android:background="@drawable/bg_spinner"
+                    android:paddingLeft="10dip"
+                    android:textColor="@color/lightgray2" />
+            </LinearLayout>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="15dip"
+                android:text="googleplus (name)"
+                android:textColor="@color/darkgray"
+                android:textStyle="bold"
+                android:textSize="16sp" />
+
+            <EditText
+                android:id="@+id/txtGoogle"
+                android:layout_width="200dip"
+                android:layout_height="36dip"
+                android:layout_marginTop="3dip"
+                android:paddingLeft="10.0dip"
+                android:singleLine="true"
+                android:gravity="center_vertical"
+                android:textSize="14sp" />
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="3dip"
+                android:gravity="center"
+                android:orientation="horizontal" >
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="This field can be seen by: "
+                    android:textColor="@color/darkgray"
+                    android:textSize="14sp"
+                    android:textStyle="italic" />
+
+                <Spinner
+                    android:id="@+id/spinGoogleFieldPermission"
+                    android:layout_width="match_parent"
+                    android:layout_height="30dip"
+                    android:layout_marginLeft="3dip"
+                    android:layout_marginRight="10dip"
+                    android:gravity="center_vertical"
+                    android:background="@drawable/bg_spinner"
+                    android:paddingLeft="10dip"
+                    android:textColor="@color/lightgray2" />
+            </LinearLayout>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="15dip"
+                android:text="twitter (name)"
+                android:textColor="@color/darkgray"
+                android:textStyle="bold" 
+                android:textSize="16sp" />
+
+            <EditText
+                android:id="@+id/txtTwitter"
+                android:layout_width="200dip"
+                android:layout_height="36dip"
+                android:layout_marginTop="3dip"
+                android:paddingLeft="10.0dip"
+                android:singleLine="true"
+                android:gravity="center_vertical"
+                android:textSize="14sp" />
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="3dip"
+                android:gravity="center"
+                android:orientation="horizontal" >
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="This field can be seen by: "
+                    android:textColor="@color/darkgray"
+                    android:textSize="14sp"
+                    android:textStyle="italic" />
+
+                <Spinner
+                    android:id="@+id/spinTwitterFieldPermission"
+                    android:layout_width="match_parent"
+                    android:layout_height="30dip"
+                    android:layout_marginLeft="3dip"
+                    android:layout_marginRight="10dip"
+                    android:gravity="center_vertical"
+                    android:background="@drawable/bg_spinner"
+                    android:paddingLeft="10dip"
+                    android:textColor="@color/lightgray2" />
+            </LinearLayout>
+            
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="15dip"
+                android:text="bio"
+                android:textColor="@color/darkgray"
+                android:textStyle="bold" 
+                android:textSize="16sp" />
+
+            <EditText
+                android:id="@+id/txtBio"
+	          	android:inputType="textMultiLine"
+	           	android:layout_width="260dip"
+	           	android:layout_height="100dip"
+	           	android:layout_marginTop="3dip"
+	           	android:paddingLeft="10.0dip"
+	           	android:singleLine="true"
+	           	android:scrollbars="vertical"
+	           	android:gravity="top|left"
+	           	android:textSize="14sp" />
+ 
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="3dip"
+                android:gravity="center"
+                android:orientation="horizontal" >
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="This field can be seen by: "
+                    android:textColor="@color/darkgray"
+                    android:textSize="14sp"
+                    android:textStyle="italic" />
+
+                <Spinner
+                    android:id="@+id/spinFieldBioPermission"
+                    android:layout_width="match_parent"
+                    android:layout_height="30dip"
+                    android:layout_marginLeft="3dip"
+                    android:layout_marginRight="10dip"
+                    android:gravity="center_vertical"
+                    android:background="@drawable/bg_spinner"
+                    android:paddingLeft="10dip"
+                    android:textColor="@color/lightgray2" />
+            </LinearLayout>
+      
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="15dip"
+                android:text="who can view my content"
+                android:textColor="@color/darkgray"
+                android:textStyle="bold" 
+                android:textSize="16sp" />
+
+            <Spinner
+                android:id="@+id/spinContent"
+                android:layout_width="match_parent"
+                android:layout_height="30dip"
+                android:layout_marginTop="3dip"
+                android:layout_marginRight="10dip"
+                android:background="@drawable/bg_spinner"
+                android:gravity="center_vertical"
+                android:paddingLeft="10dip"
+                android:textColor="@color/lightgray2" />
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="3dip"
+                android:gravity="center"
+                android:orientation="horizontal" >
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="This field can be seen by: "
+                    android:textColor="@color/darkgray"
+                    android:textSize="14sp"
+                    android:textStyle="italic" />
+
+                <Spinner
+                    android:id="@+id/spinContentFieldPermission"
+                    android:layout_width="match_parent"
+                    android:layout_height="30dip"
+                    android:layout_marginLeft="3dip"
+                    android:layout_marginRight="10dip"
+                    android:gravity="center_vertical"
+                    android:background="@drawable/bg_spinner"
+                    android:paddingLeft="10dip"
+                    android:textColor="@color/lightgray2" />
+            </LinearLayout>
+                  
+            <Button
+                android:id="@+id/btnSaveChanges"
+                android:layout_width="120dip"
+                android:layout_height="36dip"
+                android:background="@drawable/btn_login"
+                android:layout_gravity="right"
+                android:gravity="center"
+                android:layout_marginTop="35dip"
+                android:layout_marginRight="40dip"
+                android:paddingLeft="20dip"
+                android:paddingRight="10dip"
+                android:text="Save Changes"
+                android:textColor="@color/white"
+                android:textSize="14sp" />
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="30dip" />
+            
+        </LinearLayout>
+    </ScrollView>
+
+</RelativeLayout>

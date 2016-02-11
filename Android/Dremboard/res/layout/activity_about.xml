@@ -15,23 +15,10 @@
             layout="@layout/view_title_bar" />
     </RelativeLayout>
 
-    <ScrollView
+    <WebView 
+        android:id="@+id/webView"
         android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/layTop"
-        android:scrollbars="vertical"
-        android:visibility="visible" >
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="10dip"
-            android:layout_marginRight="7dip"
-            android:layout_marginTop="15dip"
-            android:paddingBottom="20dip"
-            android:text="@string/text_about"
-            android:textColor="@color/darkgray"
-            android:textSize="15sp" />
-    </ScrollView>
+        android:layout_height="fill_parent"
+        android:layout_below="@+id/layTop"/>  
 
 </RelativeLayout>

@@ -12,6 +12,10 @@ public class DremInfo {
 	public String guid;
 	public String favorite;
 	public String like;
+	public String author_name;
+	public String author_avatar;
+	public String last_modified;
+	public String description;
 	public boolean isMore = true;
 	public ArrayList<CommentInfo> comment_list;
 	

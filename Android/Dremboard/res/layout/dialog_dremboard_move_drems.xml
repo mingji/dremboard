@@ -1,0 +1,70 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="260dip"
+    android:layout_height="wrap_content"
+    android:layout_gravity="center"
+    android:background="@color/background_gray"
+    android:orientation="vertical" >
+
+    
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" >
+
+        <TextView
+            android:id="@+id/txtMergeDremboardBar"
+            android:layout_width="wrap_content"
+            android:layout_height="30dip"
+            android:layout_alignParentLeft="true"
+            android:layout_margin="12dip"
+            android:gravity="center_vertical"
+            android:text="@string/text_move_drems_to_dremboard_title"
+            android:textSize="16sp" >
+        </TextView>
+	    <Button
+	        android:id="@+id/btnClose"
+	        android:layout_width="30dip"
+	        android:layout_height="30dip"
+	        android:layout_alignParentRight="true"
+	        android:layout_margin="8dip"
+	        android:background="@drawable/btn_close" >
+	    </Button>
+    </RelativeLayout>
+
+    <TextView
+        android:id="@+id/lblDremboardMergeTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="24dip"
+        android:layout_marginLeft ="12dip"
+        android:layout_marginTop ="12dip"
+        android:gravity="center_vertical"
+        android:text="@string/text_dremboard_move_drems_title"
+        >
+    </TextView>
+	    
+   <Spinner
+        android:id="@+id/spinMoveDremstoDremboardCategory"
+        android:layout_width="220dip"
+        android:layout_height="32dip"
+		android:layout_marginLeft="20dp"
+		android:layout_marginTop="4dp"
+        android:background="@drawable/bg_spinner"
+        android:gravity="center_vertical"
+        android:paddingLeft="10dip"
+        android:textColor="@color/lightgray2" />
+    
+    <Button
+        android:id="@+id/btnMoveDremstoDremboard"
+        android:layout_width="80dip"
+        android:layout_height="30dip"
+        android:background="@drawable/btn_login"
+        android:layout_gravity="right"
+        android:gravity="center"
+		android:layout_marginLeft="20dp"
+		android:layout_marginRight="20dp"
+		android:layout_marginTop="24dp"
+		android:layout_marginBottom="24dp"
+		android:text="@string/btn_move_drems_to_dremboard"
+        android:textColor="@color/white"
+        android:textSize="12sp" />
+        
+</LinearLayout>

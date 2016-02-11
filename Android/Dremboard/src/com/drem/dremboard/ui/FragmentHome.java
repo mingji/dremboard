@@ -34,6 +34,7 @@ import com.drem.dremboard.webservice.WebApiInstance.Type;
 public class FragmentHome extends Fragment implements WebApiCallback
 {
 	private AppPreferences mPrefs;
+	public static FragmentHome instance;
 
 	Spinner spin_ActivityScope;
 	GridView mGridDremActivities;
@@ -63,6 +64,7 @@ public class FragmentHome extends Fragment implements WebApiCallback
 		mPrefs = new AppPreferences(getActivity());
 		waitDialog = new WaitDialog(getActivity());
 
+		instance = this;
 		initView(view);
 		
 		resetOptions();
@@ -152,7 +154,7 @@ public class FragmentHome extends Fragment implements WebApiCallback
 		});
 	}
 	
-	private void resetOptions()
+	public void resetOptions()
 	{
 		mFlagLoading = false;
 		mAddMoreFlag = true;
@@ -163,7 +165,7 @@ public class FragmentHome extends Fragment implements WebApiCallback
 		mArrayDremActivities.clear();
 	}
 
-	private void loadMoreDremActivities()
+	public void loadMoreDremActivities()
 	{
 		getDremActivityList(mLastDremActivityId, mPerPage);
 	}

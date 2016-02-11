@@ -10,6 +10,8 @@ import com.drem.dremboard.ui.DialogFriendshipAccept.OnFriendshipResultCallback;
 import com.drem.dremboard.utils.AppPreferences;
 import com.drem.dremboard.utils.ImageLoader;
 import com.drem.dremboard.utils.Utility;
+import com.drem.dremboard.view.AdminSearchView;
+import com.drem.dremboard.view.CustomSearchView;
 import com.drem.dremboard.view.CustomToast;
 import com.drem.dremboard.view.WebCircularImgView;
 import com.drem.dremboard.view.WaitDialog;
@@ -22,6 +24,7 @@ import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -36,8 +39,8 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.AbsListView.OnScrollListener;
 
-public class FragmentDremers extends Fragment
-		implements OnClickListener, WebApiCallback, OnFriendshipResultCallback, OnSetBlockResultCallback
+public class FragmentDremers extends Fragment implements
+		CustomSearchView.OnCustomSearchListener, OnClickListener, WebApiCallback, OnFriendshipResultCallback, OnSetBlockResultCallback
 {
 	private AppPreferences mPrefs;
 
@@ -60,6 +63,8 @@ public class FragmentDremers extends Fragment
 	GridView mGridDremer;
 	DremerGridAdapter mAdapterGridDremer;
 	
+	CustomSearchView mDremersSearchView;
+
 	int mDremerId;
 	String mType;
 	
@@ -156,6 +161,10 @@ public class FragmentDremers extends Fragment
 			}
 		});
 		
+		mDremersSearchView = (CustomSearchView) view
+				.findViewById(R.id.lay_dremers_search);
+		mDremersSearchView.setOnCustomSearchListener(this);
+
 		onClickShowType (false);
 	}
 	
@@ -253,6 +262,11 @@ public class FragmentDremers extends Fragment
 		}
 	}
 	
+
+	public void removeAllDremers() {
+		mArrayDremer.removeAll(mArrayDremer);
+	}
+
 	private void loadMoreDremers()
 	{
 		mFlagLoading = false;
@@ -632,9 +646,11 @@ public class FragmentDremers extends Fragment
 				holder = new DremerGidHolder();
 				holder.imgDremer = (WebCircularImgView) convertView.findViewById(R.id.imgDremer);
 				holder.txtDremer = (TextView) convertView.findViewById(R.id.txtDremer);	
+				holder.txtPostNum = (TextView) convertView.findViewById(R.id.txtPostNum);	
 				
 				holder.imgDremer.setOnClickListener(this);
 				holder.txtDremer.setOnClickListener(this);
+				holder.txtPostNum.setOnClickListener(this);
 				
 				convertView.setTag(holder);
 			} 
@@ -643,6 +659,7 @@ public class FragmentDremers extends Fragment
 			
 			holder.imgDremer.setTag(position);
 			holder.txtDremer.setTag(position);
+			holder.txtPostNum.setTag(position);
 
 			if (dremer.user_avatar != null && !dremer.user_avatar.isEmpty())
 				ImageLoader.getInstance().displayImage(dremer.user_avatar, holder.imgDremer, 0, 0);
@@ -650,6 +667,11 @@ public class FragmentDremers extends Fragment
 				holder.imgDremer.imageView.setImageResource(R.drawable.empty_man);
 
 			holder.txtDremer.setText(dremer.display_name);
+			
+			if (dremer.drem_count == 0 || dremer.drem_count == 1)
+				holder.txtPostNum.setText(Integer.toString(dremer.drem_count) + " drem");
+			else
+				holder.txtPostNum.setText(Integer.toString(dremer.drem_count) + " drems");
 
 			return convertView;
 		}
@@ -657,6 +679,7 @@ public class FragmentDremers extends Fragment
 		public class DremerGidHolder {
 			WebCircularImgView imgDremer;
 			TextView txtDremer;
+			TextView txtPostNum;
 		}
 
 		@Override
@@ -679,6 +702,16 @@ public class FragmentDremers extends Fragment
 				break;
 			}
 		}
+	}
+	
+	@Override
+	public void onCustomSearchBtnClicked(String search_str) {
+		mFlagLoading = false;
+		removeAllDremers();
+		resetOptions();
+		mSearchStr = search_str;
+		
+		getDremerList(mLastPageNum, mPerPage);
 	}
 
 	@Override

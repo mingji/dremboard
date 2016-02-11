@@ -7,9 +7,12 @@ import com.drem.dremboard.entity.FunctionInfo;
 import com.drem.dremboard.utils.AppPreferences;
 
 import android.app.Activity;
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -54,6 +57,9 @@ public class FragmentYou extends Fragment implements OnClickListener
 		mArrayFunction.add(new FunctionInfo("Followers"));
 		mArrayFunction.add(new FunctionInfo("Setting"));
 		mArrayFunction.add(new FunctionInfo("Media"));
+		mArrayFunction.add(new FunctionInfo("Post"));
+		mArrayFunction.add(new FunctionInfo("Log Out"));
+
 		
 		mAdapterFunction = new FunctionAdapter(getActivity(), R.layout.item_more, mArrayFunction);
 
@@ -125,12 +131,58 @@ public class FragmentYou extends Fragment implements OnClickListener
 			intent.setClass(getActivity(), ActivityMedia.class);
 			intent.putExtra("dremer_id", user_id);
 			break;
+
+		case 11:
+			intent.setClass(getActivity(), ActivityDremPost.class);
+			intent.putExtra("dremer_id", user_id);
+			break;
+
+		case 12:
+			actionLogOut();
+			return;
 		}
 		
 		startActivity(intent);
 		getActivity().overridePendingTransition(R.anim.in_right_left, R.anim.out_right_left);
 	}
 	
+	private void actionLogOut() {
+		TextView title = new TextView(getActivity());
+		title.setText(R.string.text_title_logout);
+		title.setTextSize(18);
+		title.setPadding(0, 40, 0, 40);
+		title.setGravity(Gravity.CENTER);
+						
+		AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(
+			getActivity());
+		alertDialogBuilder.setCustomTitle(title);
+		alertDialogBuilder
+			.setMessage("Are you sure you want to" + "\n" + "log out?")
+			.setCancelable(false)
+			.setPositiveButton("Log Out",new DialogInterface.OnClickListener() {
+				public void onClick(DialogInterface dialog,int id) {
+					getActivity().finish();
+					Intent intent = new Intent(getActivity(), ActivityLogin.class);
+					intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP); 
+					intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+					startActivity(intent);
+					getActivity().overridePendingTransition(R.anim.in_right_left, R.anim.out_right_left);
+				}
+			  })
+			.setNegativeButton("Cancel",new DialogInterface.OnClickListener() {
+				public void onClick(DialogInterface dialog,int id) {
+					dialog.cancel();
+				}
+			});
+
+		// create alert dialog
+		AlertDialog alertDialog = alertDialogBuilder.create();
+		// show it
+		alertDialog.show();
+		TextView messageText = (TextView)alertDialog.findViewById(android.R.id.message);
+        messageText.setGravity(Gravity.CENTER);
+	}
+
 	public class FunctionAdapter extends ArrayAdapter<FunctionInfo> {
 		Activity activity;
 		int layoutResourceId;

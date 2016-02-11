@@ -28,7 +28,7 @@
             android:layout_centerVertical="true"
             android:layout_marginLeft="10dip"
             android:layout_toRightOf="@+id/btnBack"
-            android:text="Drems"
+            android:text="Drēms"
             android:textColor="@color/white"
             android:textSize="24sp" />
 
@@ -61,6 +61,15 @@
             android:textColor="@color/black"
             android:textSize="22sp"
             android:textStyle="bold" />
+
+        <ImageButton
+            android:id="@+id/imgBtnDremboardOptions"
+            android:layout_width="30dip"
+            android:layout_height="30dip"
+            android:layout_alignParentRight="true"
+            android:layout_marginRight="5dip"
+            android:layout_marginTop="3dip"
+            android:background="@drawable/ic_setting" />
     </RelativeLayout>
 
     <RelativeLayout
@@ -96,7 +105,7 @@
                 android:textSize="18sp" />
         </LinearLayout>
     </RelativeLayout>
-    
+
     <ProgressBar
         android:id="@+id/progMore"
         android:layout_width="wrap_content"
@@ -108,8 +117,8 @@
         android:id="@+id/gridDrems"
         android:layout_width="fill_parent"
         android:layout_height="fill_parent"
-        android:layout_below="@+id/layAuthor"
         android:layout_above="@+id/progMore"
+        android:layout_below="@+id/layAuthor"
         android:layout_marginBottom="15dip"
         android:layout_marginLeft="10dip"
         android:layout_marginRight="10dip"

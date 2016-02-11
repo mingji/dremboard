@@ -17,6 +17,7 @@ public class DremerInfo {
 	public String user_avatar;
 	public String last_activity;
 	public ContentInfo latest_update;
+	public int drem_count;
 
 	public class ContentInfo {
 		public int id;

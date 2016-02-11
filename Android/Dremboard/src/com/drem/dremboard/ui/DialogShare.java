@@ -25,7 +25,11 @@ import android.widget.LinearLayout;
 import android.widget.Spinner;
 
 import com.drem.dremboard.R;
+import com.drem.dremboard.entity.DremActivityInfo;
+import com.drem.dremboard.entity.DremActivityInfo.MediaInfo;
+import com.drem.dremboard.utils.ImageLoader;
 import com.drem.dremboard.utils.RestApi;
+import com.drem.dremboard.view.WebImgView;
 import com.drem.dremboard.webservice.Constants;
 
 public class DialogShare extends Dialog implements View.OnClickListener {
@@ -33,13 +37,16 @@ public class DialogShare extends Dialog implements View.OnClickListener {
 	int activity_id;
 	Button btnShareDremboard, btnShareFacebook, btnShareTwitter,
 			btnShareGoogle, btnShareEmail;
-
-	public DialogShare(Context context, Activity activity, int activity_id) {
+  
+	String imgPath;
+	
+	public DialogShare(Context context, Activity activity, int activity_id, String guid) {
 		super(context);
 
 		this.activity = activity;
 		this.activity_id = activity_id;
-
+		this.imgPath = guid;
+		
 	}
 
 	protected void onCreate(Bundle savedInstanceState) {
@@ -73,12 +80,24 @@ public class DialogShare extends Dialog implements View.OnClickListener {
 	
 	private void onClickShareFacebook()
 	{
-		String url = "http://www.facebook.com/sharer/sharer.php?u="
-				+ Constants.HTTP_HOME + "activity/" + activity_id + "/";
+		String url = "";
+		
+		if (imgPath.equals(""))
+		{
+			url = "http://www.facebook.com/sharer/sharer.php?u="
+					+ Constants.HTTP_HOME + "activity/" + activity_id + "/";
+
+		}
+		else
+		{
+			url = "http://www.facebook.com/sharer/sharer.php?u=" + imgPath;
+		}
+
 		Intent i = new Intent(Intent.ACTION_VIEW);
 		i.setData(Uri.parse(url));
 		activity.startActivity(i);
 		dismiss();
+
 	}
 	
 	private void onClickShareTwitter()

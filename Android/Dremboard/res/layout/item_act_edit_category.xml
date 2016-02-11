@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical" >
+
+    <TextView
+        android:id="@+id/lblCategory"
+        android:layout_width="wrap_content"
+        android:layout_height="30dip"
+        android:layout_marginLeft="30dip"
+        android:layout_marginTop="20dip"
+        android:gravity="center_vertical"
+        android:text="@string/text_dremboard_category" >
+    </TextView>
+
+    <Spinner
+        android:id="@+id/spinActEditCategory"
+        android:layout_width="match_parent"
+        android:layout_height="34dip"
+        android:layout_marginLeft="30dip"
+        android:layout_marginRight="30dip"
+        android:layout_marginTop="2dip"
+        android:background="@drawable/bg_spinner"
+        android:gravity="center_vertical"
+        android:paddingLeft="10dip"
+        android:textColor="@color/lightgray2" />
+
+    <TextView
+        android:id="@+id/lblDescription"
+        android:layout_width="wrap_content"
+        android:layout_height="30dip"
+        android:layout_marginLeft="60dip"
+        android:gravity="center_vertical"
+        android:text="@string/text_dremboard_category" >
+    </TextView>
+
+</LinearLayout>

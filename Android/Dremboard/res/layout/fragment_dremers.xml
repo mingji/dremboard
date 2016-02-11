@@ -8,8 +8,8 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
-        android:orientation="horizontal"
-        android:background="@color/lightgray" >
+        android:background="@color/lightgray"
+        android:orientation="horizontal" >
 
         <TextView
             android:id="@+id/lblGrid"
@@ -17,7 +17,7 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:gravity="center"
-            android:padding="10dip" 
+            android:padding="10dip"
             android:text="Grid"
             android:textColor="@color/lightblue"
             android:textSize="16sp" />
@@ -41,26 +41,38 @@
         android:layout_above="@+id/layBtns"
         android:layout_centerHorizontal="true" />
 
-    <ListView
-        android:id="@+id/lstDremer"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:layout_above="@+id/progMore"
-        android:divider="@null"
-        android:dividerHeight="0dp"
-        android:visibility="gone" />
+        android:layout_alignParentTop="true"
+        android:orientation="vertical" >
 
-    <GridView
-        android:id="@+id/GrdDremer"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_above="@+id/progMore"
-        android:background="@android:color/transparent"
-        android:columnWidth="90dip"
-        android:horizontalSpacing="5dip"
-        android:numColumns="auto_fit"
-        android:stretchMode="columnWidth"
-        android:verticalSpacing="15dp"
-        android:visibility="visible" />
+        <com.drem.dremboard.view.CustomSearchView
+            android:id="@+id/lay_dremers_search"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content" >
+        </com.drem.dremboard.view.CustomSearchView>
+
+        <ListView
+            android:id="@+id/lstDremer"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:divider="@null"
+            android:dividerHeight="0dp"
+            android:visibility="gone" />
+
+        <GridView
+            android:id="@+id/GrdDremer"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@android:color/transparent"
+            android:columnWidth="90dip"
+            android:horizontalSpacing="5dip"
+            android:numColumns="auto_fit"
+            android:stretchMode="columnWidth"
+            android:verticalSpacing="15dp"
+            android:visibility="visible" />
+    </LinearLayout>
 
 </RelativeLayout>

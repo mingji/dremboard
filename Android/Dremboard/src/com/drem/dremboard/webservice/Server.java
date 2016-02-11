@@ -113,6 +113,34 @@ public class Server {
 		} else
 			return null;
 	}
+	
+	public static SetSingleDremerImageResult SetSingleDremerImage(SetSingleDremerImageParam param)
+	{
+		HttpParams httpParam = new HttpParams();
+		httpParam.addParam(Constants.PARAM_USER_ID, param.user_id);
+		if (param.disp_user_id != -1)
+			httpParam.addParam(Constants.PARAM_DISP_USER_ID, Integer.toString(param.disp_user_id));
+		
+		httpParam.addParam(Constants.PARAM_CROP_X, Integer.toString(param.crop_x));
+		httpParam.addParam(Constants.PARAM_CROP_Y, Integer.toString(param.crop_y));
+		httpParam.addParam(Constants.PARAM_CROP_WIDTH, Integer.toString(param.crop_w));
+		httpParam.addParam(Constants.PARAM_CROP_HEIGHT, Integer.toString(param.crop_h));
+
+		String response = HttpApi.sendRequestWithImage(Constants.SERVER_REST_API_BASE + Constants.ACT_SET_SINGLE_DREMER_IMAGE,
+				httpParam, param.avatar, null);
+
+		SetSingleDremerImageResult result = null;
+		if (response != null) {
+			try {
+				Gson gson = new Gson();
+				result = gson.fromJson(response, SetSingleDremerImageResult.class);
+			} catch (JsonSyntaxException e) {
+				Log.e("SetSingleDremerImage", e.toString());
+			}
+			return result;
+		} else
+			return null;
+	}
 
 	public static GetDremboardsResult GetDremboards(GetDremboardsParam param)
 	{
@@ -140,12 +168,246 @@ public class Server {
 			return null;
 	}
 	
-	public static GetVideosResult GetVideos(GetVideosParam param)
+	public static AddDremToDremboardResult AddDremToDremboard(AddDremToDremboardData param)
+	{
+		HttpParams httpParam = new HttpParams();
+		httpParam.addParam(Constants.PARAM_USER_ID, param.user_id);
+		httpParam.addParam(Constants.PARAM_DREM_ID, Integer.toString(param.drem_id));
+		httpParam.addParam(Constants.PARAM_DREMBOARD_ID, Integer.toString(param.dremboard_id));
+
+		String response = HttpApi.sendRequest(Constants.SERVER_REST_API_BASE + Constants.ACT_ADD_DREM_TO_DREMBOARD,
+				httpParam, null);
+
+		AddDremToDremboardResult result = null;
+		if (response != null) {
+			try {
+				Gson gson = new Gson();
+				result = gson.fromJson(response, AddDremToDremboardResult.class);
+			} catch (JsonSyntaxException e) {
+				Log.e("AddDremToDremboard", e.toString());
+			}
+			return result;
+		} else
+			return null;
+	}
+	
+	public static CreateDremboardResult CreateDremboard(CreateDremboardData param)
+	{
+		HttpParams httpParam = new HttpParams();
+		httpParam.addParam(Constants.PARAM_USER_ID, param.user_id);
+		httpParam.addParam(Constants.PARAM_TITLE, param.title);
+		httpParam.addParam(Constants.PARAM_DESCRIPTION, param.description);
+		httpParam.addParam(Constants.PARAM_CATEGORY_ID, Integer.toString(param.category_id));
+		httpParam.addParam(Constants.PARAM_PRIVACY, Integer.toString(param.privacy));
+
+		String response = HttpApi.sendRequest(Constants.SERVER_REST_API_BASE + Constants.CREATE_DREMBOARD,
+				httpParam, null);
+
+		CreateDremboardResult result = null;
+		if (response != null) {
+			try {
+				Gson gson = new Gson();
+				result = gson.fromJson(response, CreateDremboardResult.class);
+			} catch (JsonSyntaxException e) {
+				Log.e("CreateDremboard", e.toString());
+			}
+			return result;
+		} else
+			return null;
+	}
+	
+	public static DeleteDremboardResult DeleteDremboard(DeleteDremboardData param)
+	{
+		HttpParams httpParam = new HttpParams();
+		
+		httpParam.addParam(Constants.PARAM_USER_ID, param.user_id);
+		httpParam.addParam(Constants.PARAM_DREMBOARD_ID, Integer.toString(param.dremboard_id));
+		
+		String response = HttpApi.sendRequest(Constants.SERVER_REST_API_BASE + Constants.DELETE_DREMBOARD,
+				httpParam, null);
+
+		DeleteDremboardResult result = null;
+		if (response != null) {
+			try {
+				Gson gson = new Gson();
+				result = gson.fromJson(response, DeleteDremboardResult.class);
+			} catch (JsonSyntaxException e) {
+				Log.e("DeleteDremboard", e.toString());
+			}
+			return result;
+		} else
+			return null;
+	}
+	
+	public static EditDremboardResult EditDremboard(EditDremboardData param)
+	{
+		HttpParams httpParam = new HttpParams();
+		httpParam.addParam(Constants.PARAM_USER_ID, param.user_id);
+		httpParam.addParam(Constants.PARAM_TITLE, param.title);
+		httpParam.addParam(Constants.PARAM_DESCRIPTION, param.description);
+		httpParam.addParam(Constants.PARAM_DREMBOARD_ID, Integer.toString(param.dremboard_id));
+		
+		String response = HttpApi.sendRequest(Constants.SERVER_REST_API_BASE + Constants.EDIT_DREMBOARD,
+				httpParam, null);
+
+		EditDremboardResult result = null;
+		if (response != null) {
+			try {
+				Gson gson = new Gson();
+				result = gson.fromJson(response, EditDremboardResult.class);
+			} catch (JsonSyntaxException e) {
+				Log.e("EditDremboard", e.toString());
+			}
+			return result;
+		} else
+			return null;
+	}
+	
+	public static MergeDremboardResult MergeDremboard(MergeDremboardData param)
+	{
+		HttpParams httpParam = new HttpParams();
+		
+		httpParam.addParam(Constants.PARAM_USER_ID, param.user_id);
+		httpParam.addParam(Constants.PARAM_SOURCE_ID, Integer.toString(param.source_id));
+		httpParam.addParam(Constants.PARAM_TARGET_ID, Integer.toString(param.target_id));
+		
+		String response = HttpApi.sendRequest(Constants.SERVER_REST_API_BASE + Constants.MERGE_DREMBOARD,
+				httpParam, null);
+
+		MergeDremboardResult result = null;
+		if (response != null) {
+			try {
+				Gson gson = new Gson();
+				result = gson.fromJson(response, MergeDremboardResult.class);
+			} catch (JsonSyntaxException e) {
+				Log.e("MergeDremboard", e.toString());
+			}
+			return result;
+		} else
+			return null;
+	}
+	
+	public static RemoveDremsFromDremboardResult RemoveDremsFromDremboard(RemoveDremsFromDremboardData param)
+	{
+		HttpParams httpParam = new HttpParams();
+		
+		httpParam.addParam(Constants.PARAM_DREM_IDS, param.drem_ids);
+		
+		String response = HttpApi.sendRequest(Constants.SERVER_REST_API_BASE + Constants.REMOVE_DREMS_FROM_DREMBOARD,
+				httpParam, null);
+
+		RemoveDremsFromDremboardResult result = null;
+		if (response != null) {
+			try {
+				Gson gson = new Gson();
+				result = gson.fromJson(response, RemoveDremsFromDremboardResult.class);
+			} catch (JsonSyntaxException e) {
+				Log.e("RemoveDremsFromDremboard", e.toString());
+			}
+			return result;
+		} else
+			return null;
+	}
+	
+	public static MoveDremsToDremboardResult MoveDremsToDremboard(MoveDremsToDremboardData param)
+	{
+		HttpParams httpParam = new HttpParams();
+		
+		httpParam.addParam(Constants.PARAM_DREM_IDS, param.drem_ids);
+		httpParam.addParam(Constants.PARAM_DREMBOARD_ID, Integer.toString(param.dremboard_id));
+	
+		String response = HttpApi.sendRequest(Constants.SERVER_REST_API_BASE + Constants.MOVE_DREMS_TO_DREMBOARD,
+				httpParam, null);
+
+		MoveDremsToDremboardResult result = null;
+		if (response != null) {
+			try {
+				Gson gson = new Gson();
+				result = gson.fromJson(response, MoveDremsToDremboardResult.class);
+			} catch (JsonSyntaxException e) {
+				Log.e("MoveDremsToDremboard", e.toString());
+			}
+			return result;
+		} else
+			return null;
+	}
+
+	public static EditActivityDremResult SetActivityDrem(EditActivityDremData param)
+	{
+		HttpParams httpParam = new HttpParams();
+		httpParam.addParam(Constants.PARAM_USER_ID, param.user_id);
+		httpParam.addParam(Constants.PARAM_ACTIVITY_ID, Integer.toString(param.activity_id));
+		httpParam.addParam(Constants.PARAM_CONTENT, param.content);
+		httpParam.addParam(Constants.PARAM_CATEGORY, param.category);
+		
+		String response = HttpApi.sendRequest(Constants.SERVER_REST_API_BASE + Constants.SET_ACTIVITY,
+				httpParam, null);
+
+		EditActivityDremResult result = null;
+		if (response != null) {
+			try {
+				Gson gson = new Gson();
+				result = gson.fromJson(response, EditActivityDremResult.class);
+			} catch (JsonSyntaxException e) {
+				Log.e("EditActivityDrem", e.toString());
+			}
+			return result;
+		} else
+			return null;
+	}
+	
+	public static DeleteActivityDremResult DeleteActivityDrem(DeleteActivityDremData param)
+	{
+		HttpParams httpParam = new HttpParams();
+		httpParam.addParam(Constants.PARAM_USER_ID, param.user_id);
+		httpParam.addParam(Constants.PARAM_ACTIVITY_ID, Integer.toString(param.activity_id));
+		
+		String response = HttpApi.sendRequest(Constants.SERVER_REST_API_BASE + Constants.DELETE_ACTIVITY,
+				httpParam, null);
+
+		DeleteActivityDremResult result = null;
+		if (response != null) {
+			try {
+				Gson gson = new Gson();
+				result = gson.fromJson(response, DeleteActivityDremResult.class);
+			} catch (JsonSyntaxException e) {
+				Log.e("DeleteActivityDrem", e.toString());
+			}
+			return result;
+		} else
+			return null;
+	}
+	
+	public static GetActivityResult getActivity(GetActivityParam param)
+	{
+		HttpParams httpParam = new HttpParams();
+		httpParam.addParam(Constants.PARAM_USER_ID, param.user_id);
+		httpParam.addParam(Constants.PARAM_ACTIVITY_ID, Integer.toString(param.activity_id));
+		
+		String response = HttpApi.sendRequest(Constants.SERVER_REST_API_BASE + Constants.GET_ACTIVITY,
+				httpParam, null);
+
+		GetActivityResult result = null;
+		if (response != null) {
+			try {
+				Gson gson = new Gson();
+				result = gson.fromJson(response, GetActivityResult.class);
+			} catch (JsonSyntaxException e) {
+				Log.e("GetActivity", e.toString());
+			}
+			return result;
+		} else
+			return null;
+	}
+	
+	public static GetDremcastsResult GetDremcasts(GetDremcastsParam param)
 	{
 
 		HttpParams httpParam = new HttpParams();
 		httpParam.addParam(Constants.PARAM_USER_ID, param.user_id);
-		httpParam.addParam(Constants.PARAM_AUTHOR_ID, Integer.toString(param.author_id));
+		if (param.author_id != -1)
+			httpParam.addParam(Constants.PARAM_AUTHOR_ID, Integer.toString(param.author_id));
+		
 		httpParam.addParam(Constants.PARAM_SEARCH_STR, param.search_str);
 		httpParam.addParam(Constants.PARAM_LAST_MEDIA_ID, Integer.toString(param.last_media_id));
 		httpParam.addParam(Constants.PARAM_PER_PAGE, Integer.toString(param.per_page));
@@ -153,11 +415,11 @@ public class Server {
 		String response = HttpApi.sendRequest(Constants.SERVER_REST_API_BASE + Constants.ACT_GET_MEMORIES,
 				httpParam, null);
 
-		GetVideosResult result = null;
+		GetDremcastsResult result = null;
 		if (response != null) {
 			try {
 				Gson gson = new Gson();
-				result = gson.fromJson(response, GetVideosResult.class);
+				result = gson.fromJson(response, GetDremcastsResult.class);
 			} catch (JsonSyntaxException e) {
 				Log.e("GetVideos", e.toString());
 			}
@@ -261,6 +523,32 @@ public class Server {
 		} else
 			return null;
 	}
+	
+	public static EditCommentResult EditActivityComment(EditCommentParam param)
+	{
+
+		HttpParams httpParam = new HttpParams();
+		httpParam.addParam(Constants.PARAM_USER_ID, param.user_id);
+		httpParam.addParam(Constants.PARAM_ACTIVITY_ID, Integer.toString(param.activity_id));
+		httpParam.addParam(Constants.PARAM_COMMENT, param.comment);
+		httpParam.addParam(Constants.PARAM_PHOTO, param.photo);
+
+		String response = HttpApi.sendRequest(Constants.SERVER_REST_API_BASE + Constants.ACT_EDIT_COMMENT,
+				httpParam, null);
+
+		EditCommentResult result = null;
+		if (response != null) {
+			try {
+				Gson gson = new Gson();
+				result = gson.fromJson(response, EditCommentResult.class);
+			} catch (JsonSyntaxException e) {
+				Log.e("EditActivityComment", e.toString());
+			}
+			return result;
+		} else
+			return null;
+	}
+	
 	
 	public static SetFriendshipResult SetDremerFriendship(SetFriendshipParam param)
 	{
@@ -400,6 +688,28 @@ public class Server {
 				result = gson.fromJson(response, SetNTResult.class);
 			} catch (JsonSyntaxException e) {
 				Log.e("SetNotification", e.toString());
+			}
+			return result;
+		} else
+			return null;
+	}
+	
+	public static GetNTCntResult GetNotificationCount(GetNTCntParam param)
+	{
+		HttpParams httpParam = new HttpParams();
+		httpParam.addParam(Constants.PARAM_USER_ID, param.user_id);
+		httpParam.addParam(Constants.PARAM_TYPE, param.type);
+
+		String response = HttpApi.sendRequest(Constants.SERVER_REST_API_BASE + Constants.ACT_GET_NT_CNT,
+				httpParam, null);
+
+		GetNTCntResult result = null;
+		if (response != null) {
+			try {
+				Gson gson = new Gson();
+				result = gson.fromJson(response, GetNTCntResult.class);
+			} catch (JsonSyntaxException e) {
+				Log.e("GetNotificationCount", e.toString());
 			}
 			return result;
 		} else

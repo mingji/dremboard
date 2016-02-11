@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="240dip"
+    android:layout_height="wrap_content"
+    android:layout_gravity="center"
+    android:background="@color/background_gray"
+    android:orientation="vertical" >
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" >
+
+        <TextView
+            android:id="@+id/txtDremboardOptions"
+            android:layout_width="match_parent"
+            android:layout_height="36dip"
+            android:gravity="center_vertical"
+            android:paddingLeft="10dp"
+            android:paddingRight="20dp"
+            android:paddingTop="12dp"
+            android:text="@string/text_dremboard_options"
+            android:textColor="@color/blue"
+            android:textSize="20sp"
+            android:textStyle="bold" >
+        </TextView>
+
+        <Button
+            android:id="@+id/btnClose"
+            android:layout_width="30dip"
+            android:layout_height="30dip"
+            android:layout_alignParentRight="true"
+            android:layout_margin="8dip"
+            android:background="@drawable/btn_close" >
+        </Button>
+    </RelativeLayout>
+
+    <TextView
+        android:id="@+id/txt_dremboard_edit"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_centerVertical="true"
+        android:layout_marginLeft="36dp"
+        android:layout_marginTop="24dp"
+        android:drawableLeft="@drawable/ic_edit"
+        android:drawablePadding="8dp"
+        android:gravity="center"
+        android:text="Edit"
+        android:textAppearance="?android:attr/textAppearanceButton"
+        android:textSize="20sp" />
+
+    <TextView
+        android:id="@+id/txt_dremboard_manage"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_centerVertical="true"
+        android:layout_marginLeft="36dp"
+        android:layout_marginTop="24dp"
+        android:drawableLeft="@drawable/ic_manage_media"
+        android:drawablePadding="8dp"
+        android:gravity="center"
+        android:text="Manage Media"
+        android:textAppearance="?android:attr/textAppearanceButton"
+        android:textSize="20sp" />
+
+    <TextView
+        android:id="@+id/txt_dremboard_delete"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_centerVertical="true"
+        android:layout_marginLeft="36dp"
+        android:layout_marginTop="24dp"
+        android:drawableLeft="@drawable/ic_delete"
+        android:drawablePadding="8dp"
+        android:gravity="center"
+        android:text="Delete"
+        android:textAppearance="?android:attr/textAppearanceButton"
+        android:textSize="20sp" />
+
+    <TextView
+        android:id="@+id/txt_dremboard_merge"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_centerVertical="true"
+        android:layout_marginBottom="24dp"
+        android:layout_marginLeft="36dp"
+        android:layout_marginTop="20dp"
+        android:drawableLeft="@drawable/ic_merge"
+        android:drawablePadding="8dp"
+        android:gravity="center"
+        android:text="Merge"
+        android:textAppearance="?android:attr/textAppearanceButton"
+        android:textSize="20sp" />
+
+</LinearLayout>

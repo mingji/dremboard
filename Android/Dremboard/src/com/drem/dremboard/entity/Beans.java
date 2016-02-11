@@ -2,6 +2,9 @@ package com.drem.dremboard.entity;
 
 import java.util.ArrayList;
 
+import android.graphics.Bitmap;
+
+
 public class Beans {
 	
 	public static class LoginData {
@@ -59,6 +62,21 @@ public class Beans {
 		public String status;
 		public String msg;
 		public GetActivitiesData data;
+	}
+	
+	/* Get Drem Activity */
+	public static class GetActivityParam {
+		public String user_id;
+		public int activity_id;
+	}
+	
+	public static class GetActivityData {
+		public DremActivityInfo activity;
+	}
+	public static class GetActivityResult {
+		public String status;
+		public String msg;
+		public GetActivityData data;
 	}
 	
 	/* Get Drems */
@@ -128,8 +146,107 @@ public class Beans {
 		public String search_str;
 		public int last_media_id;
 		public int per_page;
+		public String author_id;
 	}
 
+	public static class AddDremToDremboardData {
+		public String user_id;
+		public int drem_id;
+		public int dremboard_id;
+	}
+	
+	public static class AddDremToDremboardResult {
+		public String status;
+		public String msg;
+	}
+	
+	public static class CreateDremboardData {
+		public String user_id;
+		public String title;
+		public String description;
+		public int category_id;
+		public int privacy;
+	}
+	
+	public static class CreateDremboardResult {
+		public String status;
+		public String msg;
+	}
+	
+	public static class DeleteDremboardData {
+		public String user_id;
+		public int dremboard_id;
+	}
+	
+	public static class DeleteDremboardResult {
+		public String status;
+		public String msg;
+	}
+	
+	public static class EditDremboardData {
+		public String user_id;
+		public String title;
+		public String description;
+		public int dremboard_id;
+	}
+	
+	public static class EditDremboardResult {
+		public String status;
+		public String msg;
+	}
+	
+	public static class RemoveDremsFromDremboardData {
+		public String drem_ids;
+	}
+	
+	public static class RemoveDremsFromDremboardResult {
+		public String status;
+		public String msg;
+	}
+	
+	public static class MoveDremsToDremboardData {
+		public String drem_ids;
+		public int dremboard_id;
+	}
+	
+	public static class MoveDremsToDremboardResult {
+		public String status;
+		public String msg;
+	}
+
+	public static class EditActivityDremData {
+		public String user_id;
+		public int activity_id;
+		public String content;
+		public String category;
+	}
+
+	public static class EditActivityDremResult {
+		public String status;
+		public String msg;
+	}
+	
+	public static class DeleteActivityDremData {
+		public String user_id;
+		public int activity_id;
+	}
+	
+	public static class DeleteActivityDremResult {
+		public String status;
+		public String msg;
+	}
+	
+	public static class MergeDremboardData {
+		public String user_id;
+		public int source_id;
+		public int target_id;
+	}
+	
+	public static class MergeDremboardResult {
+		public String status;
+		public String msg;
+	}
+	
 	public static class GetDremboardsData {
 		public int count;
 		public ArrayList<DremboardInfo> media;
@@ -142,7 +259,7 @@ public class Beans {
 	}
 	
 	/* Get Videos */
-	public static class GetVideosParam {
+	public static class GetDremcastsParam {
 		public String user_id;
 		public int author_id;
 		public String search_str;
@@ -150,15 +267,15 @@ public class Beans {
 		public int per_page;
 	}
 
-	public static class GetVideosData {
+	public static class GetDremcastsData {
 		public int count;
-		public ArrayList<VideoInfo> media;
+		public ArrayList<DremcastInfo> media;
 	}
 	
-	public static class GetVideosResult {
+	public static class GetDremcastsResult {
 		public String status;
 		public String msg;
-		public GetVideosData data;
+		public GetDremcastsData data;
 	}
 	
 	/* Set Favorite */
@@ -238,6 +355,20 @@ public class Beans {
 		public String msg;
 		public SetCommentData data;
 	}
+	
+	/* Set Comment */
+	public static class EditCommentParam {
+		public String user_id;		
+		public int activity_id;
+		public String comment;
+		public String photo;		
+	}
+
+	public static class EditCommentResult {
+		public String status;
+		public String msg;
+	}
+	
 	
 	/* Set Dremer Friendship */
 	public static class SetFriendshipParam {
@@ -336,6 +467,18 @@ public class Beans {
 		public String status;
 		public String msg;
 		public GetNTsData data;
+	}
+	
+	/* Get Notifications */
+	public static class GetNTCntParam {
+		public String user_id;
+		public String type;
+	}
+	
+	public static class GetNTCntResult {
+		public String status;
+		public String msg;
+		public int count;
 	}
 	
 	/* Set Notification */
@@ -479,6 +622,21 @@ public class Beans {
 	}	
 	
 	public static class SetSettingPrivacyResult {
+		public String status;
+		public String msg;
+	}
+	
+	public static class SetSingleDremerImageParam {
+		public String user_id;
+		public int disp_user_id;
+		public Bitmap avatar;
+		public int crop_x;
+		public int crop_y;
+		public int crop_w;
+		public int crop_h;
+	}
+	
+	public static class SetSingleDremerImageResult {
 		public String status;
 		public String msg;
 	}

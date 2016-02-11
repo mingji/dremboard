@@ -3,11 +3,15 @@ package com.drem.dremboard.adapter;
 import java.util.ArrayList;
 
 import android.app.Activity;
+import android.app.AlertDialog;
 import android.app.Dialog;
+import android.app.Fragment;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.text.Html;
 import android.text.Spanned;
 import android.text.method.LinkMovementMethod;
+import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -19,6 +23,9 @@ import android.widget.TextView;
 
 import com.drem.dremboard.R;
 import com.drem.dremboard.entity.DremActivityInfo;
+import com.drem.dremboard.entity.DremInfo;
+import com.drem.dremboard.entity.Beans.EditActivityDremData;
+import com.drem.dremboard.entity.Beans.EditActivityDremResult;
 import com.drem.dremboard.entity.Beans.SetFavoriteParam;
 import com.drem.dremboard.entity.Beans.SetFavoriteResult;
 import com.drem.dremboard.entity.Beans.SetLikeParam;
@@ -27,8 +34,15 @@ import com.drem.dremboard.entity.CommentInfo;
 import com.drem.dremboard.entity.DremActivityInfo.MediaInfo;
 import com.drem.dremboard.ui.DialogComment;
 import com.drem.dremboard.ui.DialogComment.OnCommentResultCallback;
+import com.drem.dremboard.ui.DialogComment.OnEditCommentResultCallback;
+import com.drem.dremboard.ui.ActivityAddDremToDremboard;
+import com.drem.dremboard.ui.ActivityDremView;
 import com.drem.dremboard.ui.ActivityDremer;
+import com.drem.dremboard.ui.DialogActivityDremEdit;
+import com.drem.dremboard.ui.DialogComment.OnDelCommentResultCallback;
 import com.drem.dremboard.ui.DialogFlagDrem;
+import com.drem.dremboard.ui.FragmentActContent;
+import com.drem.dremboard.ui.FragmentHome;
 import com.drem.dremboard.ui.DialogFlagDrem.OnFlagResultCallback;
 import com.drem.dremboard.ui.DialogShare;
 import com.drem.dremboard.utils.AppPreferences;
@@ -43,9 +57,12 @@ import com.drem.dremboard.webservice.Constants;
 import com.drem.dremboard.webservice.WebApiCallback;
 import com.drem.dremboard.webservice.WebApiInstance;
 import com.drem.dremboard.webservice.WebApiInstance.Type;
+import com.drem.dremboard.entity.Beans.DeleteActivityDremData;
+import com.drem.dremboard.entity.Beans.DeleteActivityDremResult;
 
 public class DremActivityAdapter extends ArrayAdapter<DremActivityInfo>
-	implements OnClickListener, WebApiCallback, OnCommentResultCallback, OnFlagResultCallback{
+	implements OnClickListener, WebApiCallback, OnCommentResultCallback, 
+		OnDelCommentResultCallback, OnEditCommentResultCallback, OnFlagResultCallback {
 	Activity activity;
 	int layoutResourceId;
 	ArrayList<DremActivityInfo> item = new ArrayList<DremActivityInfo>();
@@ -58,7 +75,7 @@ public class DremActivityAdapter extends ArrayAdapter<DremActivityInfo>
 		item = items;
 		this.activity = activity;
 		this.layoutResourceId = layoutId;
-		
+
 		mPrefs = new AppPreferences(this.activity);
 		waitDialog = new WaitDialog(this.activity);
 	}
@@ -89,6 +106,8 @@ public class DremActivityAdapter extends ArrayAdapter<DremActivityInfo>
 			holder.txtDate = (TextView) convertView.findViewById(R.id.txtDate);
 			holder.layMediaList = (LinearLayout) convertView.findViewById(R.id.layMediaList);
 			holder.txtDescription = (TextView) convertView.findViewById(R.id.txtDescription);
+			holder.txtDescription.setMovementMethod(LinkMovementMethod.getInstance());
+
 			holder.btnComment = (Button) convertView.findViewById(R.id.btnComment);
 			holder.btnFavorite = (Button) convertView.findViewById(R.id.btnFavorite);
 			holder.btnLike = (Button) convertView.findViewById(R.id.btnLike);
@@ -96,6 +115,9 @@ public class DremActivityAdapter extends ArrayAdapter<DremActivityInfo>
 			holder.btnShare = (Button) convertView.findViewById(R.id.btnShare);
 			holder.btnEdit = (Button) convertView.findViewById(R.id.btnEdit);
 			holder.btnDelete = (Button) convertView.findViewById(R.id.btnDelete);
+			holder.btnMore = (Button) convertView.findViewById(R.id.btnMore);
+			holder.btnLess = (Button) convertView.findViewById(R.id.btnLess);
+			
 //			holder.layCommentList = (LinearLayout) convertView.findViewById(R.id.layCommentList);
 			
 			holder.imgAuthor.setOnClickListener(this);
@@ -106,6 +128,9 @@ public class DremActivityAdapter extends ArrayAdapter<DremActivityInfo>
 			holder.btnShare.setOnClickListener(this);
 			holder.btnEdit.setOnClickListener(this);
 			holder.btnDelete.setOnClickListener(this);
+			
+			holder.btnMore.setOnClickListener(this);
+			holder.btnLess.setOnClickListener(this);
 
 			convertView.setTag(holder);
 		} else
@@ -120,7 +145,7 @@ public class DremActivityAdapter extends ArrayAdapter<DremActivityInfo>
 		String actionTxt = dremActivityItem.action;
 		Spanned actionSpan = Html.fromHtml(actionTxt);
 		holder.txtAction.setText(actionSpan);
-		holder.txtAction.setMovementMethod(LinkMovementMethod.getInstance());
+//		holder.txtAction.setMovementMethod(LinkMovementMethod.getInstance());
 		TextViewUtils.stripUnderlines(holder.txtAction);
 		
 		holder.txtDate.setText(Utility.getRelativeDateStrFromTime(dremActivityItem.last_modified));
@@ -142,6 +167,8 @@ public class DremActivityAdapter extends ArrayAdapter<DremActivityInfo>
 		holder.btnFlag.setTag(position);
 		holder.btnEdit.setTag(position);
 		holder.btnDelete.setTag(position);
+		holder.btnMore.setTag(position);
+		holder.btnLess.setTag(position);
 		
 		holder.layMediaList.removeAllViews();
 		for (int i = 0; i < dremActivityItem.media_list.size(); i++){
@@ -175,13 +202,94 @@ public class DremActivityAdapter extends ArrayAdapter<DremActivityInfo>
 //		}
 			
 		holder.btnLike.setText(dremActivityItem.like);
-		if(dremActivityItem.comment_list.size() > 0) {
+		if(dremActivityItem.comment_list != null && dremActivityItem.comment_list.size() > 0) {
 			holder.btnComment.setText("Comment ("+String.valueOf(dremActivityItem.comment_list.size())+")");
 		} else {
 			holder.btnComment.setText("Comment");
 		}
+		
+		if(dremActivityItem.isMore == true){
+			holder.btnLike.setVisibility(View.VISIBLE);
+			holder.btnComment.setVisibility(View.VISIBLE);
+			holder.btnShare.setVisibility(View.VISIBLE);
+			holder.btnMore.setVisibility(View.VISIBLE);
+			holder.btnDelete.setVisibility(View.INVISIBLE);
+			holder.btnEdit.setVisibility(View.INVISIBLE);
+			holder.btnFavorite.setVisibility(View.INVISIBLE);
+			holder.btnFlag.setVisibility(View.INVISIBLE);
+			holder.btnLess.setVisibility(View.INVISIBLE);
+		} else {
+			holder.btnLike.setVisibility(View.VISIBLE);
+			holder.btnComment.setVisibility(View.VISIBLE);
+			holder.btnShare.setVisibility(View.VISIBLE);
+			holder.btnMore.setVisibility(View.INVISIBLE);
+			holder.btnDelete.setVisibility(View.VISIBLE);
+			holder.btnEdit.setVisibility(View.VISIBLE);
+			holder.btnFavorite.setVisibility(View.VISIBLE);
+			holder.btnFlag.setVisibility(View.VISIBLE);
+			holder.btnLess.setVisibility(View.VISIBLE);
+		}
+		
 		return convertView;
 	}
+	
+	private void showEditDialog (DremActivityInfo activityItem)
+	{
+		if (activityItem == null)
+			return;
+		
+		Dialog dialog = new DialogActivityDremEdit(activity, activity, activityItem);
+		dialog.show();
+
+	}
+	
+	private void DeleteActivityDream(DremActivityInfo activityItem)
+	{
+		DeleteActivityDremData param = new DeleteActivityDremData();
+
+		param.user_id = mPrefs.getUserId();
+		param.activity_id = activityItem.activity_id;
+		
+		WebApiInstance.getInstance().executeAPI(Type.DELETE_ACTIVITY, param, this);
+
+		waitDialog.show();
+
+	}
+	
+	private void showDeleteDialog (final DremActivityInfo activityItem)
+	{
+		TextView title = new TextView(activity);
+		title.setText("Delete Drēm");
+		title.setTextSize(18);
+		title.setPadding(0, 40, 0, 40);
+		title.setGravity(Gravity.CENTER);
+
+		AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(
+				activity);
+			alertDialogBuilder.setCustomTitle(title);
+			alertDialogBuilder
+				.setMessage("Are you sure to delete" + "\n" + "drēm?")
+				.setCancelable(false)
+				.setPositiveButton("Ok",new DialogInterface.OnClickListener() {
+					public void onClick(DialogInterface dialog,int id) {
+						DeleteActivityDream(activityItem);
+					}
+				  })
+				.setNegativeButton("Cancel",new DialogInterface.OnClickListener() {
+					public void onClick(DialogInterface dialog,int id) {
+						dialog.cancel();
+					}
+				});
+			
+			// create alert dialog
+			AlertDialog alertDialog = alertDialogBuilder.create();
+			// show it
+			alertDialog.show();
+			TextView messageText = (TextView)alertDialog.findViewById(android.R.id.message);
+	        messageText.setGravity(Gravity.CENTER);
+
+	}
+	
 	
 	@Override
 	public void onClick(View v) {
@@ -211,8 +319,26 @@ public class DremActivityAdapter extends ArrayAdapter<DremActivityInfo>
 			showFlagDialog(item.activity_id, position);
 			break;
 		case R.id.btnShare:
-			showShareDialog(item.activity_id);
+			showShareDialog(item);
 			break;
+			
+		case R.id.btnEdit:
+			showEditDialog(item);
+			break;
+			
+		case R.id.btnDelete:
+			showDeleteDialog(item);
+			break;
+
+		case R.id.btnMore:
+			item.isMore = false;
+			notifyDataSetChanged();				
+			break;
+		case R.id.btnLess:
+			item.isMore = true;
+			notifyDataSetChanged();				
+			break;
+			
 		default:
 			break;
 		}
@@ -230,6 +356,9 @@ public class DremActivityAdapter extends ArrayAdapter<DremActivityInfo>
 		Button btnShare;
 		Button btnEdit;
 		Button btnDelete;
+		Button btnMore;
+		Button btnLess;
+		
 		LinearLayout layMediaList;
 //		LinearLayout layCommentList;
 	}
@@ -250,10 +379,6 @@ public class DremActivityAdapter extends ArrayAdapter<DremActivityInfo>
 			ImageLoader.getInstance().displayImage(commentInfo.author_avatar, imgAuthor, 0, 0);
 		else
 			imgAuthor.imageView.setImageResource(R.drawable.empty_pic);
-		
-		txtAuthor.setText(commentInfo.author_name);
-		txtComment.setText(commentInfo.description);
-		txtCommentDate.setText(Utility.getRelativeDateStrFromTime(commentInfo.last_modified));
 		
 		if (commentInfo.media_guid != null && !commentInfo.media_guid.isEmpty()) {
 			if (!commentInfo.media_guid.contains("dremboard.com")) {
@@ -341,8 +466,11 @@ public class DremActivityAdapter extends ArrayAdapter<DremActivityInfo>
 		if (activityItem == null)
 			return;
 		
+		if (activityItem.comment_list == null)
+			activityItem.comment_list = new ArrayList<CommentInfo>();
+		
 		DialogComment commentDiag = new DialogComment(activity, activity, activityItem.activity_id, 
-				index, activityItem.comment_list, this);
+				index, activityItem.comment_list, this, this, this);
 		commentDiag.show();
 	}
 	
@@ -357,6 +485,34 @@ public class DremActivityAdapter extends ArrayAdapter<DremActivityInfo>
 			activityItem.comment_list = new ArrayList<CommentInfo>();
 		
 		activityItem.comment_list.add(commentData);
+		
+		notifyDataSetChanged();
+	}
+	
+	private void delCommentResult (int activity_index, int index)
+	{
+		DremActivityInfo activityItem = getItem(activity_index);
+		
+		if (activityItem == null)
+			return;
+		
+		activityItem.comment_list.remove(index);
+		
+		notifyDataSetChanged();
+	}
+	
+	private void editCommentResult (int activity_index, CommentInfo commentData, int index)
+	{
+		DremActivityInfo activityItem = getItem(activity_index);
+		
+		if (activityItem == null || commentData == null)
+			return;
+		
+		if (activityItem.comment_list == null)
+			activityItem.comment_list = new ArrayList<CommentInfo>();
+		
+		CommentInfo changeData = activityItem.comment_list.get(index);
+		changeData.description = commentData.description;
 		
 		notifyDataSetChanged();
 	}
@@ -407,9 +563,45 @@ public class DremActivityAdapter extends ArrayAdapter<DremActivityInfo>
 		}
 	}
 	
-	private void showShareDialog(int activity_id)
+	private void deleteActivityDremResult(Object param, Object obj) {
+
+		waitDialog.dismiss();
+		
+		if (obj == null) {
+			CustomToast.makeCustomToastShort(this.activity, Constants.NETWORK_ERR);
+		}
+
+		if (obj != null){
+			DeleteActivityDremResult resultBean = (DeleteActivityDremResult)obj;
+			CustomToast.makeCustomToastShort(this.activity, resultBean.msg);
+			
+			if (FragmentHome.instance != null)
+			{
+				FragmentHome.instance.resetOptions();
+				FragmentHome.instance.loadMoreDremActivities();
+			}
+			
+			if (FragmentActContent.instance != null)
+			{
+				FragmentHome.instance.resetOptions();
+				FragmentActContent.instance.loadMoreDremActivities();
+			}
+		}
+	}
+	
+	private void showShareDialog(DremActivityInfo item)
 	{
-		Dialog dialog = new DialogShare(this.activity, this.activity, activity_id);
+		String guid = "";
+		
+		for (int i = 0; i < item.media_list.size(); i++){
+			MediaInfo mediaInfo = item.media_list.get(i);
+			
+			if (mediaInfo.media_type.equals("photo")) {
+				guid = mediaInfo.media_guid;
+			}
+		}
+
+		Dialog dialog = new DialogShare(this.activity, this.activity, item.activity_id, guid);
 		dialog.show();
 	}
 
@@ -430,6 +622,10 @@ public class DremActivityAdapter extends ArrayAdapter<DremActivityInfo>
 		case SET_FAVORITE:
 			setFavoriteResult(parameter, result);			
 			break;
+		case DELETE_ACTIVITY:
+			deleteActivityDremResult(parameter, result);
+			break;
+			
 		default:
 			break;
 		}
@@ -449,5 +645,17 @@ public class DremActivityAdapter extends ArrayAdapter<DremActivityInfo>
 			CommentInfo commentData, int index) {
 		// TODO Auto-generated method stub
 		setCommentResult (commentData, index);
+	}
+	
+	@Override
+	public void OnDelCommentResult(int activity_index, int index) {
+		// TODO Auto-generated method stub
+		delCommentResult (activity_index, index);
+	}
+	
+	@Override
+	public void OnEditCommentResult(int activity_index, CommentInfo commentData, int index) {
+		// TODO Auto-generated method stub
+		editCommentResult (activity_index, commentData, index);
 	}
 }

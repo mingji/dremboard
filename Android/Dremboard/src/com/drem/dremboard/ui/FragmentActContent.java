@@ -27,6 +27,7 @@ import com.drem.dremboard.webservice.WebApiInstance.Type;
 
 public class FragmentActContent extends Fragment implements WebApiCallback
 {
+	public static FragmentActContent instance;
 	private AppPreferences mPrefs;
 
 	GridView mGridDremActivities;
@@ -50,6 +51,7 @@ public class FragmentActContent extends Fragment implements WebApiCallback
 	{
 		View view = inflater.inflate(R.layout.fragment_act_content, null);
 		
+		instance = this;
 		mPrefs = new AppPreferences(getActivity());
 		waitDialog = new WaitDialog(getActivity());
 		
@@ -116,7 +118,7 @@ public class FragmentActContent extends Fragment implements WebApiCallback
 		});
 	}
 	
-	private void resetOptions()
+	public void resetOptions()
 	{
 		mFlagLoading = false;
 		mAddMoreFlag = true;
@@ -125,7 +127,7 @@ public class FragmentActContent extends Fragment implements WebApiCallback
 		mPerPage = 5;
 	}
 
-	private void loadMoreDremActivities()
+	public void loadMoreDremActivities()
 	{
 		getDremActivityList(mLastDremActivityId, mPerPage);
 	}

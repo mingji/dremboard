@@ -1,0 +1,169 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="300dip"
+    android:layout_height="wrap_content"
+    android:layout_gravity="center"
+    android:background="@color/background_gray"
+    android:orientation="vertical" >
+
+    
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" >
+
+        <TextView
+            android:id="@+id/txtTitleBar"
+            android:layout_width="wrap_content"
+            android:layout_height="30dip"
+            android:layout_alignParentLeft="true"
+            android:layout_marginLeft="12dip"
+            android:layout_marginTop="6dip"
+            android:gravity="center|top"
+            android:text="@string/text_new_dremboard_title"
+            android:textSize="16sp" >
+        </TextView>
+	    <Button
+	        android:id="@+id/btnClose"
+	        android:layout_width="30dip"
+	        android:layout_height="30dip"
+	        android:layout_alignParentRight="true"
+	        android:layout_margin="8dip"
+	        android:background="@drawable/btn_close" >
+	    </Button>
+    </RelativeLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" >
+	    <TextView
+	        android:id="@+id/lblDremboardTitle"
+	        android:layout_width="wrap_content"
+	        android:layout_height="30dip"
+            android:layout_margin="12dip"
+            android:gravity="center_vertical"
+            android:text="@string/text_dremboard_title"
+	        >
+	        
+	    </TextView>
+	    
+	    <EditText
+           android:id="@+id/txtDremboardTitle"
+           android:inputType="textMultiLine"
+           android:layout_width="match_parent"
+           android:layout_height="30dip"
+           android:layout_marginRight="12dip"
+           android:layout_marginTop="12dip"
+           android:paddingLeft="10.0dip"
+           android:singleLine="true"
+           android:scrollbars="vertical"
+           android:background="@drawable/style_textview_border"
+           android:textSize="13sp" />    
+    </LinearLayout>
+    
+    <TextView
+	        android:id="@+id/lblDremboardDescription"
+	        android:layout_width="wrap_content"
+	        android:layout_height="30dip"
+	        android:layout_marginLeft="12dip"
+            android:gravity="center_vertical"
+            android:text="@string/text_dremboard_description">
+ 	</TextView>
+	<EditText
+           android:id="@+id/txtDremboardDescription"
+           android:inputType="textMultiLine"
+           android:layout_width="match_parent"
+           android:layout_height="60dip"
+           android:layout_marginLeft="12dip"
+           android:layout_marginRight="12dip"
+           android:paddingLeft="10.0dip"
+           android:singleLine="true"
+           android:scrollbars="vertical"
+           android:gravity="top|left"
+           android:background="@drawable/style_textview_border"
+           android:textSize="13sp">
+	 </EditText>    
+    
+	 <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" >
+	    <TextView
+	        android:id="@+id/lblCategory"
+	        android:layout_width="wrap_content"
+	        android:layout_height="30dip"
+            android:layout_margin="12dip"
+            android:gravity="center_vertical"
+            android:text="@string/text_dremboard_category"
+	        >
+	    </TextView>
+
+	    <Spinner
+	        android:id="@+id/spinDremboardCategory"
+	        android:layout_width="match_parent"
+	        android:layout_height="34dip"
+			android:layout_marginRight="12dip"
+	        android:layout_marginTop="12dip"
+	        android:background="@drawable/bg_spinner"
+	        android:gravity="center_vertical"
+	        android:paddingLeft="10dip"
+	        android:textColor="@color/lightgray2" />
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/txtNewDremboard"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center_vertical"
+        android:linksClickable="true"
+        android:minHeight="30dp"
+        android:paddingLeft="10dp"
+        android:text="@string/text_dremboard_privacy">
+    </TextView>
+    
+    <RadioGroup
+        android:id="@+id/radioGroup"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" >
+
+        <RadioButton
+            android:id="@+id/radioPublic"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="6dip"
+            android:checked="true"
+            android:text="@string/radio_dremboard_1" />
+
+        <RadioButton
+            android:id="@+id/radioPersonal"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="6dip"
+            android:text="@string/radio_dremboard_2" />
+
+        <RadioButton
+            android:id="@+id/radioFamily"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="6dip"
+            android:text="@string/radio_dremboard_3" />
+
+        <RadioButton
+            android:id="@+id/radioFriends"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="6dip"
+            android:text="@string/radio_dremboard_4" />
+    </RadioGroup>
+
+
+    <Button
+        android:id="@+id/btnCreateDremboard"
+        android:layout_width="120dip"
+        android:layout_height="30dip"
+        android:background="@drawable/btn_login"
+        android:layout_gravity="right"
+        android:gravity="center"
+        android:layout_margin="20dip"
+        android:text="@string/btn_create_dremboard"
+        android:textColor="@color/white"
+        android:textSize="12sp" />
+        
+</LinearLayout>

@@ -32,16 +32,19 @@ public class WebApiInstance {
 		SEND_INVITE,
 		
 		/* Notification */
-		GET_NT, SET_NT,		
+		GET_NT, SET_NT,	GET_NT_CNT,
 		
 		/* GET Content */
-		GET_DREM_ACTIVITY, GET_DREM, GET_DREMER, GET_DREMBOARD, GET_VIDEOS, GET_SINGLE_DREMER,
+		GET_DREM_ACTIVITY, GET_DREM, GET_DREMER, GET_DREMBOARD, GET_DREMCAST, GET_SINGLE_DREMER, GET_ONE_ACTIVITY, 
 		
 		/* Contents Actions */
-		SET_COMMENT, SET_FAVORITE, SET_LIKE, SET_FLAG,
+		SET_COMMENT, EDIT_COMMENT, SET_FAVORITE, SET_LIKE, SET_FLAG, SET_SINGLE_DREMER_IMAGE,
 		
 		/* Dremer Actions */
 		SET_FRIENDSHIP, SET_FAMILYSHIP, SET_BLOCK, SET_FOLLOW,
+		
+		/* Manage Dremboard */
+		ADD_DREM_TO_DREMBOARD, CREATE_DREMBOARD, DELETE_DREMBOARD, EDIT_DREMBOARD, MERGE_DREMBOARD, REMOVE_DREMS_FROM_DREMBOARD, MOVE_DREMS_TO_DREMBOARD, SET_ACTIVITY, DELETE_ACTIVITY,
 		
 	};
 
@@ -150,12 +153,16 @@ public class WebApiInstance {
 			result = getDremboards(param); 
 			break;
 			
-		case GET_VIDEOS:
-			result = getVideos(param);
+		case GET_DREMCAST:
+			result = getDremcasts(param);
 			break;
 			
 		case GET_SINGLE_DREMER:
 			result = getSingleDremer(param);
+			break;
+			
+		case SET_SINGLE_DREMER_IMAGE:
+			result = setSingleDremerImage(param);
 			break;
 			
 		case GET_NT:
@@ -166,10 +173,18 @@ public class WebApiInstance {
 			result = setNotification(param);
 			break;
 			
+		case GET_NT_CNT:
+			result = getNotificationsCount(param);
+			break;
+			
 		case SET_COMMENT:
 			result = setComment(param);
 			break;
 			
+		case EDIT_COMMENT:
+			result = editComment(param);
+			break;
+
 		case SET_FAVORITE:
 			result = setFavorite(param);
 			break;
@@ -227,6 +242,46 @@ public class WebApiInstance {
 			break;
 		case SET_SETTING_PRIVACY:
 			result = setSettingDefaultPrivacy(param);
+			break;
+			
+		case ADD_DREM_TO_DREMBOARD:
+			result = addDremToDremboard(param);
+			break;
+			
+		case CREATE_DREMBOARD:
+			result = createDremboard(param);
+			break;
+			
+		case DELETE_DREMBOARD:
+			result = deleteDremboard(param);
+			break;
+			
+		case EDIT_DREMBOARD:
+			result = editDremboard(param);
+			break;
+			
+		case MERGE_DREMBOARD:
+			result = mergeDremboard(param);
+			break;
+			
+		case REMOVE_DREMS_FROM_DREMBOARD:
+			result = removeDremsFromDremboard(param);
+			break;
+
+		case MOVE_DREMS_TO_DREMBOARD:
+			result = moveDremsToDremboard(param);
+			break;
+
+		case SET_ACTIVITY:
+			result = setActivityDrem(param);
+			break;
+			
+		case DELETE_ACTIVITY:
+			result = deleteActivityDrem(param);
+			break;
+		
+		case GET_ONE_ACTIVITY:
+			result = getActivity(param);
 			break;
 		default:
 			break;
@@ -286,6 +341,18 @@ public class WebApiInstance {
 		return result;
 	}
 	
+	Object setSingleDremerImage(Object obj)
+	{
+		Object result = null;
+		SetSingleDremerImageParam param = (SetSingleDremerImageParam)obj;
+		
+		if (param == null)
+			return null;		
+		
+		result = Server.SetSingleDremerImage(param);
+		return result;
+	}
+	
 	Object getDremboards(Object obj)
 	{
 		Object result = null;
@@ -298,15 +365,15 @@ public class WebApiInstance {
 		return result;
 	}
 	
-	Object getVideos(Object obj)
+	Object getDremcasts(Object obj)
 	{
 		Object result = null;
-		GetVideosParam param = (GetVideosParam)obj;
+		GetDremcastsParam param = (GetDremcastsParam)obj;
 		
 		if (param == null)
 			return null;		
 		
-		result = Server.GetVideos(param);
+		result = Server.GetDremcasts(param);
 		return result;
 	}
 	
@@ -358,6 +425,18 @@ public class WebApiInstance {
 			return null;		
 		
 		result = Server.SetActivityComment(param);
+		return result;
+	}
+	
+	Object editComment(Object obj)
+	{
+		Object result = null;
+		EditCommentParam param = (EditCommentParam)obj;
+		
+		if (param == null)
+			return null;		
+		
+		result = Server.EditActivityComment(param);
 		return result;
 	}
 
@@ -436,6 +515,18 @@ public class WebApiInstance {
 			return null;		
 		
 		result = Server.SetNotification(param);
+		return result;
+	}
+	
+	Object getNotificationsCount(Object obj)
+	{
+		Object result = null;
+		GetNTCntParam param = (GetNTCntParam)obj;
+		
+		if (param == null)
+			return null;		
+		
+		result = Server.GetNotificationCount(param);
 		return result;
 	}
 	
@@ -551,6 +642,126 @@ public class WebApiInstance {
 			return null;		
 		
 		result = Server.SetDefaultPrivacy(param);
+		return result;
+	}
+	
+	Object addDremToDremboard(Object obj)
+	{
+		Object result = null;
+		AddDremToDremboardData param = (AddDremToDremboardData)obj;
+		
+		if (param == null)
+			return null;		
+		
+		result = Server.AddDremToDremboard(param);
+		return result;
+	}
+	
+	Object createDremboard(Object obj)
+	{
+		Object result = null;
+		CreateDremboardData param = (CreateDremboardData)obj;
+		
+		if (param == null)
+			return null;		
+		
+		result = Server.CreateDremboard(param);
+		return result;
+	}
+	
+	Object deleteDremboard(Object obj)
+	{
+		Object result = null;
+		DeleteDremboardData param = (DeleteDremboardData)obj;
+		
+		if (param == null)
+			return null;		
+		
+		result = Server.DeleteDremboard(param);
+		return result;
+	}
+	
+	Object editDremboard(Object obj)
+	{
+		Object result = null;
+		EditDremboardData param = (EditDremboardData)obj;
+		
+		if (param == null)
+			return null;		
+		
+		result = Server.EditDremboard(param);
+		return result;
+	}
+	
+	Object mergeDremboard(Object obj)
+	{
+		Object result = null;
+		MergeDremboardData param = (MergeDremboardData)obj;
+		
+		if (param == null)
+			return null;		
+		
+		result = Server.MergeDremboard(param);
+		return result;
+	}
+	
+	Object removeDremsFromDremboard(Object obj)
+	{
+		Object result = null;
+		RemoveDremsFromDremboardData param = (RemoveDremsFromDremboardData)obj;
+		
+		if (param == null)
+			return null;		
+		
+		result = Server.RemoveDremsFromDremboard(param);
+		return result;
+	}
+	
+	Object moveDremsToDremboard(Object obj)
+	{
+		Object result = null;
+		MoveDremsToDremboardData param = (MoveDremsToDremboardData)obj;
+		
+		if (param == null)
+			return null;		
+		
+		result = Server.MoveDremsToDremboard(param);
+		return result;
+	}
+	
+	Object setActivityDrem(Object obj)
+	{
+		Object result = null;
+		EditActivityDremData param = (EditActivityDremData)obj;
+		
+		if (param == null)
+			return null;		
+		
+		result = Server.SetActivityDrem(param);
+		return result;
+	}
+	
+	Object deleteActivityDrem(Object obj)
+	{
+		Object result = null;
+		DeleteActivityDremData param = (DeleteActivityDremData)obj;
+		
+		if (param == null)
+			return null;		
+		
+		result = Server.DeleteActivityDrem(param);
+		return result;
+	}
+	
+	Object getActivity(Object obj)
+	{
+		Object result = null;
+		GetActivityParam param = (GetActivityParam)obj;
+		
+		if (param == null)
+			return null;		
+		
+		result = Server.getActivity(param);
 		return result;
 	}
 }

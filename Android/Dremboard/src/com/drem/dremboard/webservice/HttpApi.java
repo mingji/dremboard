@@ -1,6 +1,7 @@
 package com.drem.dremboard.webservice;
 
 import java.io.ByteArrayOutputStream;
+import java.io.File;
 
 import org.apache.http.HttpResponse;
 import org.apache.http.NameValuePair;
@@ -13,6 +14,7 @@ import org.apache.http.client.utils.URLEncodedUtils;
 import org.apache.http.entity.mime.HttpMultipartMode;
 import org.apache.http.entity.mime.MultipartEntity;
 import org.apache.http.entity.mime.content.ByteArrayBody;
+import org.apache.http.entity.mime.content.FileBody;
 import org.apache.http.entity.mime.content.StringBody;
 import org.apache.http.impl.client.DefaultHttpClient;
 import org.apache.http.params.BasicHttpParams;
@@ -96,6 +98,71 @@ public class HttpApi {
 		return null;
 	}
 
+	@SuppressWarnings("deprecation")
+	public static String sendRequestWithVideo(String serverUrl, HttpParams params, String videoPath,
+			int[] statusCode) {
+		HttpPost httpRequest = new HttpPost(serverUrl);
+		int status = -1;
+
+		try {
+			/** Makes an HTTP request request */
+			//			if (params != null) {
+			//				httpRequest.setEntity(new UrlEncodedFormEntity(params
+			//						.getParams(), HTTP.UTF_8));
+			//			}
+
+			MultipartEntity entity = new MultipartEntity(HttpMultipartMode.BROWSER_COMPATIBLE);
+
+			if (params != null) {
+//				entity.addPart("name", new StringBody("testname"));
+				for(int index=0; index < params.getParams().size(); index++) {
+					// Normal string data
+					entity.addPart(params.getParams().get(index).getName(), new StringBody(params.getParams().get(index).getValue()));
+				}
+			}
+			
+			FileBody filebodyVideo = new FileBody(new File(videoPath));
+			entity.addPart(Constants.PARAM_PHOTO, filebodyVideo);
+
+			httpRequest.setEntity(entity);
+
+			/** Create an HTTP client */
+			//DefaultHttpClient httpClient = new DefaultHttpClient();
+			DefaultHttpClient httpClient = defaultHttpClient();
+
+			/** Set Cookie information */
+			if (cookieStore != null) {
+				httpClient.setCookieStore(cookieStore);
+			}
+
+			/** Gets the HTTP response response */
+			HttpResponse httpresponse = httpClient.execute(httpRequest);
+
+			status = httpresponse.getStatusLine().getStatusCode();
+
+			/** If the status code 200 response successfully */
+			Log.v(LOG, Integer.toString(status));
+			if (status == 200) {
+				/** Remove the response string */
+				String strResponse = EntityUtils.toString(
+						httpresponse.getEntity(), HTTP.UTF_8);
+				Log.v(LOG, strResponse);
+				if (statusCode != null)
+					statusCode[0] = status;
+
+				cookieStore = httpClient.getCookieStore();
+				return strResponse.trim();
+			}
+		} catch (Exception e) {
+			Log.v(LOG, "send request error");
+			status = -1;
+		}
+
+		if (statusCode != null)
+			statusCode[0] = status;
+		return null;
+	}
+	
 	@SuppressWarnings("deprecation")
 	public static String sendRequestWithImage(String serverUrl, HttpParams params, Bitmap bm,
 			int[] statusCode) {

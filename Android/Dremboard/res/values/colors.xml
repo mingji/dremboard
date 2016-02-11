@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    
+
     <color name="transparent">#00000000</color>
     <color name="blue">#FF0000EE</color>
     <color name="green">#17291C</color>
@@ -21,32 +21,33 @@
     <color name="background_lightyellow">#FFFBF48A</color>
     <color name="background_signup_bottom">#FFC4E5F9</color>
     <color name="text_signup_bottom">#FF484D72</color>
-    
     <color name="repo_unselect">#FFDADADA</color>
     <color name="repo_select">#FF94BA38</color>
     <color name="repo_content_background">#FFECECEC</color>
-    
     <color name="title_name">#FFF6FF00</color>
-    
     <color name="yellowbackground">#ffF8C015</color>
     <color name="darekgreen">#ff6BC04B</color>
-    
     <color name="bg_gray">#FFF4F4F4</color>
     <color name="bg_blue">#FF135F8E</color>
     <color name="bg_lightblue">#FFF0F8FF</color>
-    
     <color name="fg_darkred">#FFA42F1E</color>
-    
     <color name="bg_lost_pwd_des">#FFFFFFE0</color>
     <color name="fg_lost_pwd_des">#FFE6DB55</color>
-    
     <color name="login_normal">#FF1195F9</color>
     <color name="login_down">#FF135C7A</color>
-    
     <color name="reg_normal">#FF68BA26</color>
     <color name="reg_down">#FF58AA16</color>
-    
     <color name="darkred1">#FFA42F1E</color>
-    <color name="darkred2">#783302</color>    
+    <color name="darkred2">#783302</color>
+    <color name="grey_light">#9fa2a4</color>
+    <color name="grey_light_more">#c4c4c4</color>
+    <color name="grey_light_extra">#ebebeb</color>
+
+    <!-- Text -->
+    <color name="text_normal">#222222</color>
+    <color name="text_light">#444444</color>
+    <color name="text_light_more">#888888</color>
+    <color name="blue_dark">#24a4b0</color>
+    <color name="white_trans0">#00ffffff</color>
     
 </resources>

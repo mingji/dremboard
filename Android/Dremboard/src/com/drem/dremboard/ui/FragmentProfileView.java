@@ -5,6 +5,15 @@ import java.util.ArrayList;
 import com.drem.dremboard.R;
 import com.drem.dremboard.entity.GlobalValue;
 import com.drem.dremboard.entity.ProfileItem;
+import com.drem.dremboard.entity.Beans.GetSingleDremerParam;
+import com.drem.dremboard.entity.Beans.GetSingleDremerResult;
+import com.drem.dremboard.utils.AppPreferences;
+import com.drem.dremboard.view.CustomToast;
+import com.drem.dremboard.view.WaitDialog;
+import com.drem.dremboard.webservice.Constants;
+import com.drem.dremboard.webservice.WebApiCallback;
+import com.drem.dremboard.webservice.WebApiInstance;
+import com.drem.dremboard.webservice.WebApiInstance.Type;
 
 import android.app.Activity;
 import android.os.Bundle;
@@ -17,13 +26,15 @@ import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
 
-public class FragmentProfileView extends Fragment implements OnClickListener
+public class FragmentProfileView extends Fragment implements OnClickListener, WebApiCallback
 {
 	ArrayList<ProfileItem> mArrayProfile = null;
 	ProfileAdapter mAdapterProfile;
 	ListView mListviewProfile;
 	
 	ArrayList<ProfileItem> mCurrentProfiles;
+	private AppPreferences mPrefs;
+	WaitDialog waitDialog;
 	
 	int mDremerId;
 	
@@ -33,6 +44,8 @@ public class FragmentProfileView extends Fragment implements OnClickListener
 		View view = inflater.inflate(R.layout.fragment_profile_view, null);
 		
 		mCurrentProfiles = GlobalValue.getInstance().getCurrentProfiles();
+		mPrefs = new AppPreferences(getActivity());
+		waitDialog = new WaitDialog(getActivity());
 		
 		Bundle bundle = getArguments();
 		if (bundle != null) {
@@ -42,9 +55,6 @@ public class FragmentProfileView extends Fragment implements OnClickListener
 		}		
 
 		initView (view);
-		
-		updateView();
-
 		return view;
 	}
 
@@ -55,6 +65,8 @@ public class FragmentProfileView extends Fragment implements OnClickListener
 
 		mListviewProfile = (ListView) view.findViewById(R.id.lstProfile);		
 		mListviewProfile.setAdapter(mAdapterProfile);
+		
+		getSingleDremer();
 	}
 	
 	private void updateView()
@@ -73,6 +85,59 @@ public class FragmentProfileView extends Fragment implements OnClickListener
 	public void onClick(View v) {
 		// TODO Auto-generated method stub
 
+	}
+	
+	private void getSingleDremer() {
+		waitDialog.show();
+		
+		GetSingleDremerParam param = new GetSingleDremerParam();
+
+		param.user_id = mPrefs.getUserId();
+		param.disp_user_id = mDremerId;
+
+		WebApiInstance.getInstance().executeAPI(Type.GET_SINGLE_DREMER, param, this);
+	}
+
+	private void getSingleDremerResult(Object param, Object obj) {
+
+		waitDialog.dismiss();
+
+		if (obj == null) {
+			CustomToast.makeCustomToastShort(getActivity(), Constants.NETWORK_ERR);
+		}
+
+		if (obj != null){
+			GetSingleDremerResult resultBean = (GetSingleDremerResult)obj;
+
+			if (resultBean.status.equals("ok")) {
+				GlobalValue.getInstance().setCurrentDremer(resultBean.data.member);
+				GlobalValue.getInstance().setCurrentProfiles(resultBean.data.profiles);
+			} else {
+				CustomToast.makeCustomToastShort(getActivity(), resultBean.msg);
+			}
+		}
+		
+		updateView();
+	}
+	
+	@Override
+	public void onPreProcessing(Type type, Object parameter) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void onResultProcessing(Type type, Object parameter, Object result) {
+		// TODO Auto-generated method stub
+		
+		switch (type)
+		{
+		case GET_SINGLE_DREMER:
+			getSingleDremerResult(parameter, result);			
+			break;
+		default:
+			break;
+		}
 	}
 	
 	public class ProfileAdapter extends ArrayAdapter<ProfileItem> {
@@ -119,4 +184,5 @@ public class FragmentProfileView extends Fragment implements OnClickListener
 			TextView txtFieldValue;
 		}
 	}
+	
 }

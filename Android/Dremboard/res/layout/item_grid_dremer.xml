@@ -23,5 +23,15 @@
         android:text="Dremer Name"
         android:textColor="@color/darkgray"
         android:textSize="14sp" />
-
+    <TextView
+        android:id="@+id/txtPostNum"
+        android:layout_width="match_parent"
+        android:layout_height="15dp"
+        android:layout_below="@+id/txtDremer"
+        android:gravity="center"
+        android:singleLine="false"
+        android:textColor="@color/darkgray"
+	    android:textIsSelectable="true"
+	    android:textSize="12sp"
+	    android:textStyle="italic" />
 </RelativeLayout>

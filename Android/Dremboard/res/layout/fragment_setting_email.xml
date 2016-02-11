@@ -25,10 +25,48 @@
                 android:textSize="17sp" />
 
             <TextView
-                android:id="@+id/lblActivity"
+                android:id="@+id/lblEmail"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/lblCaption"
+                android:layout_marginTop="15dip"
+                android:text="TURN ON/OFF EMAIL"
+                android:textColor="@color/black"
+                android:textSize="20sp"
+                android:textStyle="bold" />
+
+            <LinearLayout
+                android:id="@+id/lblEmail1"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/lblEmail"
+                android:layout_marginTop="10dip"
+                android:orientation="horizontal" >
+
+                <TextView
+                    android:layout_width="230dip"
+                    android:layout_height="wrap_content"
+                    android:text="Turn on/off email sending"
+                    android:textColor="@color/black"
+                    android:textSize="15sp" />
+
+                <CheckBox
+                    android:id="@+id/chkEmail"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="20dip"
+                    android:background="@color/transparent"
+                    android:button="@null"
+                    android:checked="false"
+                    android:drawableLeft="@drawable/checkbox"
+                    android:textSize="14sp" />
+            </LinearLayout>
+
+            <TextView
+                android:id="@+id/lblActivity"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/lblEmail1"
                 android:layout_marginTop="15dip"
                 android:text="Activity"
                 android:textColor="@color/black"

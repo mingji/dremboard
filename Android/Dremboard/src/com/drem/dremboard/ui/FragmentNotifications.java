@@ -128,11 +128,11 @@ public class FragmentNotifications extends Fragment
 
 	}
 	
-	private void afterSetNotification(String action)
+	private void afterSetNotification(String action, int activity_id)
 	{
 		ActivityNotification parent = (ActivityNotification) getActivity();
 		
-		parent.updateNotifications(action);
+		parent.updateNotifications(action, activity_id);
 	}
 	
 	private void updateListView (String action, int index)
@@ -141,14 +141,15 @@ public class FragmentNotifications extends Fragment
 		
 		if (notification == null)
 			return;
-		
+
+		int activity_id = notification.id;
 		mArrayNT.remove(index);
 		mAdapterNT.notifyDataSetChanged();
 		
 		if (action.equalsIgnoreCase("read")) {
-			afterSetNotification("read");			
+			afterSetNotification("read", activity_id);			
 		} else if (action.equalsIgnoreCase("unread")) {
-			afterSetNotification("unread");
+			afterSetNotification("unread", activity_id);
 		} else if (action.equalsIgnoreCase("delete")) {
 			
 		}

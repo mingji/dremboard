@@ -12,6 +12,7 @@ import android.os.Bundle;
 import android.view.KeyEvent;
 import android.view.View;
 import android.view.View.OnClickListener;
+import android.webkit.WebView;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -56,6 +57,9 @@ public class ActivityAbout extends Activity implements OnClickListener{
 		DremerInfo dremer = GlobalValue.getInstance().getCurrentDremer();
 		if (dremer.user_avatar != null && !dremer.user_avatar.isEmpty())
 			ImageLoader.getInstance().displayImage(dremer.user_avatar, mImgUserIcon, 0, 0);
+		
+		WebView webView = (WebView) findViewById(R.id.webView);
+		webView.loadUrl("file:///android_asset/AboutUs.html");
     }
     
     @Override
