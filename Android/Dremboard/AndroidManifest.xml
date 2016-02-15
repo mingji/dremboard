@@ -249,7 +249,13 @@
             android:theme="@android:style/Theme.NoTitleBar"
             android:windowSoftInputMode="adjustPan" >
         </activity>
-        
+        <activity
+            android:name=".ui.ActivityComment"
+            android:configChanges="keyboardHidden|orientation"
+            android:screenOrientation="portrait"
+            android:theme="@android:style/Theme.NoTitleBar"
+            android:windowSoftInputMode="adjustPan" >
+        </activity>
         
         <activity android:name="io.vov.vitamio.activity.InitActivity" 
   			android:configChanges="orientation|screenSize|smallestScreenSize|keyboard|keyboardHidden"

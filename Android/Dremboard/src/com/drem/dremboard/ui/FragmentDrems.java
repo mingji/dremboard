@@ -30,9 +30,9 @@ import com.drem.dremboard.entity.CommentInfo;
 import com.drem.dremboard.entity.DremActivityInfo;
 import com.drem.dremboard.entity.DremInfo;
 import com.drem.dremboard.entity.GlobalValue;
-import com.drem.dremboard.ui.DialogComment.OnCommentResultCallback;
-import com.drem.dremboard.ui.DialogComment.OnDelCommentResultCallback;
-import com.drem.dremboard.ui.DialogComment.OnEditCommentResultCallback;
+import com.drem.dremboard.ui.ActivityComment.OnCommentResultCallback;
+import com.drem.dremboard.ui.ActivityComment.OnDelCommentResultCallback;
+import com.drem.dremboard.ui.ActivityComment.OnEditCommentResultCallback;
 import com.drem.dremboard.ui.DialogFlagDrem.OnFlagResultCallback;
 import com.drem.dremboard.utils.AppPreferences;
 import com.drem.dremboard.utils.ImageLoader;
@@ -567,9 +567,21 @@ public class FragmentDrems extends Fragment implements
 			if (dremItem.comment_list == null)
 				dremItem.comment_list = new ArrayList<CommentInfo>();
 			
-			DialogComment commentDiag = new DialogComment(this.activity, this.activity, dremItem.activity_id, 
-					index, dremItem.comment_list, this, this, this);
-					commentDiag.show();
+			ActivityComment.mResultCallback = null;
+			ActivityComment.mEditCommentCallback = null;
+			ActivityComment.mDelCommentCallback = null;
+			ActivityComment.mCommentList = null;
+
+			ActivityComment.mResultCallback = this;
+			ActivityComment.mEditCommentCallback = this;
+			ActivityComment.mDelCommentCallback = this;
+			ActivityComment.mCommentList = dremItem.comment_list;
+					
+			Intent intent = new Intent(this.activity, ActivityComment.class);
+			intent.putExtra("activity_id", dremItem.activity_id);
+			intent.putExtra("index", index);
+			
+			startActivity(intent);
 		}
 		
 		private void setCommentResult (CommentInfo commentData, int index)

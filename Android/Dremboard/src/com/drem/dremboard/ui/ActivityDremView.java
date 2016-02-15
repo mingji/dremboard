@@ -34,9 +34,9 @@ import com.drem.dremboard.entity.Beans.GetActivitiesParam;
 import com.drem.dremboard.entity.Beans.SetLikeParam;
 import com.drem.dremboard.entity.Beans.SetLikeResult;
 import com.drem.dremboard.ui.DialogFlagDrem.OnFlagResultCallback;
-import com.drem.dremboard.ui.DialogComment.OnCommentResultCallback;
-import com.drem.dremboard.ui.DialogComment.OnDelCommentResultCallback;
-import com.drem.dremboard.ui.DialogComment.OnEditCommentResultCallback;
+import com.drem.dremboard.ui.ActivityComment.OnCommentResultCallback;
+import com.drem.dremboard.ui.ActivityComment.OnDelCommentResultCallback;
+import com.drem.dremboard.ui.ActivityComment.OnEditCommentResultCallback;
 import com.drem.dremboard.utils.AppPreferences;
 import com.drem.dremboard.utils.ImageLoader;
 import com.drem.dremboard.utils.Utility;
@@ -271,8 +271,21 @@ public class ActivityDremView extends Activity implements OnClickListener, WebAp
 		if (dremItem.comment_list == null)
 			dremItem.comment_list = new ArrayList<CommentInfo>();
 		
-		DialogComment commentDiag = new DialogComment(this, this, dremItem.activity_id, -1, dremItem.comment_list, this, this, this);
-		commentDiag.show();
+		ActivityComment.mResultCallback = null;
+		ActivityComment.mEditCommentCallback = null;
+		ActivityComment.mDelCommentCallback = null;
+		ActivityComment.mCommentList = null;
+
+		ActivityComment.mResultCallback = this;
+		ActivityComment.mEditCommentCallback = this;
+		ActivityComment.mDelCommentCallback = this;
+		ActivityComment.mCommentList = dremItem.comment_list;
+				
+		Intent intent = new Intent(this, ActivityComment.class);
+		intent.putExtra("activity_id", dremItem.activity_id);
+		intent.putExtra("index", 0);
+		
+		startActivity(intent);
 	}
 	
 	private void showShareDialog(int activity_id, String guid)

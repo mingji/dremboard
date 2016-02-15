@@ -32,14 +32,14 @@ import com.drem.dremboard.entity.Beans.SetLikeParam;
 import com.drem.dremboard.entity.Beans.SetLikeResult;
 import com.drem.dremboard.entity.CommentInfo;
 import com.drem.dremboard.entity.DremActivityInfo.MediaInfo;
-import com.drem.dremboard.ui.DialogComment;
-import com.drem.dremboard.ui.DialogComment.OnCommentResultCallback;
-import com.drem.dremboard.ui.DialogComment.OnEditCommentResultCallback;
+import com.drem.dremboard.ui.ActivityComment;
+import com.drem.dremboard.ui.ActivityComment.OnCommentResultCallback;
+import com.drem.dremboard.ui.ActivityComment.OnEditCommentResultCallback;
 import com.drem.dremboard.ui.ActivityAddDremToDremboard;
 import com.drem.dremboard.ui.ActivityDremView;
 import com.drem.dremboard.ui.ActivityDremer;
 import com.drem.dremboard.ui.DialogActivityDremEdit;
-import com.drem.dremboard.ui.DialogComment.OnDelCommentResultCallback;
+import com.drem.dremboard.ui.ActivityComment.OnDelCommentResultCallback;
 import com.drem.dremboard.ui.DialogFlagDrem;
 import com.drem.dremboard.ui.FragmentActContent;
 import com.drem.dremboard.ui.FragmentHome;
@@ -469,9 +469,21 @@ public class DremActivityAdapter extends ArrayAdapter<DremActivityInfo>
 		if (activityItem.comment_list == null)
 			activityItem.comment_list = new ArrayList<CommentInfo>();
 		
-		DialogComment commentDiag = new DialogComment(activity, activity, activityItem.activity_id, 
-				index, activityItem.comment_list, this, this, this);
-		commentDiag.show();
+		ActivityComment.mResultCallback = null;
+		ActivityComment.mEditCommentCallback = null;
+		ActivityComment.mDelCommentCallback = null;
+		ActivityComment.mCommentList = null;
+
+		ActivityComment.mResultCallback = this;
+		ActivityComment.mEditCommentCallback = this;
+		ActivityComment.mDelCommentCallback = this;
+		ActivityComment.mCommentList = activityItem.comment_list;
+				
+		Intent intent = new Intent(this.activity, ActivityComment.class);
+		intent.putExtra("activity_id", activityItem.activity_id);
+		intent.putExtra("index", index);
+		
+		this.activity.startActivity(intent);
 	}
 	
 	private void setCommentResult (CommentInfo commentData, int index)

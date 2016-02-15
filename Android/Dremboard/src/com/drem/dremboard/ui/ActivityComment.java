@@ -48,8 +48,7 @@ import com.drem.dremboard.webservice.WebApiCallback;
 import com.drem.dremboard.webservice.WebApiInstance;
 import com.drem.dremboard.webservice.WebApiInstance.Type;
 
-public class DialogComment extends Dialog implements WebApiCallback {
-	Activity activity;
+public class ActivityComment extends Activity implements WebApiCallback {
 	int activity_id;
 	ImageView mImgPost;
 	Button mBtnClose, btnPost;
@@ -59,51 +58,40 @@ public class DialogComment extends Dialog implements WebApiCallback {
 
 	WaitDialog waitDialog;
 	
-	public static DialogComment instance = null;
+	public static ActivityComment instance = null;
 
-	OnCommentResultCallback mResultCallback;
-	OnDelCommentResultCallback mDelCommentCallback;
-	OnEditCommentResultCallback mEditCommentCallback;
+	public static OnCommentResultCallback mResultCallback;
+	public static OnDelCommentResultCallback mDelCommentCallback;
+	public static OnEditCommentResultCallback mEditCommentCallback;
+	public static ArrayList<CommentInfo> mCommentList;
+	
 	int itemIndex;
 	int mDeleteIndex, mEditIndex;
-
-	ArrayList<CommentInfo> mArrayComment = null;
 	CommentAdapter mAdapterComment;
 	ListView mListviewComment;
 	CommentInfo mEdtCommentItem;
-
-
-	public DialogComment(Context context, Activity activity, int activity_id, int index, ArrayList<CommentInfo> arrayComment, 
-			OnCommentResultCallback callback, OnDelCommentResultCallback delcallback, OnEditCommentResultCallback editcallback) {
-		super(context);
-
-		this.activity = activity;
-		this.activity_id = activity_id;
-		this.itemIndex = index;
-		this.mResultCallback = callback;
-		this.mDelCommentCallback = delcallback;
-		this.mEditCommentCallback = editcallback;
-		
-		mArrayComment = new ArrayList<CommentInfo>();
-		mArrayComment.addAll(arrayComment);
-	}
+	ArrayList<CommentInfo> mArrayComment = null;
 
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		requestWindowFeature(Window.FEATURE_NO_TITLE);
 
-		setContentView(R.layout.dialog_comment);
+		setContentView(R.layout.activity_comment);
 
 		getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_RESIZE | 
 				WindowManager.LayoutParams.SOFT_INPUT_STATE_HIDDEN);		
 
 		getWindow().setLayout(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT);
-		setCancelable(true);
 
 		instance = this;
-		mPrefs = new AppPreferences(this.activity);
-		waitDialog = new WaitDialog(this.activity);
+		mPrefs = new AppPreferences(this);
+		waitDialog = new WaitDialog(this);
 
+		mArrayComment = new ArrayList<CommentInfo>();
+		mArrayComment.addAll(mCommentList);
+		activity_id = getIntent().getExtras().getInt("activity_id");
+		itemIndex = getIntent().getExtras().getInt("index");
+		
 		btnPost = (Button) findViewById(R.id.btnPost);
 		btnPost.setText("Post");
 
@@ -112,7 +100,7 @@ public class DialogComment extends Dialog implements WebApiCallback {
 			@Override
 			public void onClick(View v) {
 				// TODO Auto-generated method stub
-				dismiss();
+				finish();
 			}
 		});
 
@@ -128,7 +116,7 @@ public class DialogComment extends Dialog implements WebApiCallback {
 			}
 		});
 		
-		mAdapterComment = new CommentAdapter(this.activity, R.layout.item_diag_comment, mArrayComment);
+		mAdapterComment = new CommentAdapter(this, R.layout.item_diag_comment, mArrayComment);
 
 		mListviewComment = (ListView) findViewById(R.id.lstComment);		
 		mListviewComment.setAdapter(mAdapterComment);
@@ -148,7 +136,7 @@ public class DialogComment extends Dialog implements WebApiCallback {
 				{
 					if (mEdtCommentItem.author_id != Integer.parseInt(mPrefs.getUserId()))
 					{
-						CustomToast.makeCustomToastShort(activity, "You can't edit the comment.");
+						CustomToast.makeCustomToastShort(ActivityComment.this, "You can't edit the comment.");
 					}
 					else 
 					{
@@ -235,7 +223,7 @@ public class DialogComment extends Dialog implements WebApiCallback {
 		waitDialog.dismiss();
 
 		if (obj == null) {
-			CustomToast.makeCustomToastShort(this.activity, Constants.NETWORK_ERR);
+			CustomToast.makeCustomToastShort(this, Constants.NETWORK_ERR);
 		}
 
 		if (obj != null){
@@ -248,7 +236,7 @@ public class DialogComment extends Dialog implements WebApiCallback {
 					mResultCallback.OnCommentResult(resultBean.data.comment, itemIndex);
 
 					mArrayComment.add(resultBean.data.comment);
-					mAdapterComment = new CommentAdapter(this.activity, R.layout.item_diag_comment, mArrayComment);
+					mAdapterComment = new CommentAdapter(this, R.layout.item_diag_comment, mArrayComment);
 
 					mListviewComment = (ListView) findViewById(R.id.lstComment);		
 					mListviewComment.setAdapter(mAdapterComment);
@@ -258,7 +246,7 @@ public class DialogComment extends Dialog implements WebApiCallback {
 					mAdapterComment.notifyDataSetChanged();
 				}
 			} else {
-				CustomToast.makeCustomToastShort(this.activity, resultBean.msg);
+				CustomToast.makeCustomToastShort(this, resultBean.msg);
 			}
 		}
 		
@@ -270,7 +258,7 @@ public class DialogComment extends Dialog implements WebApiCallback {
 		waitDialog.dismiss();
 		
 		if (obj == null) {
-			CustomToast.makeCustomToastShort(this.activity, Constants.NETWORK_ERR);
+			CustomToast.makeCustomToastShort(this, Constants.NETWORK_ERR);
 		}
 
 		if (obj != null){
@@ -284,7 +272,7 @@ public class DialogComment extends Dialog implements WebApiCallback {
 					mDelCommentCallback.OnDelCommentResult(itemIndex, mDeleteIndex);
 				}
 			} else {
-				CustomToast.makeCustomToastShort(this.activity, resultBean.msg);
+				CustomToast.makeCustomToastShort(this, resultBean.msg);
 			}
 		}
 	}
@@ -294,7 +282,7 @@ public class DialogComment extends Dialog implements WebApiCallback {
 		waitDialog.dismiss();
 		
 		if (obj == null) {
-			CustomToast.makeCustomToastShort(this.activity, Constants.NETWORK_ERR);
+			CustomToast.makeCustomToastShort(this, Constants.NETWORK_ERR);
 		}
 
 		if (obj != null){
@@ -306,7 +294,7 @@ public class DialogComment extends Dialog implements WebApiCallback {
 				if (this.mEditCommentCallback != null){
 					mEditCommentCallback.OnEditCommentResult(itemIndex, mEdtCommentItem, mEditIndex);
 				} else {
-					CustomToast.makeCustomToastShort(this.activity, resultBean.msg);
+					CustomToast.makeCustomToastShort(this, resultBean.msg);
 				}
 			}
 		}
@@ -357,8 +345,8 @@ public class DialogComment extends Dialog implements WebApiCallback {
 		public CommentAdapter(Activity activity, int layoutId, ArrayList<CommentInfo> items) {
 			// TODO Auto-generated constructor stub
 			super(activity, layoutId, items);
-			item = items;
 			this.activity = activity;
+			item = items;
 			this.layoutResourceId = layoutId;
 		}
 
@@ -419,7 +407,7 @@ public class DialogComment extends Dialog implements WebApiCallback {
 				@Override
 				public void onClick(View v) {
 					// TODO Auto-generated method stub
-					final MyDialog dialog = new MyDialog(instance.getContext());
+					final MyDialog dialog = new MyDialog(getContext());
 					dialog.setContentView(R.layout.dialog_delete);
 					dialog.show();
 
@@ -516,7 +504,7 @@ public class DialogComment extends Dialog implements WebApiCallback {
 				@Override
 				public void onClick(View v) {
 					// TODO Auto-generated method stub
-					final MyDialog dialog = new MyDialog(instance.getContext());
+					final MyDialog dialog = new MyDialog(getContext());
 					dialog.setContentView(R.layout.dialog_delete);
 					dialog.show();
 

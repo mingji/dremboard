@@ -63,7 +63,7 @@
                 android:layout_width="20dp"
                 android:layout_height="20dp"
                 android:layout_alignParentTop="true"
-                android:layout_marginRight="@dimen/margin_small"
+                android:layout_marginRight="@dimen/margin_normal"
                 android:layout_toLeftOf="@+id/btn_delete"
                 android:contentDescription="@string/app_name"
                 android:src="@drawable/ic_edit" />

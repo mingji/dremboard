@@ -32,9 +32,9 @@ import com.drem.dremboard.entity.Beans.SetFavoriteParam;
 import com.drem.dremboard.entity.Beans.SetFavoriteResult;
 import com.drem.dremboard.entity.Beans.SetLikeParam;
 import com.drem.dremboard.entity.Beans.SetLikeResult;
-import com.drem.dremboard.ui.DialogComment.OnCommentResultCallback;
-import com.drem.dremboard.ui.DialogComment.OnDelCommentResultCallback;
-import com.drem.dremboard.ui.DialogComment.OnEditCommentResultCallback;
+import com.drem.dremboard.ui.ActivityComment.OnCommentResultCallback;
+import com.drem.dremboard.ui.ActivityComment.OnDelCommentResultCallback;
+import com.drem.dremboard.ui.ActivityComment.OnEditCommentResultCallback;
 import com.drem.dremboard.ui.DialogFlagDrem.OnFlagResultCallback;
 import com.drem.dremboard.ui.FragmentDrems.DremAdapter;
 import com.drem.dremboard.ui.FragmentDrems.DremAdapter.DremHolder;
@@ -646,9 +646,21 @@ public class ActivityBoardDrems extends Activity
 			if (dremItem.comment_list == null)
 				dremItem.comment_list = new ArrayList<CommentInfo>();
 			
-			DialogComment commentDiag = new DialogComment(this.activity, this.activity, dremItem.activity_id, 
-					index, dremItem.comment_list, this, this, this);
-					commentDiag.show();
+			ActivityComment.mResultCallback = null;
+			ActivityComment.mEditCommentCallback = null;
+			ActivityComment.mDelCommentCallback = null;
+			ActivityComment.mCommentList = null;
+
+			ActivityComment.mResultCallback = this;
+			ActivityComment.mEditCommentCallback = this;
+			ActivityComment.mDelCommentCallback = this;
+			ActivityComment.mCommentList = dremItem.comment_list;
+					
+			Intent intent = new Intent(this.activity, ActivityComment.class);
+			intent.putExtra("activity_id", dremItem.activity_id);
+			intent.putExtra("index", index);
+			
+			startActivity(intent);
 		}
 		
 		private void setCommentResult (CommentInfo commentData, int index)
